@@ -1,5 +1,6 @@
 import * as React from "react";
 import { IconSvgProps } from "@/types";
+import Image from "next/image";
 
 export const Logo: React.FC<IconSvgProps> = ({
 	size = 36,
@@ -7,21 +8,43 @@ export const Logo: React.FC<IconSvgProps> = ({
 	height,
 	...props
 }) => (
-	<svg
-		fill="none"
-		height={size || height}
-		viewBox="0 0 32 32"
-		width={size || width}
-		{...props}
-	>
-		<path
-			clipRule="evenodd"
-			d="M17.6482 10.1305L15.8785 7.02583L7.02979 22.5499H10.5278L17.6482 10.1305ZM19.8798 14.0457L18.11 17.1983L19.394 19.4511H16.8453L15.1056 22.5499H24.7272L19.8798 14.0457Z"
-			fill="currentColor"
-			fillRule="evenodd"
-		/>
-	</svg>
+	<Image src="/white-logo.png" alt="KYZA Logo" width={50} height={50}></Image>
 );
+
+export const LightLogo: React.FC<IconSvgProps> = ({
+	size = 36,
+	width,
+	height,
+	...props
+}) => (
+	<Image src="/black-logo.png" alt="KYZA Logo" width={50} height={50}></Image>
+);
+export const DownloadIcon: React.FC<IconSvgProps> = ({
+	size = 24,
+	width,
+	height,
+	...props
+}) => {
+	return (
+		<svg xmlns="http://www.w3.org/2000/svg" width="200" height="200" viewBox="0 0 24 24" {...props}>
+    		<path fill="currentColor" d="M13 3v9.586l3.5-3.5l1.414 1.414L12 16.414L6.086 10.5L7.5 9.086l3.5 3.5V3h2ZM4.5 14v5h15v-5h2v7h-19v-7h2Z"/>
+		</svg>
+	);
+};
+
+export const ArrowLeft: React.FC<IconSvgProps> = ({
+	size = 24,
+	width,
+	height,
+	...props
+}) => {
+	return (
+		<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" className="lucide lucide-arrow-left" {...props}>
+			<path d="m12 19-7-7 7-7"/>
+			<path d="M19 12H5"/>
+		</svg>
+	);
+};
 
 export const DiscordIcon: React.FC<IconSvgProps> = ({
 	size = 24,
