@@ -1,4 +1,4 @@
-import { createClient } from "next-sanity";
+import { createClient } from "../node_modules/@sanity/client";
 
 const projectId = process.env.SANITY_PROJECT_ID;
 const dataset = "production";
