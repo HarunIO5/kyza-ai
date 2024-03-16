@@ -1,4 +1,4 @@
-import cn from 'classnames'
+
 import { urlFor } from '@/lib/sanityImageUrl'
 import Image from 'next/image'
 import Link from 'next/link'
