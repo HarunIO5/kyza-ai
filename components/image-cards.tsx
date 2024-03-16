@@ -131,7 +131,7 @@ export default function VidCard ({vidProp, limit, offset} : {vidProp : vidType[]
                             }} 
                             isPressable={true}
                             >
-                              <video height="240" onMouseEnter={handleMouseEnter} onMouseLeave={handleMouseLeave} onTouchStart={handleMouseEnter} onTouchEnd={handleMouseLeave} className="h-[420px] w-full object-cover" playsInline>
+                              <video height="240" onMouseEnter={handleMouseEnter} onMouseLeave={handleMouseLeave} className="h-[420px] w-full object-cover" playsInline>
                                 <source src={file.url} type="video/mp4" />
                                 <track
                                   src={file.url}
