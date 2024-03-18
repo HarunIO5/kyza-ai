@@ -114,7 +114,7 @@ export default function VidCard ({vidProp, limit, offset} : {vidProp : vidType[]
 				      	type="search"
 				      />
 			      </div>
-            <div className="w-full grid grid-cols-2 md:grid-cols-4 lg:grid-cols-5 2xl:grid-cols-6 gap-1.5">
+            <div className="w-full grid grid-cols-1 md:grid-cols-4 lg:grid-cols-5 2xl:grid-cols-6 gap-1.5">
                 {filtered && (
                     filtered.map((file: vidType) => {
                         return (
