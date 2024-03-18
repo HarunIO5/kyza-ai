@@ -17,7 +17,7 @@ export default function PostHeader(
         <div className="mb-8 sm:mx-0 md:mb-16">
           <CoverImage title={title!} image={mainImage} priority slug={slug} />
         </div>
-        <div className="mx-auto max-w-7xl">
+        <div className="mx-auto max-w-5xl">
           <div className="mb-6 block md:hidden">
             {author && <Avatar name={author.name} image={author.image} />}
           </div>
