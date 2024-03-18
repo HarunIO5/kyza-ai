@@ -14,8 +14,8 @@ import Link from "next/link";
 
   export default function ImageModal ({onOpen, onOpenChange, srcName, srcUrl} : {onOpen: boolean, onOpenChange: () => void, srcName: string, srcUrl: string}) {
     return (
-            <Modal isOpen={onOpen} onOpenChange={onOpenChange} placement="center" size="3xl" backdrop="blur">
-              <ModalContent className="p-4">
+            <Modal isOpen={onOpen} onOpenChange={onOpenChange} placement="center" size="3xl" backdrop="blur"  className=" overflow-auto">
+              <ModalContent className="p-4 max-md:h-[700px]">
                 {(onClose) => (
                   <>
                     <ModalBody className="flex flex-col-reverse items-center md:flex-row md:items-start justify-between gap-4">
@@ -37,7 +37,7 @@ import Link from "next/link";
                         </p>
                       </div>
                         <div className="flex flex-col gap-2">
-                            <video width="600" height="400" autoPlay loop className="h-[350px] md:h-[600px] w-[400px] object-cover rounded-md" playsInline muted preload="auto">
+                            <video width="600" height="400" autoPlay loop className="h-[350px] md:h-[600px] w-[400px] object-cover rounded-md" playsInline={true} muted preload="auto">
                               <source src={srcUrl} type="video/mp4" />
                               <track
                                 src={srcUrl}

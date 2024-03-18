@@ -27,7 +27,6 @@ import ImageModal from "./image-modal";
 import { useInView } from "react-intersection-observer";
 import { fetchVideos } from "@/app/_action";
 
-
 export default function VidCard ({vidProp, limit, offset} : {vidProp : vidType[], limit: number, offset: number}) {
 
     const [query, setQuery] = useState<string>('')
@@ -131,7 +130,7 @@ export default function VidCard ({vidProp, limit, offset} : {vidProp : vidType[]
                             }} 
                             isPressable={true}
                             >
-                              <video height="240" onMouseEnter={handleMouseEnter} onMouseLeave={handleMouseLeave} className="h-[420px] w-full object-cover" playsInline>
+                              <video height="240" onMouseEnter={handleMouseEnter} onMouseLeave={handleMouseLeave} className="h-[420px] w-full object-cover" playsInline={true} muted preload="auto">
                                 <source src={file.url} type="video/mp4" />
                                 <track
                                   src={file.url}
