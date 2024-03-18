@@ -25,6 +25,9 @@ import { Suspense } from "react";
 import { divider } from "@nextui-org/theme";
 import ImageModal from "./image-modal";
 import { useInView } from "react-intersection-observer";
+import useIntersectionObserver from '@react-hook/intersection-observer'
+import { useRef } from 'react'
+
 import { fetchVideos } from "@/app/_action";
 
 export default function VidCard ({vidProp, limit, offset, isMobile} : {vidProp : vidType[], limit: number, offset: number, isMobile: boolean}) {
@@ -37,6 +40,13 @@ export default function VidCard ({vidProp, limit, offset, isMobile} : {vidProp :
     const [videoLimit, setVideoLimit] = useState(limit)
     const [videoOffset, setVideoOffset] = useState(offset)
     const [ref, inView] = useInView()
+
+    const containerRef = useRef<any>()
+    const lockRef = useRef(false)
+    const { isIntersecting } = useIntersectionObserver(containerRef)
+    if (isIntersecting) {
+      lockRef.current = true
+    }
 
     // console.log("CLIENT SIDE")
     // console.log(vidProp)
@@ -114,8 +124,8 @@ export default function VidCard ({vidProp, limit, offset, isMobile} : {vidProp :
 				      	type="search"
 				      />
 			      </div>
-            <div className="w-full grid grid-cols-1 md:grid-cols-4 lg:grid-cols-5 2xl:grid-cols-6 gap-1.5">
-                {(filtered && isMobile) ? (
+            <div className="w-full grid grid-cols-1 md:grid-cols-4 lg:grid-cols-5 2xl:grid-cols-6 gap-1.5" ref={containerRef}>
+                {(lockRef.current && filtered && isMobile) && (
                     filtered.map((file: vidType) => {
                         return (
                           <>
@@ -145,7 +155,9 @@ export default function VidCard ({vidProp, limit, offset, isMobile} : {vidProp :
                           </>
                         )
                     })
-                ) : (
+                )} 
+                
+                {(lockRef.current && filtered && !isMobile) && (
                   filtered.map((file: vidType) => {
                     return (
                       <>

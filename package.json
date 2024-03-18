@@ -22,6 +22,7 @@
     "@nextui-org/theme": "2.1.17",
     "@react-aria/ssr": "^3.8.0",
     "@react-aria/visually-hidden": "^3.8.6",
+    "@react-hook/intersection-observer": "^3.1.1",
     "@sanity/image-url": "^1.0.2",
     "@sanity/vision": "^3.34.0",
     "@types/node": "20.5.7",
