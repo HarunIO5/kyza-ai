@@ -27,7 +27,7 @@ import ImageModal from "./image-modal";
 import { useInView } from "react-intersection-observer";
 import { fetchVideos } from "@/app/_action";
 
-export default function VidCard ({vidProp, limit, offset} : {vidProp : vidType[], limit: number, offset: number}) {
+export default function VidCard ({vidProp, limit, offset, isMobile} : {vidProp : vidType[], limit: number, offset: number, isMobile: boolean}) {
 
     const [query, setQuery] = useState<string>('')
     const [srcName, setSrcName] = useState<string>('')
@@ -115,7 +115,7 @@ export default function VidCard ({vidProp, limit, offset} : {vidProp : vidType[]
 				      />
 			      </div>
             <div className="w-full grid grid-cols-1 md:grid-cols-4 lg:grid-cols-5 2xl:grid-cols-6 gap-1.5">
-                {filtered && (
+                {(filtered && isMobile) ? (
                     filtered.map((file: vidType) => {
                         return (
                           <>
@@ -145,7 +145,37 @@ export default function VidCard ({vidProp, limit, offset} : {vidProp : vidType[]
                           </>
                         )
                     })
-                )}
+                ) : (
+                  filtered.map((file: vidType) => {
+                    return (
+                      <>
+                        <Card
+                        isFooterBlurred
+                        className="rounded-none opacity-75 hover:opacity-100"
+                        key={file.id}
+                        onPress={() => {
+                          setSrcUrl(file.url)
+                          setSrcName(file.name)
+                          onOpen() 
+                        }} 
+                        isPressable={true}
+                        >
+                          <video height="240" onMouseEnter={handleMouseEnter} onMouseLeave={handleMouseLeave} className="h-[420px] w-full object-cover" playsInline>
+                            <source src={file.url} type="video/mp4" />
+                            <track
+                              src={file.url}
+                            />
+                            Your browser does not support the video tag.
+                          </video>
+                        <CardFooter className="justify-start before:bg-white/10 border-white/20 border-1 overflow-hidden py-2 absolute before:rounded-xl rounded-large bottom-1 w-[calc(100%_-_8px)] shadow-small ml-1 z-10">
+                          <p className="text-tiny text-white/80">{file.name.slice(0, 30)}...</p>
+                        </CardFooter>
+                      </Card>
+                      
+                      </>
+                    )
+                })
+            )}
             </div>
             <ImageModal onOpen={isOpen} onOpenChange={onOpenChange} srcName={srcName} srcUrl={srcUrl}/>
             {/* loading spinner */}
