@@ -40,6 +40,7 @@ export default function VidCard ({vidProp, limit, offset, isMobile} : {vidProp :
     const [videoLimit, setVideoLimit] = useState(limit)
     const [videoOffset, setVideoOffset] = useState(offset)
     const [ref, inView] = useInView()
+    const player = useRef<any>(null);
 
     const containerRef = useRef<any>()
     const lockRef = useRef(false)
@@ -52,8 +53,8 @@ export default function VidCard ({vidProp, limit, offset, isMobile} : {vidProp :
     // console.log(vidProp)
 
     async function loadMoreVideos() {
-      const next = videoLimit + 20
-      const skip = videoOffset + 20
+      const next = videoLimit + 12
+      const skip = videoOffset + 12
       const videos = await fetchVideos({ limit: next, offset: skip })
       if (videos?.length) {
         setVideoLimit(next)
@@ -124,8 +125,8 @@ export default function VidCard ({vidProp, limit, offset, isMobile} : {vidProp :
 				      	type="search"
 				      />
 			      </div>
-            <div className="w-full grid grid-cols-1 md:grid-cols-4 lg:grid-cols-5 2xl:grid-cols-6 gap-1.5" ref={containerRef}>
-                {(lockRef.current && filtered && isMobile) && (
+            <div className="w-full grid grid-cols-1 md:grid-cols-4 lg:grid-cols-5 2xl:grid-cols-6 gap-1.5" >
+                {(filtered && isMobile) && (
                     filtered.map((file: vidType) => {
                         return (
                           <>
@@ -139,8 +140,17 @@ export default function VidCard ({vidProp, limit, offset, isMobile} : {vidProp :
                               onOpen() 
                             }} 
                             isPressable={true}
+                            
                             >
-                              <video height="240" className="h-[420px] w-full object-cover" playsInline={true} muted preload="auto" autoPlay loop>
+                              <video 
+                                height="240" 
+                                className="h-[420px] w-full object-cover"
+                                preload="none"
+                                poster={file.url + '#t=0.1'} 
+                                ref={player} 
+                                onLoad={() => {
+                                  player.current.seek(1);
+                              }}>
                                 <source src={file.url} type="video/mp4" />
                                 <track
                                   src={file.url}
@@ -157,7 +167,7 @@ export default function VidCard ({vidProp, limit, offset, isMobile} : {vidProp :
                     })
                 )} 
                 
-                {(lockRef.current && filtered && !isMobile) && (
+                {(filtered && !isMobile) && (
                   filtered.map((file: vidType) => {
                     return (
                       <>
@@ -172,7 +182,17 @@ export default function VidCard ({vidProp, limit, offset, isMobile} : {vidProp :
                         }} 
                         isPressable={true}
                         >
-                          <video height="240" onMouseEnter={handleMouseEnter} onMouseLeave={handleMouseLeave} className="h-[420px] w-full object-cover" playsInline>
+                          <video 
+                            height="240" 
+                            onMouseEnter={handleMouseEnter} 
+                            onMouseLeave={handleMouseLeave} 
+                            className="h-[420px] w-full object-cover" 
+                            ref={player} 
+                            onLoad={() => {
+                              player.current.seek(1);
+                            }}
+                            poster={file.url + '#t=0.1'}
+                          >
                             <source src={file.url} type="video/mp4" />
                             <track
                               src={file.url}

@@ -8,7 +8,7 @@ import { isMobileDevice } from "@/server/mobile-checker";
 
 export default async function Home() {
 
-	const finalFiles = await fetchVideos({limit: 20, offset: 0})
+	const finalFiles = await fetchVideos({limit: 12, offset: 0})
 
 	const mobile = isMobileDevice();
 
