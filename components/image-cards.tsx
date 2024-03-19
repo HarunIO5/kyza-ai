@@ -145,13 +145,14 @@ export default function VidCard ({vidProp, limit, offset, isMobile} : {vidProp :
                               <video 
                                 height="240" 
                                 className="h-[420px] w-full object-cover"
-                                preload="none"
+                                preload="metadata"
                                 poster={file.url + '#t=0.1'} 
                                 ref={player} 
                                 onLoad={() => {
                                   player.current.seek(1);
-                              }}>
-                                <source src={file.url} type="video/mp4" />
+                              }}
+                              autoPlay>
+                                <source src={file.url + '#t=0.1'} type="video/mp4" />
                                 <track
                                   src={file.url}
                                 />
