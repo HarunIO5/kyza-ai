@@ -37,10 +37,10 @@ import Link from "next/link";
                         </p>
                       </div>
                         <div className="flex flex-col gap-2">
-                            <video width="600" height="400" autoPlay loop className="h-[350px] md:h-[600px] w-[400px] object-cover rounded-md" playsInline={true} muted preload="auto">
+                            <video width="600" height="400" autoPlay loop className="h-[350px] md:h-[600px] w-[400px] object-cover rounded-md" playsInline={true} muted preload="metadata">
                               <source src={srcUrl} type="video/mp4" />
                               <track
-                                src={srcUrl}
+                                src={srcUrl + '#t=0.1'}
                               />
                               Your browser does not support the video tag.
                             </video>

@@ -40,14 +40,14 @@ export default function VidCard ({vidProp, limit, offset, isMobile} : {vidProp :
     const [videoLimit, setVideoLimit] = useState(limit)
     const [videoOffset, setVideoOffset] = useState(offset)
     const [ref, inView] = useInView()
-    const player = useRef<any>(null);
+    // const player = useRef<any>(null);
 
-    const containerRef = useRef<any>()
-    const lockRef = useRef(false)
-    const { isIntersecting } = useIntersectionObserver(containerRef)
-    if (isIntersecting) {
-      lockRef.current = true
-    }
+    // const containerRef = useRef<any>()
+    // const lockRef = useRef(false)
+    // const { isIntersecting } = useIntersectionObserver(containerRef)
+    // if (isIntersecting) {
+    //   lockRef.current = true
+    // }
 
     // console.log("CLIENT SIDE")
     // console.log(vidProp)
@@ -146,12 +146,8 @@ export default function VidCard ({vidProp, limit, offset, isMobile} : {vidProp :
                                 height="240" 
                                 className="h-[420px] w-full object-cover"
                                 preload="metadata"
-                                poster={file.url + '#t=0.1'} 
-                                ref={player} 
-                                onLoad={() => {
-                                  player.current.seek(1);
-                              }}
-                              autoPlay>
+                                poster={file.url + '#t=0.1'}
+                                autoPlay>
                                 <source src={file.url + '#t=0.1'} type="video/mp4" />
                                 <track
                                   src={file.url}
@@ -187,14 +183,10 @@ export default function VidCard ({vidProp, limit, offset, isMobile} : {vidProp :
                             height="240" 
                             onMouseEnter={handleMouseEnter} 
                             onMouseLeave={handleMouseLeave} 
-                            className="h-[420px] w-full object-cover" 
-                            ref={player} 
-                            onLoad={() => {
-                              player.current.seek(1);
-                            }}
-                            poster={file.url + '#t=0.1'}
+                            className="h-[420px] w-full object-cover"
+                            preload="metadata"
                           >
-                            <source src={file.url} type="video/mp4" />
+                            <source src={file.url + '#t=0.1'} type="video/mp4" />
                             <track
                               src={file.url}
                             />
