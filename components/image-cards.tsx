@@ -66,19 +66,19 @@ export default function VidCard ({vidProp, limit, offset, isMobile} : {vidProp :
       }
     }
 
-    // handle mouse enter
-    const handleMouseEnter = (e: any) => {
-      const vid = e.target
-      vid.muted = true
-      vid.play()
-    }
-    // handle mouse leave
-    const handleMouseLeave = (e: any) => {
-      const vid = e.target
-      vid.muted = false
-      vid.currentTime = 0
-      vid.pause()
-    }
+    // // handle mouse enter
+    // const handleMouseEnter = (e: any) => {
+    //   const vid = e.target
+    //   vid.muted = true
+    //   vid.play()
+    // }
+    // // handle mouse leave
+    // const handleMouseLeave = (e: any) => {
+    //   const vid = e.target
+    //   vid.muted = false
+    //   vid.currentTime = 0
+    //   vid.pause()
+    // }
 
     //Our search filter function
     const searchFilter = (array: vidType[]) => {
@@ -100,6 +100,10 @@ export default function VidCard ({vidProp, limit, offset, isMobile} : {vidProp :
         loadMoreVideos()
       }
     }, [inView])
+
+    const boxStyle =
+    'rounded-xl brightness-110';
+
 
     return (
         <>
@@ -125,86 +129,43 @@ export default function VidCard ({vidProp, limit, offset, isMobile} : {vidProp :
 				      	type="search"
 				      />
 			      </div>
-            <div className="w-full grid grid-cols-1 md:grid-cols-4 lg:grid-cols-5 2xl:grid-cols-6 gap-1.5" >
-                {(filtered && isMobile) && (
-                    filtered.map((file: vidType) => {
+            <div className="w-full grid md:grid-cols-4 auto-rows-[300px] gap-4 my-10" >
+                {videos && (
+                    videos.map((file: vidType, i: number) => {
                         return (
                           <>
                             <Card
                             isFooterBlurred
-                            className="rounded-none opacity-75 hover:opacity-100"
+                            className={`${boxStyle} ${
+                              i === 0 || i === 4 || i === 5 || i === 6 ? 'md:col-span-2' : ''
+                            } ${i === 2 ? 'md:row-span-2' : ''} ${i === 7 ? 'md:row-span-2 md:col-span-2' : ''} ${i === 8 ? 'md:col-span-2' : ''}`}
                             key={file.id}
-                            onPress={() => {
-                              setSrcUrl(file.url)
-                              setSrcName(file.name)
-                              onOpen() 
-                            }} 
-                            isPressable={true}
                             
                             >
                               <video 
-                                height="240" 
-                                className="h-[420px] w-full object-cover"
+                                className="h-full w-full object-cover"
                                 preload="metadata"
                                 poster={file.url + '#t=0.1'}
-                                autoPlay>
+                                autoPlay
+                                loop
+                                muted
+                              >
                                 <source src={file.url + '#t=0.1'} type="video/mp4" />
                                 <track
                                   src={file.url}
                                 />
                                 Your browser does not support the video tag.
                               </video>
-                            <CardFooter className="justify-start before:bg-white/10 border-white/20 border-1 overflow-hidden py-2 absolute before:rounded-xl rounded-large bottom-1 w-[calc(100%_-_8px)] shadow-small ml-1 z-10">
-                              <p className="text-tiny text-white/80">{file.name.slice(0, 30)}...</p>
-                            </CardFooter>
                           </Card>
                           
                           </>
                         )
                     })
                 )} 
-                
-                {(filtered && !isMobile) && (
-                  filtered.map((file: vidType) => {
-                    return (
-                      <>
-                        <Card
-                        isFooterBlurred
-                        className="rounded-none opacity-75 hover:opacity-100"
-                        key={file.id}
-                        onPress={() => {
-                          setSrcUrl(file.url)
-                          setSrcName(file.name)
-                          onOpen() 
-                        }} 
-                        isPressable={true}
-                        >
-                          <video 
-                            height="240" 
-                            onMouseEnter={handleMouseEnter} 
-                            onMouseLeave={handleMouseLeave} 
-                            className="h-[420px] w-full object-cover"
-                            preload="metadata"
-                          >
-                            <source src={file.url + '#t=0.1'} type="video/mp4" />
-                            <track
-                              src={file.url}
-                            />
-                            Your browser does not support the video tag.
-                          </video>
-                        <CardFooter className="justify-start before:bg-white/10 border-white/20 border-1 overflow-hidden py-2 absolute before:rounded-xl rounded-large bottom-1 w-[calc(100%_-_8px)] shadow-small ml-1 z-10">
-                          <p className="text-tiny text-white/80">{file.name.slice(0, 30)}...</p>
-                        </CardFooter>
-                      </Card>
-                      
-                      </>
-                    )
-                })
-            )}
             </div>
             <ImageModal onOpen={isOpen} onOpenChange={onOpenChange} srcName={srcName} srcUrl={srcUrl}/>
             {/* loading spinner */}
-            <div
+            {/* <div
               ref={ref}
               className='col-span-1 mt-16 flex items-center justify-center sm:col-span-2 md:col-span-3 lg:col-span-4'
             >
@@ -225,7 +186,7 @@ export default function VidCard ({vidProp, limit, offset, isMobile} : {vidProp :
                 />
               </svg>
               <span className='sr-only'>Loading...</span>
-            </div>
+            </div> */}
         </>  
     );
 }

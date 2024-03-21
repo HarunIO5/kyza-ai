@@ -3,30 +3,36 @@ import { cache } from "react";
 
 export async function GetVideoFiles ({limit, offset} : {limit: number, offset: number}) {
 
-    const fileList = await fetch('https://uploadthing.com/api/listFiles', {
-	  method: 'POST',
-	  headers: {
-	    'Content-Type': 'application/json',
-	    'X-Uploadthing-Api-Key': process.env.UPLOADTHING_SECRET!,
-	    'X-Uploadthing-Version': '6.4.0'
-	  },
-	  body: JSON.stringify({
-		limit: limit,
-		offset: offset
-	  })
-	})
+    // const fileList = await fetch('https://uploadthing.com/api/listFiles', {
+	//   method: 'POST',
+	//   headers: {
+	//     'Content-Type': 'application/json',
+	//     'X-Uploadthing-Api-Key': process.env.UPLOADTHING_SECRET!,
+	//     'X-Uploadthing-Version': '6.4.0'
+	//   },
+	//   body: JSON.stringify({
+	// 	limit: limit,
+	// 	offset: offset
+	//   })
+	// })
 
-	// console.log('LIST FILE')
+	// // console.log('LIST FILE')
 
-	const viewFiles = await fileList.json()
+	// const viewFiles = await fileList.json()
 	// console.log("VIEW FILES")
 	// console.log(viewFiles)
+
+	const files = await utapi.listFiles();
 
 	let finalFiles = [] as any[]
 
 	// Use map to create an array of promises
-	const filePromises = viewFiles.files.map(async (file: any) => {
-		const oneUrl = await utapi.getFileUrls(file.key);
+	const filePromises = files.map(async (file: any) => {
+		console.log(file)
+		const oneUrl = await utapi.getFileUrls(file.key as string);
+
+		// console.log("URL")
+		// console.log(oneUrl)
 	
 		return {
 		  url: oneUrl[0].url,
