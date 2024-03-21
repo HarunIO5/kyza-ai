@@ -112,10 +112,13 @@ export default function VidCard ({vidProp, limit, offset, isMobile} : {vidProp :
 				      	aria-label="Search"
                           onChange={handleChange}
 				      	classNames={{
-				      		inputWrapper: "bg-default-100",
+				      		inputWrapper: [
+                    "bg-default-100",
+                    "border-violet-500",
+                  ],
 				      		input: "text-sm",
 				      	}}
-                className="md:w-1/2"
+                className="md:w-1/2 border-violet-500"
 				      	endContent={
 				      		<Kbd className="hidden lg:inline-block" keys={["command"]}>
 				      			K
@@ -127,7 +130,9 @@ export default function VidCard ({vidProp, limit, offset, isMobile} : {vidProp :
 				      		<SearchIcon className="text-base text-default-400 pointer-events-none flex-shrink-0" />
 				      	}
 				      	type="search"
+                variant="bordered"
 				      />
+              
 			      </div>
             <div className="w-full grid md:grid-cols-4 auto-rows-[300px] gap-4 my-10" >
                 {videos && (
@@ -149,6 +154,7 @@ export default function VidCard ({vidProp, limit, offset, isMobile} : {vidProp :
                                 autoPlay
                                 loop
                                 muted
+                                playsInline
                               >
                                 <source src={file.url + '#t=0.1'} type="video/mp4" />
                                 <track
@@ -157,7 +163,6 @@ export default function VidCard ({vidProp, limit, offset, isMobile} : {vidProp :
                                 Your browser does not support the video tag.
                               </video>
                           </Card>
-                          
                           </>
                         )
                     })
