@@ -1,5 +1,6 @@
 import { utapi } from "@/server/uploadthing";
 import { cache } from "react";
+import prisma from "./prisma";
 
 export async function GetVideoFiles ({limit, offset} : {limit: number, offset: number}) {
 
@@ -28,7 +29,7 @@ export async function GetVideoFiles ({limit, offset} : {limit: number, offset: n
 
 	// Use map to create an array of promises
 	const filePromises = files.map(async (file: any) => {
-		console.log(file)
+		// console.log(file)
 		const oneUrl = await utapi.getFileUrls(file.key as string);
 
 		// console.log("URL")
@@ -50,4 +51,36 @@ export async function GetVideoFiles ({limit, offset} : {limit: number, offset: n
 
     return JSON.parse(JSON.stringify(finalFiles))
 
+}
+
+
+export const SearchVideosDB = async ({search, skip}: {search?: string, skip: number}) => {
+
+	const videos = await prisma.searchableVideos.findMany(
+		{
+			where: {
+				prompt: {
+					search: search
+				}
+			},
+			skip: skip,
+			take: 12
+		}
+	)
+
+	return JSON.parse(JSON.stringify(videos))
+}
+
+export const SearchVideoLength = async ({search}: {search?: string}) => {
+	const videos = await prisma.searchableVideos.findMany(
+		{
+			where: {
+				prompt: {
+					search: search
+				}
+			}
+		}
+	)
+
+	return videos.length
 }

@@ -17,9 +17,6 @@ export const metadata: Metadata = {
 	icons: {
 		icon: "/favicon.ico",
 	},
-	openGraph: {
-		images: './public/Kyza Hero Cover Image.JPEG'
-	},
 	twitter: {
 		card: 'summary_large_image'
 	}

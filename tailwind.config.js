@@ -9,23 +9,31 @@ module.exports = {
     './node_modules/@nextui-org/theme/dist/**/*.{js,ts,jsx,tsx}'
   ],
   theme: {
-    extend: {},
-  },
-  "animation": {
-    "border-width": "border-width 3s infinite alternate"
-  },
-  "keyframes": {
-    "border-width": {
-      "from": {
-        "width": "10px",
-        "opacity": "0"
+    extend: {
+      "animation": {
+        "border-width": "border-width 3s infinite alternate",
+        "text-gradient": "text-gradient 1.5s linear infinite"
       },
-      "to": {
-        "width": "100px",
-        "opacity": "1"
-      }
-    }
+      "keyframes": {
+        "border-width": {
+          "from": {
+            "width": "10px",
+            "opacity": "0"
+          },
+          "to": {
+            "width": "100px",
+            "opacity": "1"
+          }
+        },
+        "text-gradient": {
+          "to": {
+            "backgroundPosition": "200% center"
+          }
+        }
+      },
+    },
   },
+  
   darkMode: "class",
-  plugins: [nextui(), require("tailwindcss-animate"),],
+  plugins: [require("tailwindcss-animate"), nextui()],
 }

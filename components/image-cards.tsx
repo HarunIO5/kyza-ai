@@ -1,98 +1,36 @@
 'use client'
 
-import { vidType } from "@/app/layout";
-import {Card, CardFooter, CardBody, Image, Button, spinner} from "@nextui-org/react";
+import {Card, CardFooter} from "@nextui-org/react";
 import {
-	TwitterIcon,
-	GithubIcon,
-	DiscordIcon,
-	HeartFilledIcon,
-	SearchIcon,
-} from "@/components/icons";
-import {
-  Modal, 
-  ModalContent, 
-  ModalHeader, 
-  ModalBody, 
-  ModalFooter, 
   useDisclosure
 } from "@nextui-org/react";
-import { Kbd } from "@nextui-org/kbd";
-import { Input } from "@nextui-org/input";
 import { useEffect, useState } from "react";
-import {Spinner} from "@nextui-org/react";
-import { Suspense } from "react";
-import { divider } from "@nextui-org/theme";
 import ImageModal from "./image-modal";
 import { useInView } from "react-intersection-observer";
-import useIntersectionObserver from '@react-hook/intersection-observer'
-import { useRef } from 'react'
 
-import { fetchVideos } from "@/app/_action";
+import { fetchSearchedVideos, fetchVideos } from "@/app/_action";
+import { SearchVideosType } from "@/app/videos/page";
 
-export default function VidCard ({vidProp, limit, offset, isMobile} : {vidProp : vidType[], limit: number, offset: number, isMobile: boolean}) {
+export default function VidCard ({vidProp, search, videoLength} : {vidProp : SearchVideosType[], search: string, videoLength: number}) {
 
-    const [query, setQuery] = useState<string>('')
     const [srcName, setSrcName] = useState<string>('')
     const [srcUrl, setSrcUrl] = useState<string>('')
     const {isOpen, onOpen, onOpenChange} = useDisclosure();
     const [videos, setVideos] = useState(vidProp)
-    const [videoLimit, setVideoLimit] = useState(limit)
-    const [videoOffset, setVideoOffset] = useState(offset)
+    const [videoSkip, setVideoSkip] = useState(0)
     const [ref, inView] = useInView()
-    // const player = useRef<any>(null);
-
-    // const containerRef = useRef<any>()
-    // const lockRef = useRef(false)
-    // const { isIntersecting } = useIntersectionObserver(containerRef)
-    // if (isIntersecting) {
-    //   lockRef.current = true
-    // }
-
-    // console.log("CLIENT SIDE")
-    // console.log(vidProp)
 
     async function loadMoreVideos() {
-      const next = videoLimit + 12
-      const skip = videoOffset + 12
-      const videos = await fetchVideos({ limit: next, offset: skip })
+
+      const skip = videoSkip + 12
+      const videos = await fetchSearchedVideos({ skip: skip, search: search})
       if (videos?.length) {
-        setVideoLimit(next)
-        setVideoOffset(skip)
-        setVideos((prev: vidType[] | undefined) => [
+        setVideoSkip(skip)
+        setVideos((prev: SearchVideosType[] | undefined) => [
           ...(prev?.length ? prev : []),
           ...videos
         ])
       }
-    }
-
-    // // handle mouse enter
-    // const handleMouseEnter = (e: any) => {
-    //   const vid = e.target
-    //   vid.muted = true
-    //   vid.play()
-    // }
-    // // handle mouse leave
-    // const handleMouseLeave = (e: any) => {
-    //   const vid = e.target
-    //   vid.muted = false
-    //   vid.currentTime = 0
-    //   vid.pause()
-    // }
-
-    //Our search filter function
-    const searchFilter = (array: vidType[]) => {
-        return array.filter(
-          (el) => el.name.toLowerCase().includes(query)
-        )
-    }
-
-    //Applying our search filter function to our array of countries recieved from the API
-    const filtered = searchFilter(videos)
-
-    //Handling the input on our search bar
-    const handleChange = (e?: React.BaseSyntheticEvent) => {
-        setQuery(e?.target.value)
     }
 
     useEffect(() => {
@@ -101,60 +39,34 @@ export default function VidCard ({vidProp, limit, offset, isMobile} : {vidProp :
       }
     }, [inView])
 
-    const boxStyle =
-    'rounded-xl brightness-110';
-
+    console.log(videoSkip)
+    console.log(videoLength)
 
     return (
         <>
-            <div className="flex gap-3 py-8 justify-center">
-				      <Input
-				      	aria-label="Search"
-                          onChange={handleChange}
-				      	classNames={{
-				      		inputWrapper: [
-                    "bg-default-100",
-                    "border-violet-500",
-                  ],
-				      		input: "text-sm",
-				      	}}
-                className="md:w-1/2 border-violet-500"
-				      	endContent={
-				      		<Kbd className="hidden lg:inline-block" keys={["command"]}>
-				      			K
-				      		</Kbd>
-				      	}
-				      	labelPlacement="outside"
-				      	placeholder="Search..."
-				      	startContent={
-				      		<SearchIcon className="text-base text-default-400 pointer-events-none flex-shrink-0" />
-				      	}
-				      	type="search"
-                variant="bordered"
-				      />
-              
-			      </div>
-            <div className="w-full grid md:grid-cols-4 auto-rows-[300px] gap-4 my-10" >
+            <div className="w-full grid grid-cols-1 md:grid-cols-4 gap-4 p-4" >
                 {videos && (
-                    videos.map((file: vidType, i: number) => {
+                    videos.map((file: SearchVideosType) => {
                         return (
                           <>
                             <Card
                             isFooterBlurred
-                            className={`${boxStyle} ${
-                              i === 0 || i === 4 || i === 5 || i === 6 ? 'md:col-span-2' : ''
-                            } ${i === 2 ? 'md:row-span-2' : ''} ${i === 7 ? 'md:row-span-2 md:col-span-2' : ''} ${i === 8 ? 'md:col-span-2' : ''}`}
-                            key={file.id}
-                            
+                            className="rounded-xl"
+                            key={file.key}
+                            onPress={() => {
+                              setSrcUrl(file.url)
+                              setSrcName(file.prompt)
+                              onOpen() 
+                            }} 
+                            isPressable={true}
                             >
-                              <video 
+                              <video
                                 className="h-full w-full object-cover"
                                 preload="metadata"
-                                poster={file.url + '#t=0.1'}
                                 autoPlay
-                                loop
-                                muted
                                 playsInline
+                                muted
+                                loop
                               >
                                 <source src={file.url + '#t=0.1'} type="video/mp4" />
                                 <track
@@ -162,15 +74,20 @@ export default function VidCard ({vidProp, limit, offset, isMobile} : {vidProp :
                                 />
                                 Your browser does not support the video tag.
                               </video>
+                            <CardFooter className="justify-start before:bg-white/10 border-white/20 border-1 overflow-hidden py-2 absolute before:rounded-xl rounded-large bottom-1 w-[calc(100%_-_8px)] shadow-small ml-1 z-10">
+                              <p className="text-tiny text-white/80">{file.prompt.slice(0, 30)}...</p>
+                            </CardFooter>
                           </Card>
+                          
                           </>
                         )
                     })
-                )} 
+                )}
             </div>
             <ImageModal onOpen={isOpen} onOpenChange={onOpenChange} srcName={srcName} srcUrl={srcUrl}/>
             {/* loading spinner */}
-            {/* <div
+            {videoLength > videoSkip+12 && (
+              <div
               ref={ref}
               className='col-span-1 mt-16 flex items-center justify-center sm:col-span-2 md:col-span-3 lg:col-span-4'
             >
@@ -191,7 +108,8 @@ export default function VidCard ({vidProp, limit, offset, isMobile} : {vidProp :
                 />
               </svg>
               <span className='sr-only'>Loading...</span>
-            </div> */}
+            </div>
+            )}
         </>  
     );
 }

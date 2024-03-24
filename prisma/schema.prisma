@@ -5,7 +5,8 @@
 // Try Prisma Accelerate: https://pris.ly/cli/accelerate-init
 
 generator client {
-  provider = "prisma-client-js"
+  provider        = "prisma-client-js"
+  previewFeatures = ["fullTextSearch"]
 }
 
 datasource db {
@@ -65,15 +66,17 @@ model VerificationToken {
 }
 
 model SearchableVideos {
-  id            String @id @default(cuid())
+  id            String  @id @default(cuid())
+  key           String?
   prompt        String
   url           String
-  fileSizeBytes Int
+  fileSizeBytes Int?
 }
 
 model LandingPageVideos {
-  id            String @id @default(cuid())
+  id            String  @id @default(cuid())
+  key           String?
   prompt        String
   url           String
-  fileSizeBytes Int
+  fileSizeBytes Int?
 }

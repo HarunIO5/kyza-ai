@@ -18,7 +18,7 @@ import Link from "next/link";
               <ModalContent className="p-4 max-md:h-[700px]">
                 {(onClose) => (
                   <>
-                    <ModalBody className="flex flex-col-reverse items-center md:flex-row md:items-start justify-between gap-4">
+                    <ModalBody className="flex flex-col-reverse md:flex-row items-start justify-between gap-4">
                       <div className="flex flex-col gap-4">
                         <p className="font-semibold text-xl">
                               Prompt:
@@ -28,16 +28,15 @@ import Link from "next/link";
                               {srcName}
                           </CardBody>
                         </Card>
-                        <Divider />
                         <h3 className="text-md font-medium text-zinc-400">
-                          File Size:
+                          Model:
                         </h3>
                         <p className="text-md font-semibold">
-                          2.5MB
+                          Haiper
                         </p>
                       </div>
                         <div className="flex flex-col gap-2">
-                            <video width="600" height="400" autoPlay loop className="h-[350px] md:h-[600px] w-[400px] object-cover rounded-md" playsInline={true} muted preload="metadata">
+                            <video autoPlay loop className="h-[350px] md:h-[600px] w-[400px] object-cover rounded-md" playsInline={true} muted preload="metadata">
                               <source src={srcUrl} type="video/mp4" />
                               <track
                                 src={srcUrl + '#t=0.1'}
@@ -45,7 +44,7 @@ import Link from "next/link";
                               Your browser does not support the video tag.
                             </video>
                             <Link href={srcUrl} target="_blank" className="w-full">
-                                <Button className="w-full">
+                                <Button className="w-full" variant="ghost">
                                     <DownloadIcon />
                                 </Button>
                             </Link>
