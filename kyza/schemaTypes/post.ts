@@ -32,6 +32,13 @@ export default defineType({
       options: {
         hotspot: true,
       },
+      fields: [
+        {
+          type: 'text',
+          name: 'alt',
+          title: 'Alternative Text',
+        },
+    ]
     }),
     defineField({
       name: 'categories',
@@ -47,7 +54,22 @@ export default defineType({
     defineField({
       name: 'body',
       title: 'Body',
-      type: 'blockContent',
+      type: 'array',
+      of: [
+        {
+          type: 'block',
+        },
+        {
+          type: 'image',
+          fields: [
+            {
+              type: 'text',
+              name: 'alt',
+              title: 'Alternative Text',
+            },
+          ],
+        },
+      ],
     }),
     defineField({
       name: 'excerpt',
