@@ -7,6 +7,7 @@ import { Navbar } from "@/components/navbar";
 import AuthProvider from "@/components/providers";
 import clsx from "clsx";
 import { SiteFooter } from "@/components/site-footer";
+import { Analytics } from "@vercel/analytics/react"
 
 export const metadata: Metadata = {
 	title: {
@@ -58,6 +59,7 @@ export default async function RootLayout({
 						
 						<SiteFooter/>
 					</div>
+					<Analytics />
 				</Providers>
 			</body>
 		</html>
