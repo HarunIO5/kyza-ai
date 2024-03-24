@@ -1,6 +1,7 @@
 import { utapi } from "@/server/uploadthing";
 import { cache } from "react";
 import prisma from "./prisma";
+import { PrismaClientUnknownRequestError } from "@prisma/client/runtime/library";
 
 export async function GetVideoFiles ({limit, offset} : {limit: number, offset: number}) {
 
@@ -56,31 +57,45 @@ export async function GetVideoFiles ({limit, offset} : {limit: number, offset: n
 
 export const SearchVideosDB = async ({search, skip}: {search?: string, skip: number}) => {
 
-	const videos = await prisma.searchableVideos.findMany(
-		{
-			where: {
-				prompt: {
-					search: search
-				}
-			},
-			skip: skip,
-			take: 12
-		}
-	)
+	try {
+		const videos = await prisma.searchableVideos.findMany(
+			{
+				where: {
+					prompt: {
+						search: search
+					}
+				},
+				skip: skip,
+				take: 12
+			}
+		)
 
-	return JSON.parse(JSON.stringify(videos))
+		return JSON.parse(JSON.stringify(videos))
+		
+	} catch (error) {
+		return []
+	}
+		
 }
 
 export const SearchVideoLength = async ({search}: {search?: string}) => {
-	const videos = await prisma.searchableVideos.findMany(
-		{
-			where: {
-				prompt: {
-					search: search
+
+	try {
+
+		const videos = await prisma.searchableVideos.findMany(
+			{
+				where: {
+					prompt: {
+						search: search
+					}
 				}
 			}
-		}
-	)
-
-	return videos.length
+		)
+	
+		return videos.length
+		
+	} catch (error) {
+		return 0
+	}
+	
 }

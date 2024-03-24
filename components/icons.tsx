@@ -32,6 +32,106 @@ export const DownloadIcon: React.FC<IconSvgProps> = ({
 	);
 };
 
+export const BbblurryIcon: React.FC<IconSvgProps> = ({
+	size = 24,
+	width,
+	height,
+	...props
+}) => {
+	return (
+		<svg xmlns="http://www.w3.org/2000/svg" version="1.1" xmlnsXlink="http://www.w3.org/1999/xlink" viewBox="0 0 800 800" {...props}>
+			<defs>
+				<filter id="bbblurry-filter" x="-100%" y="-100%" width="400%" height="400%" filterUnits="objectBoundingBox" primitiveUnits="userSpaceOnUse" color-interpolation-filters="sRGB" >
+					<feGaussianBlur stdDeviation="40" x="0%" y="0%" width="100%" height="100%" in="SourceGraphic" edgeMode="none" result="blur">
+					</feGaussianBlur>
+				</filter>
+			</defs>
+			<g filter="url(#bbblurry-filter)">
+				<ellipse rx="150" ry="150" cx="557.6335896383891" cy="202.05028922808452" fill="hsl(37, 99%, 67%)">
+				</ellipse>
+				<ellipse rx="150" ry="150" cx="528.3360595703125" cy="342.89361572265625" fill="hsl(316, 73%, 52%)">
+				</ellipse>
+				<ellipse rx="150" ry="150" cx="389.15823711826465" cy="253.5437338091594" fill="hsl(185, 100%, 57%)">
+				</ellipse>
+			</g>
+		</svg>
+	);
+};
+
+export const WavesIcon: React.FC<IconSvgProps> = ({
+	size = 24,
+	width,
+	height,
+	...props
+}) => {
+	return (
+		<svg xmlns="http://www.w3.org/2000/svg" version="1.1" xmlnsXlink="http://www.w3.org/1999/xlink" viewBox="0 0 1422 800" {...props}>
+			<defs>
+				<linearGradient x1="50%" y1="0%" x2="50%" y2="100%" id="oooscillate-grad">
+					<stop stop-color="hsl(265, 55%, 30%)" stop-opacity="1" offset="0%">
+					</stop>
+					<stop stop-color="hsl(265, 55%, 60%)" stop-opacity="1" offset="100%">
+					</stop>
+				</linearGradient>
+			</defs>
+			<g stroke-width="2" stroke="url(#oooscillate-grad)" fill="none" stroke-linecap="round">
+				<path d="M 0 810 Q 355.5 -100 711 400 Q 1066.5 900 1422 810" opacity="1.00">
+				</path>
+				<path d="M 0 780 Q 355.5 -100 711 400 Q 1066.5 900 1422 780" opacity="0.96">
+				</path>
+				<path d="M 0 750 Q 355.5 -100 711 400 Q 1066.5 900 1422 750" opacity="0.93">
+				</path>
+				<path d="M 0 720 Q 355.5 -100 711 400 Q 1066.5 900 1422 720" opacity="0.89">
+				</path>
+				<path d="M 0 690 Q 355.5 -100 711 400 Q 1066.5 900 1422 690" opacity="0.85">
+				</path>
+				<path d="M 0 660 Q 355.5 -100 711 400 Q 1066.5 900 1422 660" opacity="0.82">
+				</path>
+				<path d="M 0 630 Q 355.5 -100 711 400 Q 1066.5 900 1422 630" opacity="0.78">
+				</path>
+				<path d="M 0 600 Q 355.5 -100 711 400 Q 1066.5 900 1422 600" opacity="0.74">
+				</path>
+				<path d="M 0 570 Q 355.5 -100 711 400 Q 1066.5 900 1422 570" opacity="0.71">
+				</path>
+				<path d="M 0 540 Q 355.5 -100 711 400 Q 1066.5 900 1422 540" opacity="0.67">
+				</path>
+				<path d="M 0 510 Q 355.5 -100 711 400 Q 1066.5 900 1422 510" opacity="0.63">
+				</path>
+				<path d="M 0 480 Q 355.5 -100 711 400 Q 1066.5 900 1422 480" opacity="0.60">
+				</path>
+				<path d="M 0 450 Q 355.5 -100 711 400 Q 1066.5 900 1422 450" opacity="0.56">
+				</path>
+				<path d="M 0 420 Q 355.5 -100 711 400 Q 1066.5 900 1422 420" opacity="0.53">
+				</path>
+				<path d="M 0 390 Q 355.5 -100 711 400 Q 1066.5 900 1422 390" opacity="0.49">
+				</path>
+				<path d="M 0 360 Q 355.5 -100 711 400 Q 1066.5 900 1422 360" opacity="0.45">
+				</path>
+				<path d="M 0 330 Q 355.5 -100 711 400 Q 1066.5 900 1422 330" opacity="0.42">
+				</path>
+				<path d="M 0 300 Q 355.5 -100 711 400 Q 1066.5 900 1422 300" opacity="0.38">
+				</path>
+				<path d="M 0 270 Q 355.5 -100 711 400 Q 1066.5 900 1422 270" opacity="0.34">
+				</path>
+				<path d="M 0 240 Q 355.5 -100 711 400 Q 1066.5 900 1422 240" opacity="0.31">
+				</path>
+				<path d="M 0 210 Q 355.5 -100 711 400 Q 1066.5 900 1422 210" opacity="0.27">
+				</path>
+				<path d="M 0 180 Q 355.5 -100 711 400 Q 1066.5 900 1422 180" opacity="0.23">
+				</path>
+				<path d="M 0 150 Q 355.5 -100 711 400 Q 1066.5 900 1422 150" opacity="0.20">
+				</path>
+				<path d="M 0 120 Q 355.5 -100 711 400 Q 1066.5 900 1422 120" opacity="0.16">
+				</path>
+				<path d="M 0 90 Q 355.5 -100 711 400 Q 1066.5 900 1422 90" opacity="0.12">
+				</path>
+				<path d="M 0 60 Q 355.5 -100 711 400 Q 1066.5 900 1422 60" opacity="0.09">
+				</path>
+			</g>
+		</svg>
+	);
+};
+
 export const ArrowLeft: React.FC<IconSvgProps> = ({
 	size = 24,
 	width,

@@ -7,12 +7,9 @@ import { isMobileDevice } from "@/server/mobile-checker";
 import LandingPageVideos from "@/components/landingVideos";
 import SearchBar from "@/components/search";
 import FAQSection from "@/components/faqsection";
+import { BbblurryIcon } from "@/components/icons";
 
 export default async function Home() {
-
-	const finalFiles = await fetchVideos({limit: 0, offset: 0})
-
-	const mobile = isMobileDevice();
 
 	// #######################################################################
 	// #################### UPLOAD FILES FROM UT TO DB #######################
@@ -53,7 +50,7 @@ export default async function Home() {
 			<LandingPageHeading />
 			<SearchBar />
 			<div className="w-full py-12 px-4">
-				<LandingPageVideos vidProp={finalFiles} limit={20} offset={0} isMobile={mobile}/>
+				<LandingPageVideos/>
 			</div>
 			<div className="w-full py-12 px-12">
 			<FAQSection />

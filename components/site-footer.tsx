@@ -2,7 +2,7 @@ import Link from "next/link"
 
 export function SiteFooter() {
   return (
-    <footer className="w-full flex justify-center py-6 md:px-8 md:py-0 border-t border-zinc-800">
+    <footer className="w-full flex justify-center md:px-8 border-t border-zinc-800 bg-black z-10">
       <div className="basis-4/5 flex gap-4 py-10 justify-between">
         <div className="flex flex-col items-start justify-center gap-4">
         <Link className="flex justify-start items-center gap-1" href="/">

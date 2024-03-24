@@ -48,10 +48,10 @@ export default async function RootLayout({
 				)}
 			>
 				<Providers themeProps={{ attribute: "class", defaultTheme: "dark" }}>
-					<div className="relative flex flex-col h-screen">
+					<div className="flex flex-col h-screen">
 						<Navbar />
 						
-						<main className="w-full mx-auto pt-16">
+						<main className="w-full mx-auto my-auto pt-16">
 							<AuthProvider>
 								{children}
 							</AuthProvider>
