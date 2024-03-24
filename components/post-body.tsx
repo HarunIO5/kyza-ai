@@ -7,7 +7,7 @@
  * https://portabletext.org/
  *
  */
-import { PortableText, type PortableTextReactComponents } from 'next-sanity'
+import {PortableText, type PortableTextReactComponents} from '@portabletext/react'
 
 import Image from 'next/image'
 import { urlFor } from '@/lib/sanityImageUrl'
@@ -30,7 +30,7 @@ const myPortableTextComponents: Partial<PortableTextReactComponents> = {
 
 export default function PostBody({ content }: {content: any}) {
   return (
-    <div className="mx-auto max-w-5xl text-lg leading-relaxed prose text-white">
+    <div className="mx-auto max-w-5xl text-lg leading-relaxed">
       <PortableText value={content} components={myPortableTextComponents} />
     </div>
   )
