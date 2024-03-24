@@ -59,8 +59,8 @@ export default async function RootLayout({
 						
 						<SiteFooter/>
 					</div>
-					<Analytics />
 				</Providers>
+				<Analytics />
 			</body>
 		</html>
 	);
