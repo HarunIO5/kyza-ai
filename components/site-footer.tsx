@@ -6,8 +6,8 @@ export function SiteFooter() {
       <div className="basis-4/5 flex gap-4 py-10 justify-between">
         <div className="flex flex-col items-start justify-center gap-4">
         <Link className="flex justify-start items-center gap-1" href="/">
-			<p className="font-bold text-inherit">KYZA</p>
-		</Link>
+			    <p className="font-bold text-inherit">KYZA</p>
+		    </Link>
       
         <Link
             target="_blank"

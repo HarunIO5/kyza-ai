@@ -15,7 +15,7 @@ import Link from "next/link";
   export default function ImageModal ({onOpen, onOpenChange, srcName, srcUrl} : {onOpen: boolean, onOpenChange: () => void, srcName: string, srcUrl: string}) {
     return (
             <Modal isOpen={onOpen} onOpenChange={onOpenChange} placement="center" size="3xl" backdrop="blur"  className=" overflow-auto">
-              <ModalContent className="p-4 max-md:h-[700px]">
+              <ModalContent className="p-4 max-md:h-[575px]">
                 {(onClose) => (
                   <>
                     <ModalBody className="flex flex-col-reverse md:flex-row items-start justify-between gap-4">
@@ -23,7 +23,7 @@ import Link from "next/link";
                         <p className="font-semibold text-xl">
                               Prompt:
                         </p>
-                        <Card className=" bg-zinc-800 p-2 rounded-md max-w-[300px]">
+                        <Card className=" bg-zinc-800 p-2 rounded-md w-full md:max-w-[300px]">
                           <CardBody>
                               {srcName}
                           </CardBody>
@@ -36,7 +36,7 @@ import Link from "next/link";
                         </p>
                       </div>
                         <div className="flex flex-col gap-2">
-                            <video autoPlay loop className="h-[350px] md:h-[600px] w-[400px] object-cover rounded-md" playsInline={true} muted preload="metadata">
+                            <video autoPlay loop className="h-[250px] md:h-[600px] w-[400px] object-cover rounded-md" playsInline={true} muted preload="metadata">
                               <source src={srcUrl} type="video/mp4" />
                               <track
                                 src={srcUrl + '#t=0.1'}

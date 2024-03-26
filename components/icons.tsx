@@ -8,7 +8,7 @@ export const Logo: React.FC<IconSvgProps> = ({
 	height,
 	...props
 }) => (
-	<Image src="/white-logo.png" alt="KYZA Logo" width={50} height={50}></Image>
+	<Image src="/kyza_colour_logo.png" alt="KYZA Logo" width={50} height={50}></Image>
 );
 
 export const LightLogo: React.FC<IconSvgProps> = ({
@@ -68,64 +68,76 @@ export const WavesIcon: React.FC<IconSvgProps> = ({
 		<svg xmlns="http://www.w3.org/2000/svg" version="1.1" xmlnsXlink="http://www.w3.org/1999/xlink" viewBox="0 0 1422 800" {...props}>
 			<defs>
 				<linearGradient x1="50%" y1="0%" x2="50%" y2="100%" id="oooscillate-grad">
-					<stop stop-color="hsl(265, 55%, 30%)" stop-opacity="1" offset="0%">
+					<stop stop-color="hsl(206, 72%, 60%)" stop-opacity="1" offset="0%">
 					</stop>
-					<stop stop-color="hsl(265, 55%, 60%)" stop-opacity="1" offset="100%">
+					<stop stop-color="hsl(272, 99%, 54%)" stop-opacity="1" offset="100%">
 					</stop>
 				</linearGradient>
 			</defs>
-			<g stroke-width="2" stroke="url(#oooscillate-grad)" fill="none" stroke-linecap="round">
-				<path d="M 0 810 Q 355.5 -100 711 400 Q 1066.5 900 1422 810" opacity="1.00">
+			<g stroke-width="1.5" stroke="url(#oooscillate-grad)" fill="none" stroke-linecap="round">
+				<path d="M 0 726 Q 355.5 25 711 400 Q 1066.5 775 1422 726" opacity="1.00">
 				</path>
-				<path d="M 0 780 Q 355.5 -100 711 400 Q 1066.5 900 1422 780" opacity="0.96">
+				<path d="M 0 704 Q 355.5 25 711 400 Q 1066.5 775 1422 704" opacity="0.97">
 				</path>
-				<path d="M 0 750 Q 355.5 -100 711 400 Q 1066.5 900 1422 750" opacity="0.93">
+				<path d="M 0 682 Q 355.5 25 711 400 Q 1066.5 775 1422 682" opacity="0.94">
 				</path>
-				<path d="M 0 720 Q 355.5 -100 711 400 Q 1066.5 900 1422 720" opacity="0.89">
+				<path d="M 0 660 Q 355.5 25 711 400 Q 1066.5 775 1422 660" opacity="0.91">
 				</path>
-				<path d="M 0 690 Q 355.5 -100 711 400 Q 1066.5 900 1422 690" opacity="0.85">
+				<path d="M 0 638 Q 355.5 25 711 400 Q 1066.5 775 1422 638" opacity="0.88">
 				</path>
-				<path d="M 0 660 Q 355.5 -100 711 400 Q 1066.5 900 1422 660" opacity="0.82">
+				<path d="M 0 616 Q 355.5 25 711 400 Q 1066.5 775 1422 616" opacity="0.85">
 				</path>
-				<path d="M 0 630 Q 355.5 -100 711 400 Q 1066.5 900 1422 630" opacity="0.78">
+				<path d="M 0 594 Q 355.5 25 711 400 Q 1066.5 775 1422 594" opacity="0.82">
 				</path>
-				<path d="M 0 600 Q 355.5 -100 711 400 Q 1066.5 900 1422 600" opacity="0.74">
+				<path d="M 0 572 Q 355.5 25 711 400 Q 1066.5 775 1422 572" opacity="0.79">
 				</path>
-				<path d="M 0 570 Q 355.5 -100 711 400 Q 1066.5 900 1422 570" opacity="0.71">
+				<path d="M 0 550 Q 355.5 25 711 400 Q 1066.5 775 1422 550" opacity="0.76">
 				</path>
-				<path d="M 0 540 Q 355.5 -100 711 400 Q 1066.5 900 1422 540" opacity="0.67">
+				<path d="M 0 528 Q 355.5 25 711 400 Q 1066.5 775 1422 528" opacity="0.73">
 				</path>
-				<path d="M 0 510 Q 355.5 -100 711 400 Q 1066.5 900 1422 510" opacity="0.63">
+				<path d="M 0 506 Q 355.5 25 711 400 Q 1066.5 775 1422 506" opacity="0.70">
 				</path>
-				<path d="M 0 480 Q 355.5 -100 711 400 Q 1066.5 900 1422 480" opacity="0.60">
+				<path d="M 0 484 Q 355.5 25 711 400 Q 1066.5 775 1422 484" opacity="0.67">
 				</path>
-				<path d="M 0 450 Q 355.5 -100 711 400 Q 1066.5 900 1422 450" opacity="0.56">
+				<path d="M 0 462 Q 355.5 25 711 400 Q 1066.5 775 1422 462" opacity="0.64">
 				</path>
-				<path d="M 0 420 Q 355.5 -100 711 400 Q 1066.5 900 1422 420" opacity="0.53">
+				<path d="M 0 440 Q 355.5 25 711 400 Q 1066.5 775 1422 440" opacity="0.61">
 				</path>
-				<path d="M 0 390 Q 355.5 -100 711 400 Q 1066.5 900 1422 390" opacity="0.49">
+				<path d="M 0 418 Q 355.5 25 711 400 Q 1066.5 775 1422 418" opacity="0.58">
 				</path>
-				<path d="M 0 360 Q 355.5 -100 711 400 Q 1066.5 900 1422 360" opacity="0.45">
+				<path d="M 0 396 Q 355.5 25 711 400 Q 1066.5 775 1422 396" opacity="0.55">
 				</path>
-				<path d="M 0 330 Q 355.5 -100 711 400 Q 1066.5 900 1422 330" opacity="0.42">
+				<path d="M 0 374 Q 355.5 25 711 400 Q 1066.5 775 1422 374" opacity="0.53">
 				</path>
-				<path d="M 0 300 Q 355.5 -100 711 400 Q 1066.5 900 1422 300" opacity="0.38">
+				<path d="M 0 352 Q 355.5 25 711 400 Q 1066.5 775 1422 352" opacity="0.50">
 				</path>
-				<path d="M 0 270 Q 355.5 -100 711 400 Q 1066.5 900 1422 270" opacity="0.34">
+				<path d="M 0 330 Q 355.5 25 711 400 Q 1066.5 775 1422 330" opacity="0.47">
 				</path>
-				<path d="M 0 240 Q 355.5 -100 711 400 Q 1066.5 900 1422 240" opacity="0.31">
+				<path d="M 0 308 Q 355.5 25 711 400 Q 1066.5 775 1422 308" opacity="0.44">
 				</path>
-				<path d="M 0 210 Q 355.5 -100 711 400 Q 1066.5 900 1422 210" opacity="0.27">
+				<path d="M 0 286 Q 355.5 25 711 400 Q 1066.5 775 1422 286" opacity="0.41">
 				</path>
-				<path d="M 0 180 Q 355.5 -100 711 400 Q 1066.5 900 1422 180" opacity="0.23">
+				<path d="M 0 264 Q 355.5 25 711 400 Q 1066.5 775 1422 264" opacity="0.38">
 				</path>
-				<path d="M 0 150 Q 355.5 -100 711 400 Q 1066.5 900 1422 150" opacity="0.20">
+				<path d="M 0 242 Q 355.5 25 711 400 Q 1066.5 775 1422 242" opacity="0.35">
 				</path>
-				<path d="M 0 120 Q 355.5 -100 711 400 Q 1066.5 900 1422 120" opacity="0.16">
+				<path d="M 0 220 Q 355.5 25 711 400 Q 1066.5 775 1422 220" opacity="0.32">
 				</path>
-				<path d="M 0 90 Q 355.5 -100 711 400 Q 1066.5 900 1422 90" opacity="0.12">
+				<path d="M 0 198 Q 355.5 25 711 400 Q 1066.5 775 1422 198" opacity="0.29">
 				</path>
-				<path d="M 0 60 Q 355.5 -100 711 400 Q 1066.5 900 1422 60" opacity="0.09">
+				<path d="M 0 176 Q 355.5 25 711 400 Q 1066.5 775 1422 176" opacity="0.26">
+				</path>
+				<path d="M 0 154 Q 355.5 25 711 400 Q 1066.5 775 1422 154" opacity="0.23">
+				</path>
+				<path d="M 0 132 Q 355.5 25 711 400 Q 1066.5 775 1422 132" opacity="0.20">
+				</path>
+				<path d="M 0 110 Q 355.5 25 711 400 Q 1066.5 775 1422 110" opacity="0.17">
+				</path>
+				<path d="M 0 88 Q 355.5 25 711 400 Q 1066.5 775 1422 88" opacity="0.14">
+				</path>
+				<path d="M 0 66 Q 355.5 25 711 400 Q 1066.5 775 1422 66" opacity="0.11">
+				</path>
+				<path d="M 0 44 Q 355.5 25 711 400 Q 1066.5 775 1422 44" opacity="0.08">
 				</path>
 			</g>
 		</svg>
