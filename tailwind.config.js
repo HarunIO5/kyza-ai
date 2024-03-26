@@ -12,7 +12,7 @@ module.exports = {
     extend: {
       "animation": {
         "border-width": "border-width 3s infinite alternate",
-        "text-gradient": "text-gradient 1.5s linear infinite"
+        "text-gradient": "text-gradient 2.0s linear infinite"
       },
       "keyframes": {
         "border-width": {
