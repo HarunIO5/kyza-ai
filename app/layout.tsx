@@ -18,6 +18,7 @@ export const metadata: Metadata = {
 	icons: {
 		icon: "/favicon.ico",
 	},
+	metadataBase: new URL('https://kyza.ai/'),
 	twitter: {
 		card: 'summary_large_image'
 	}
