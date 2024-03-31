@@ -21,19 +21,22 @@ import NextLink from "next/link";
 import clsx from "clsx";
 
 import { ThemeSwitch } from "@/components/theme-switch";
+import { Video, Construction, ChevronDown } from 'lucide-react';
 import {
-	TwitterIcon,
-	GithubIcon,
-	DiscordIcon,
-	HeartFilledIcon,
-	SearchIcon,
-} from "@/components/icons";
+	DropdownItem, 
+	DropdownTrigger, 
+	Dropdown, 
+	DropdownMenu
+} from '@nextui-org/react' 
 
 import { Logo } from "@/components/icons";
 import { useEffect, useState } from "react";
 import { usePathname } from "next/navigation";
+import { Session } from "next-auth";
+import UserNav from "@/components/user-nav";
+import { signOut } from "next-auth/react"
 
-export const Navbar = () => {
+export const Navbar = ({session, creditCount, checkCreditLimit}: {session: Session, creditCount: number, checkCreditLimit: boolean}) => {
 	const [isMenuOpen, setIsMenuOpen] = useState<boolean | undefined>(false);
 	const [isMounted, setIsMounted] = useState(false);
 
@@ -53,6 +56,12 @@ export const Navbar = () => {
        return null;
     }
 
+	const icons = {
+		Video: <Video  size={30} />,
+		Construction: <Construction size={30} />,
+		ChevronDown: <ChevronDown size={16} />
+	};
+
 	return (
 		<NextUINavbar maxWidth="xl" position="sticky" className="border-b border-zinc-800" isMenuOpen={isMenuOpen} onMenuOpenChange={setIsMenuOpen}>
 			<NavbarContent className="basis-1/5 sm:basis-full" justify="start">
@@ -68,7 +77,7 @@ export const Navbar = () => {
 				className="hidden sm:flex basis-1/5 sm:basis-full"
 				justify="end"
 			>
-				<ul className="hidden lg:flex gap-4 justify-start ml-2">
+				<ul className="hidden lg:flex gap-4 justify-start ml-2" key={'menu'}>
 					{siteConfig.navItems.map((item) => (
 						<NavbarItem key={item.href}>
 							<NextLink
@@ -84,6 +93,54 @@ export const Navbar = () => {
 						</NavbarItem>
 					))}
 				</ul>
+				<Dropdown>
+        		  <NavbarItem>
+        		    <DropdownTrigger>
+        		      <Button
+        		        disableRipple
+        		        className="p-0 bg-transparent data-[hover=true]:bg-transparent"
+						endContent={icons.ChevronDown}
+        		        radius="sm"
+        		        variant="light"
+        		      >
+        		        Generations
+        		      </Button>
+        		    </DropdownTrigger>
+        		  </NavbarItem>
+        		  <DropdownMenu
+        		    aria-label="Kyza Generations"
+        		    className="w-[340px]"
+        		    itemClasses={{
+        		      base: "gap-4",
+        		    }}
+        		  >
+        		    <DropdownItem
+        		      key="text_to_video"
+        		      startContent={icons.Video}
+					  href="/text-to-video"
+        		    >
+        		      Text-to-Video
+        		    </DropdownItem>
+        		    <DropdownItem
+        		      key="wallpaper_engine"
+        		      startContent={icons.Construction}
+        		    >
+        		      Wallpaper Engine - Coming Soon
+        		    </DropdownItem>
+        		  </DropdownMenu>
+        		</Dropdown>
+				{session ? (
+					<UserNav session={session} creditCount={creditCount!} checkCreditLimit={checkCreditLimit!} />	
+				) : (
+					<NavbarItem key={'login'}>
+						<NextLink href={'/login'}>
+							<Button color="secondary">
+								Login
+							</Button>
+						</NextLink>
+					</NavbarItem>
+				)}	
+								
 			</NavbarContent>
 
 			<NavbarContent className="sm:hidden basis-1 pl-4" justify="end">
@@ -95,13 +152,7 @@ export const Navbar = () => {
 					{siteConfig.navMenuItems.map((item, index) => (
 						<NavbarMenuItem key={`${item}-${index}`}>
 							<Link
-								color={
-									index === 2
-										? "primary"
-										: index === siteConfig.navMenuItems.length - 1
-										? "danger"
-										: "foreground"
-								}
+								color={"foreground"}
 								href={item.href}
 								size="lg"
 							>
@@ -109,6 +160,49 @@ export const Navbar = () => {
 							</Link>
 						</NavbarMenuItem>
 					))}
+					<NavbarMenuItem key={`text_to_video`}>
+						<Link
+							color={"foreground"}
+							href={'/text-to-video'}
+							size="lg"
+						>
+							Text-to-Video
+						</Link>
+					</NavbarMenuItem>
+					<NavbarMenuItem key={`wallpaper_engine`}>
+						<Link
+							color={"foreground"}
+							href={'/'}
+							size="lg"
+							isDisabled
+						>
+							Wallpaper Engine - Coming Soon
+						</Link>
+					</NavbarMenuItem>
+					{session ? (
+						<NavbarMenuItem key={`logout`}>
+						<Link
+							color={"danger"}
+							href={''}
+							onClick={() => signOut({callbackUrl: 'http://localhost:3000/login'})}
+							size="lg"
+						>
+							Logout
+						</Link>
+					</NavbarMenuItem>
+					) : (
+						<NavbarMenuItem key={`logout`}>
+						<Link
+							color={"secondary"}
+							href={'/login'}
+							onClick={() => signOut({callbackUrl: 'http://localhost:3000/login'})}
+							size="lg"
+						>
+							Login
+						</Link>
+					</NavbarMenuItem>
+					)}
+					
 				</div>
 			</NavbarMenu>
 		</NextUINavbar>

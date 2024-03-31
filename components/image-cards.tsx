@@ -9,7 +9,7 @@ import ImageModal from "./image-modal";
 import { useInView } from "react-intersection-observer";
 
 import { fetchSearchedVideos, fetchVideos } from "@/app/_action";
-import { SearchVideosType } from "@/app/videos/page";
+import { SearchVideosType } from "@/app/(main)/videos/page";
 
 export default function VidCard ({vidProp, search, videoLength} : {vidProp : SearchVideosType[], search: string, videoLength: number}) {
 

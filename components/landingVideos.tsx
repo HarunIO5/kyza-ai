@@ -5,7 +5,7 @@ export default function LandingPageVideos ()  {
     const boxStyle =
     'rounded-xl brightness-110';
     return (
-        <div className="w-full grid md:grid-cols-4 auto-rows-[300px] gap-4 my-10" >
+        <div className="w-full grid md:grid-cols-4 auto-rows-[300px] gap-4" >
                 <Card
                   isFooterBlurred
                   className={`${boxStyle} md:col-span-2`}

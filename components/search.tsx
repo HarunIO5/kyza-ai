@@ -15,10 +15,19 @@ export default function SearchBar () {
 
     const router = useRouter()
     const [query, setQuery] = useState<string>('')
+    const [isMounted, setIsMounted] = useState(false);
 
     //Handling the input on our search bar
     const handleChange = (e: ChangeEvent<HTMLInputElement>) => {
         setQuery(e.target.value)
+    }
+
+    useEffect(() => {
+        setIsMounted(true);
+    }, []);
+    
+    if (!isMounted) {
+       return null;
     }
 
     // useEffect(() => {

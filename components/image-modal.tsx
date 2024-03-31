@@ -8,7 +8,7 @@ import {
     ModalFooter, 
     useDisclosure
   } from "@nextui-org/react";
-  import {Card, CardFooter, CardHeader, CardBody, Image, Button, Spinner, Divider} from "@nextui-org/react";
+  import {Card, CardFooter, CardHeader, CardBody, Image, Button, Spinner, Divider } from "@nextui-org/react";
   import { DownloadIcon } from "./icons";
 import Link from "next/link";
 

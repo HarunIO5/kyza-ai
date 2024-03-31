@@ -58,6 +58,22 @@ export const BbblurryIcon: React.FC<IconSvgProps> = ({
 	);
 };
 
+export const GoogleIcon: React.FC<IconSvgProps> = ({
+	size = 24,
+	width,
+	height,
+	...props
+}) => {
+	return (
+		<svg role="img" viewBox="0 0 24 24" {...props}>
+      <path
+        fill="currentColor"
+        d="M12.48 10.92v3.28h7.84c-.24 1.84-.853 3.187-1.787 4.133-1.147 1.147-2.933 2.4-6.053 2.4-4.827 0-8.6-3.893-8.6-8.72s3.773-8.72 8.6-8.72c2.6 0 4.507 1.027 5.907 2.347l2.307-2.307C18.747 1.44 16.133 0 12.48 0 5.867 0 .307 5.387.307 12s5.56 12 12.173 12c3.573 0 6.267-1.173 8.373-3.36 2.16-2.16 2.84-5.213 2.84-7.667 0-.76-.053-1.467-.173-2.053H12.48z"
+      />
+    </svg>
+	)
+}
+
 export const WavesIcon: React.FC<IconSvgProps> = ({
 	size = 24,
 	width,
@@ -68,13 +84,13 @@ export const WavesIcon: React.FC<IconSvgProps> = ({
 		<svg xmlns="http://www.w3.org/2000/svg" version="1.1" xmlnsXlink="http://www.w3.org/1999/xlink" viewBox="0 0 1422 800" {...props}>
 			<defs>
 				<linearGradient x1="50%" y1="0%" x2="50%" y2="100%" id="oooscillate-grad">
-					<stop stop-color="hsl(206, 72%, 60%)" stop-opacity="1" offset="0%">
+					<stop stopColor="hsl(206, 72%, 60%)" stopOpacity="1" offset="0%">
 					</stop>
-					<stop stop-color="hsl(272, 99%, 54%)" stop-opacity="1" offset="100%">
+					<stop stopColor="hsl(272, 99%, 54%)" stopOpacity="1" offset="100%">
 					</stop>
 				</linearGradient>
 			</defs>
-			<g stroke-width="1.5" stroke="url(#oooscillate-grad)" fill="none" stroke-linecap="round">
+			<g strokeWidth="1.5" stroke="url(#oooscillate-grad)" fill="none" strokeLinecap="round">
 				<path d="M 0 726 Q 355.5 25 711 400 Q 1066.5 775 1422 726" opacity="1.00">
 				</path>
 				<path d="M 0 704 Q 355.5 25 711 400 Q 1066.5 775 1422 704" opacity="0.97">

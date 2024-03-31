@@ -8,6 +8,7 @@ import AuthProvider from "@/components/providers";
 import clsx from "clsx";
 import { SiteFooter } from "@/components/site-footer";
 import { Analytics } from "@vercel/analytics/react"
+import { ToasterProvider } from "@/components/toaster-provider";
 
 export const metadata: Metadata = {
 	title: {
@@ -49,17 +50,14 @@ export default async function RootLayout({
 				)}
 			>
 				<Providers themeProps={{ attribute: "class", defaultTheme: "dark" }}>
-					<div className="flex flex-col h-screen">
-						<Navbar />
-						
-						<main className="w-full mx-auto my-auto pt-16">
-							<AuthProvider>
-								{children}
-							</AuthProvider>
-						</main>
-						
-						<SiteFooter/>
-					</div>
+					<ToasterProvider />
+						<div className="flex flex-col h-screen">
+							<main className="w-full mx-auto">
+								<AuthProvider>
+									{children}
+								</AuthProvider>
+							</main>
+						</div>
 				</Providers>
 				<Analytics />
 			</body>

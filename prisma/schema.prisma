@@ -43,18 +43,22 @@ model Session {
 }
 
 model User {
-  id                        String    @id @default(cuid())
-  name                      String?
-  email                     String?   @unique
+  id                        String                 @id @default(cuid())
+  name                      String?                @unique
+  email                     String?                @unique
   hashedPassword            String?
   emailVerified             DateTime?
   image                     String?
-  forgotPasswordToken       String?   @unique
+  freeCredits               Int                    @default(3)
+  credits                   Int                    @default(0)
+  forgotPasswordToken       String?                @unique
   forgotPasswordTokenExpiry DateTime?
-  verifyToken               String?   @unique
+  verifyToken               String?                @unique
   verifyTokenExpiry         DateTime?
   accounts                  Account[]
   sessions                  Session[]
+  OneTimePurchases          OneTimePurchases[]
+  UserSavedGenerations      UserSavedGenerations[]
 }
 
 model VerificationToken {
@@ -69,6 +73,7 @@ model SearchableVideos {
   id            String  @id @default(cuid())
   key           String?
   prompt        String
+  model         String?
   url           String
   fileSizeBytes Int?
 }
@@ -79,4 +84,27 @@ model LandingPageVideos {
   prompt        String
   url           String
   fileSizeBytes Int?
+}
+
+model OneTimePurchases {
+  id          String   @id @default(cuid())
+  productType String
+  credits     Int?
+  createdAt   DateTime @default(now())
+  products    Json?
+  status      String   @default("Pending")
+  userId      String
+  user        User     @relation(fields: [userId], references: [id])
+}
+
+model UserSavedGenerations {
+  id          String   @id @default(cuid())
+  productType String
+  model       String?
+  prompt      String
+  style       String?
+  createdAt   DateTime @default(now())
+  url         String?
+  userId      String
+  user        User     @relation(fields: [userId], references: [id])
 }

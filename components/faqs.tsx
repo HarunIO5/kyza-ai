@@ -1,10 +1,19 @@
 'use client'
 
 import {Accordion, AccordionItem} from "@nextui-org/react";
+import { useEffect, useState } from "react";
 
 export default function FAQs () {
-    const defaultContent =
-    "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.";
+    
+  const [isMounted, setIsMounted] = useState(false);
+
+  useEffect(() => {
+    setIsMounted(true);
+  }, []);
+
+  if (!isMounted) {
+     return null;
+  }
 
   return (
     <div className='relative'>
@@ -25,7 +34,7 @@ export default function FAQs () {
             </AccordionItem>
             <AccordionItem key="3" aria-label="What level of control do users have over the visual and auditory elements?" title="What level of control do users have over the visual and auditory elements?">
             <p className=" text-content4-foreground">
-              What level of control do users have over the visual and auditory elements?
+              Kyza.ai provides users with extensive customization options. Users can upload custom images, logos, and voiceovers to personalise their videos.
             </p>
             </AccordionItem>
             <AccordionItem key="4" aria-label="How does Kyza.ai ensure the quality and accuracy of the generated videos?" title="How does Kyza.ai ensure the quality and accuracy of the generated videos?">

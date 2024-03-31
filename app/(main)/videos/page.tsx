@@ -1,6 +1,6 @@
 import VidCard from "@/components/image-cards";
 import LandingPageHeading from "@/components/landing-page-heading";
-import { fetchSearchedVideos } from "../_action";
+import { fetchSearchedVideos } from "../../_action";
 import { SearchVideosDB, SearchVideoLength } from "@/lib/getVidFiles";
 import SearchBar from "@/components/search";
 import { revalidatePath } from 'next/cache'
@@ -38,7 +38,9 @@ export default async function VideosFeed ({
     return (
         <div className="w-full flex flex-col items-center justify-center gap-4 py-8 md:py-10">
             <LandingPageHeading />
-            <SearchBar />
+            <Suspense>
+                <SearchBar />
+            </Suspense>
             {videoLength !=0 ? (
                 <Suspense key={`search=${searchParams?.search}`} fallback={<div>Loading...</div>}>
                     <VidCard vidProp={initialVideos} search={search!} videoLength={videoLength as number}/>

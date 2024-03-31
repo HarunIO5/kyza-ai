@@ -2,7 +2,7 @@ import { utapi } from "@/server/uploadthing";
 import VidCard from "@/components/image-cards";
 import { Suspense } from "react";
 import LandingPageHeading from "@/components/landing-page-heading";
-import { fetchVideos } from "./_action";
+import { fetchVideos } from "../_action";
 import { isMobileDevice } from "@/server/mobile-checker";
 import LandingPageVideos from "@/components/landingVideos";
 import SearchBar from "@/components/search";
