@@ -8,7 +8,6 @@ import Image from "next/image";
 import { urlFor } from "@/lib/sanityImageUrl";
 import { PortableText } from "@portabletext/react";
 import MoreStories from "@/components/more-stories";
-import { Suspense } from "react";
 
 export interface IndexPageProps {
 	preview?: boolean
