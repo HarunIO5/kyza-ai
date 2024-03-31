@@ -53,7 +53,9 @@ export default async function RootLayout({
 					<ToasterProvider />
 						<div className="flex flex-col h-screen">
 							<main className="w-full mx-auto">
+								<AuthProvider>
 									{children}
+								</AuthProvider>
 							</main>
 						</div>
 				</Providers>

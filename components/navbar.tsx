@@ -35,12 +35,15 @@ import { usePathname } from "next/navigation";
 import { Session } from "next-auth";
 import UserNav from "@/components/user-nav";
 import { signOut } from "next-auth/react"
+import { useSession } from "next-auth/react";
 
-export const Navbar = ({session}: {session: Session}) => {
+export const Navbar = () => {
 	const [isMenuOpen, setIsMenuOpen] = useState<boolean | undefined>(false);
 	const [isMounted, setIsMounted] = useState(false);
 
 	const pathname = usePathname();
+
+	const { data: session, status } = useSession()
 
 	useEffect(() => {
 		if (isMenuOpen) {
