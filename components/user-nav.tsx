@@ -6,7 +6,9 @@ import { signOut } from "next-auth/react"
 import { Session } from "next-auth";
 import { Sparkles } from 'lucide-react';
 
-export default function UserNav({ session }: {session: Session}) {
+// USE checkCreditLimit to have a CTA to purchase via the UserNav
+
+export default function UserNav({session, creditCount, checkCreditLimit}: {session: Session, creditCount: number, checkCreditLimit: boolean}) {
 
     // const [ freeCredits, setFreeCredits ] = useState<number>(3)
     // const [ credit, setCredits ] = useState<number>(0)
@@ -51,6 +53,9 @@ export default function UserNav({ session }: {session: Session}) {
                   <p className="font-semibold">Signed in as</p>
                   <p className="font-semibold">{email!}</p>
                 </DropdownItem>
+                <DropdownItem key="profile" className="h-14 gap-2" startContent={<Sparkles className={'h-4 w-4 fill-yellow-500 text-yellow-500'} />}>
+                  <p className="font-semibold">{creditCount} credits remaining</p>
+                </DropdownItem> 
             </DropdownSection>
             <DropdownItem key="logout" color="danger" onClick={() => signOut({callbackUrl: `${baseUrl}`})}>
               Log Out

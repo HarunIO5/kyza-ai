@@ -35,16 +35,12 @@ import { usePathname } from "next/navigation";
 import { Session } from "next-auth";
 import UserNav from "@/components/user-nav";
 import { signOut } from "next-auth/react"
-import { useSession } from "next-auth/react";
 
-
-export const Navbar = () => {
+export const Navbar = ({session, creditCount, checkCreditLimit}: {session: Session, creditCount: number, checkCreditLimit: boolean}) => {
 	const [isMenuOpen, setIsMenuOpen] = useState<boolean | undefined>(false);
 	const [isMounted, setIsMounted] = useState(false);
 
 	const pathname = usePathname();
-
-	const { data: session, status } = useSession()
 
 	useEffect(() => {
 		if (isMenuOpen) {
@@ -142,7 +138,7 @@ export const Navbar = () => {
         		  </DropdownMenu>
         		</Dropdown>
 				{session ? (
-					<UserNav session={session} />	
+					<UserNav session={session} creditCount={creditCount!} checkCreditLimit={checkCreditLimit!} />	
 				) : (
 					<NavbarItem key={'login'}>
 						<NextLink href={'/login'}>
