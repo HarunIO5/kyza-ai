@@ -28,18 +28,18 @@ export default async function Layout({
 
 	// const user = await getUser(session?.user?.email!)
 
-	let checkCredits
-	let getCreditCount
+	// let checkCredits
+	// let getCreditCount
 
-	if (session) {
-		checkCredits = await checkCreditLimit({email: session?.user?.email!})
+	// if (session) {
+	// 	checkCredits = await checkCreditLimit({email: session?.user?.email!})
 
-    	getCreditCount = await getTotalCreditCount({email: session?.user?.email!})
-	}
+    // 	getCreditCount = await getTotalCreditCount({email: session?.user?.email!})
+	// }
 
 	return (
 			<div className="flex flex-col h-screen">
-				<Navbar session={session!} creditCount={getCreditCount!} checkCreditLimit={checkCredits!}/>
+				<Navbar session={session!}/>
 				<main className="w-full mx-auto flex-grow">
 						{children}
 				</main>

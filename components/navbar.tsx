@@ -36,7 +36,7 @@ import { Session } from "next-auth";
 import UserNav from "@/components/user-nav";
 import { signOut } from "next-auth/react"
 
-export const Navbar = ({session, creditCount, checkCreditLimit}: {session: Session, creditCount: number, checkCreditLimit: boolean}) => {
+export const Navbar = ({session}: {session: Session}) => {
 	const [isMenuOpen, setIsMenuOpen] = useState<boolean | undefined>(false);
 	const [isMounted, setIsMounted] = useState(false);
 
@@ -138,7 +138,7 @@ export const Navbar = ({session, creditCount, checkCreditLimit}: {session: Sessi
         		  </DropdownMenu>
         		</Dropdown>
 				{session ? (
-					<UserNav session={session} creditCount={creditCount!} checkCreditLimit={checkCreditLimit!} />	
+					<UserNav session={session} />	
 				) : (
 					<NavbarItem key={'login'}>
 						<NextLink href={'/login'}>
