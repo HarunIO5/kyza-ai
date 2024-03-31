@@ -6,7 +6,7 @@ import { signOut } from "next-auth/react"
 import { Session } from "next-auth";
 import { Sparkles } from 'lucide-react';
 
-export default function UserNav({session }: {session: Session}) {
+export default function UserNav({ session }: {session: Session}) {
 
     // const [ freeCredits, setFreeCredits ] = useState<number>(3)
     // const [ credit, setCredits ] = useState<number>(0)
