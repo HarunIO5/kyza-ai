@@ -35,22 +35,16 @@ export default async function BlogPage() {
 				<h1 className="text-6xl font-bold leading-tight tracking-tighter md:pr-8 md:text-8xl">Blog</h1>
 			</header>
 			{heroPost && (
-				<Suspense>
-            		<HeroPost
-            		  title={heroPost.title}
-            		  mainImage={heroPost.mainImage}
-            		  _updatedAt={heroPost._updatedAt}
-            		  author={heroPost.author}
-            		  slug={heroPost.slug}
-            		  excerpt={heroPost.excerpt}
-            		/>
-				</Suspense>
+            	<HeroPost
+            	  title={heroPost.title}
+            	  mainImage={heroPost.mainImage}
+            	  _updatedAt={heroPost._updatedAt}
+            	  author={heroPost.author}
+            	  slug={heroPost.slug}
+            	  excerpt={heroPost.excerpt}
+            	/>
           )}
-		  {morePosts.length > 0 && (
-			<Suspense>
-		  		<MoreStories posts={morePosts} />
-			</Suspense>	
-		  )}
+		  {morePosts.length > 0 && <MoreStories posts={morePosts} />}
 		</div>
 	);
 }
