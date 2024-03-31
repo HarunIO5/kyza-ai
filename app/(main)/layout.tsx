@@ -1,4 +1,5 @@
 
+import { Suspense } from "react";
 import { Navbar } from "@/components/navbar";
 import { SiteFooter } from "@/components/site-footer";
 
@@ -24,7 +25,9 @@ export default async function Layout({
 
 	return (
 			<div className="flex flex-col h-screen">
-				<Navbar />
+				<Suspense>
+					<Navbar />
+				</Suspense>
 				<main className="w-full mx-auto flex-grow">
 						{children}
 				</main>

@@ -47,7 +47,7 @@ export function UserLoginForm({ className, ...props }: UserAuthFormProps) {
     })
 
     if(status?.error === null){
-      router.push('/text-to-video')
+      router.push('/')
     } else {
       setLoginError(true)
       setIsLoading(false)
