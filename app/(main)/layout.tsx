@@ -39,9 +39,7 @@ export default async function Layout({
 
 	return (
 			<div className="flex flex-col h-screen">
-				<Suspense>
-					<Navbar session={session!} creditCount={getCreditCount!} checkCreditLimit={checkCredits!}/>
-				</Suspense>
+				<Navbar session={session!} creditCount={getCreditCount!} checkCreditLimit={checkCredits!}/>
 				<main className="w-full mx-auto flex-grow">
 						{children}
 				</main>
