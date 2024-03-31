@@ -36,7 +36,7 @@ import { Session } from "next-auth";
 import UserNav from "@/components/user-nav";
 import { signOut } from "next-auth/react"
 
-export const Navbar = ({session}: {session: Session}) => {
+export const Navbar = () => {
 	const [isMenuOpen, setIsMenuOpen] = useState<boolean | undefined>(false);
 	const [isMounted, setIsMounted] = useState(false);
 
@@ -137,7 +137,7 @@ export const Navbar = ({session}: {session: Session}) => {
         		    </DropdownItem>
         		  </DropdownMenu>
         		</Dropdown>
-				{session ? (
+				{/* {session ? (
 					<UserNav session={session} />	
 				) : (
 					<NavbarItem key={'login'}>
@@ -147,7 +147,7 @@ export const Navbar = ({session}: {session: Session}) => {
 							</Button>
 						</NextLink>
 					</NavbarItem>
-				)}	
+				)}	 */}
 								
 			</NavbarContent>
 
@@ -187,7 +187,7 @@ export const Navbar = ({session}: {session: Session}) => {
 							Wallpaper Engine - Coming Soon
 						</Link>
 					</NavbarMenuItem>
-					{session ? (
+					{/* {session ? (
 						<NavbarMenuItem key={`logout`}>
 						<Link
 							color={"danger"}
@@ -208,7 +208,7 @@ export const Navbar = ({session}: {session: Session}) => {
 							Login
 						</Link>
 					</NavbarMenuItem>
-					)}
+					)} */}
 					
 				</div>
 			</NavbarMenu>

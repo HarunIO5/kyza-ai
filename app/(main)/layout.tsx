@@ -24,7 +24,7 @@ export default async function Layout({
 	children: React.ReactNode;
 }) {
 
-	const session = await getServerSession(authOptions)
+	// const session = await getServerSession(authOptions)
 
 	// const user = await getUser(session?.user?.email!)
 
@@ -39,7 +39,7 @@ export default async function Layout({
 
 	return (
 			<div className="flex flex-col h-screen">
-				<Navbar session={session!}/>
+				<Navbar />
 				<main className="w-full mx-auto flex-grow">
 						{children}
 				</main>
