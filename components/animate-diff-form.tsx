@@ -19,7 +19,7 @@ import useWindowSize from 'react-use/lib/useWindowSize'
 import Confetti from 'react-confetti'
 import { useRouter } from "next/navigation";
 
-export default function AnimateDiffForm ({session, checkCreditLimit, getCreditCount} : {session: Session, checkCreditLimit: boolean, getCreditCount: number}) {
+export default function AnimateDiffForm ({session, checkCreditLimit, getCreditCount} : {session: Session, checkCreditLimit?: boolean, getCreditCount?: number}) {
 
     const [ prompt, setPrompt ] = useState<string>('')
     const [ negative, setNegative ] = useState<string>('')
@@ -159,8 +159,8 @@ export default function AnimateDiffForm ({session, checkCreditLimit, getCreditCo
                       <Radio value="majicmixRealistic_v5Preview.safetensors">Realistic v5</Radio>
                       <Radio value="realisticVisionV40_v20Novae.safetensors">Realistic v10</Radio>
                     </RadioGroup>
-
-                    <p className="text-md font-semibold pt-4">
+                    
+                    <p className={`${getCreditCount ? 'visible' : 'hidden'} text-md font-semibold pt-4`}>
                         <Sparkles className="h-5 w-5 inline fill-yellow-500 text-yellow-500"/> {getCreditCount} Credits Remaining
                     </p>
                 </CardBody>

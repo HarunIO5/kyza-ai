@@ -15,9 +15,14 @@ export default async function TextToVideoPage () {
 
     // const user = await getUser(session?.user?.email!) // GET RID AFTER CREDIT CHECK WORKS
 
-    const checkCredits = await checkCreditLimit({email: session?.user?.email!})
+    let checkCredits
+	let getCreditCount
 
-    const getCreditCount = await getTotalCreditCount({email: session?.user?.email!})
+	if (session) {
+		checkCredits = await checkCreditLimit({email: session?.user?.email!})
+
+    	getCreditCount = await getTotalCreditCount({email: session?.user?.email!})
+	}
 
     return (
         <div className="w-full h-full flex flex-col items-center justify-center py-12">
