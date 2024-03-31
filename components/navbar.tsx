@@ -62,6 +62,14 @@ export const Navbar = ({session, creditCount, checkCreditLimit}: {session: Sessi
 		ChevronDown: <ChevronDown size={16} />
 	};
 
+	let baseUrl = ''
+
+    if (process.env.NODE_ENV === 'production'){
+      baseUrl = 'https://kyza.ai'
+      } else {
+      baseUrl = 'http://localhost:3000'
+    }
+
 	return (
 		<NextUINavbar maxWidth="xl" position="sticky" className="border-b border-zinc-800" isMenuOpen={isMenuOpen} onMenuOpenChange={setIsMenuOpen}>
 			<NavbarContent className="basis-1/5 sm:basis-full" justify="start">
@@ -184,7 +192,7 @@ export const Navbar = ({session, creditCount, checkCreditLimit}: {session: Sessi
 						<Link
 							color={"danger"}
 							href={''}
-							onClick={() => signOut({callbackUrl: 'http://localhost:3000/login'})}
+							onClick={() => signOut({callbackUrl: `${baseUrl}`})}
 							size="lg"
 						>
 							Logout
@@ -195,7 +203,6 @@ export const Navbar = ({session, creditCount, checkCreditLimit}: {session: Sessi
 						<Link
 							color={"secondary"}
 							href={'/login'}
-							onClick={() => signOut({callbackUrl: 'http://localhost:3000/login'})}
 							size="lg"
 						>
 							Login
