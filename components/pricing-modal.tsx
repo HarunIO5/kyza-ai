@@ -43,7 +43,7 @@ import { useRouter } from "next/navigation";
         } else if (price == "4.99") {
             price_id=process.env.NEXT_PUBLIC_STRIPE_ANIMATEDIFF_50_PRICE_ID
             credit = 50
-        } else if (price == "9.99") {
+        } else if (price == "8.99") {
             price_id=process.env.NEXT_PUBLIC_STRIPE_ANIMATEDIFF_100_PRICE_ID
             credit = 100
         }
@@ -101,7 +101,7 @@ import { useRouter } from "next/navigation";
                                     10 generations
                                 </CardHeader>
                                 <CardBody className="flex items-center justify-center">
-                                    $2.99
+                                    £2.99
                                 </CardBody>
                             </Card>
                             <Card className=" bg-zinc-800 p-2 rounded-md w-full md:max-w-[300px]">
@@ -109,7 +109,7 @@ import { useRouter } from "next/navigation";
                                     50 generations
                                 </CardHeader>
                                 <CardBody className="flex items-center justify-center">
-                                    $4.99
+                                    £4.99
                                 </CardBody>
                             </Card>
                             <Card className=" bg-zinc-800 p-2 rounded-md w-full md:max-w-[300px]">
@@ -117,7 +117,7 @@ import { useRouter } from "next/navigation";
                                     100 generations
                                 </CardHeader>
                                 <CardBody className="flex items-center justify-center">
-                                    $9.99
+                                    £8.99
                                 </CardBody>
                             </Card>
                         </div>
@@ -131,13 +131,13 @@ import { useRouter } from "next/navigation";
                           onChange={handleSelectionChange}
                         >
                             <SelectItem key='2.99' value='2.99'>
-                              $2.99
+                              £2.99
                             </SelectItem>
                             <SelectItem key='4.99' value='4.99'>
-                              $4.99
+                              £4.99
                             </SelectItem>
-                            <SelectItem key='9.99' value='9.99'>
-                              $9.99
+                            <SelectItem key='8.99' value='9.99'>
+                              £8.99
                             </SelectItem>
                         </Select>
                         <Button className="w-full" color="secondary" disabled={isLoading} onClick={onSubscribe}>
