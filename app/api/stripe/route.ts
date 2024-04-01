@@ -40,7 +40,7 @@ export async function POST(req: Request) {
         success_url: `${process.env.NEXTAUTH_URL}/text-to-video?success=true`,  
         cancel_url: `${process.env.NEXTAUTH_URL}/text-to-video?cancelled=true`,
         customer_email: params.purchaseObj.email,
-        automatic_tax: {enabled: true},
+        // automatic_tax: {enabled: true},
         metadata:{
           productType: 'animateDiff',
           credit: params.purchaseObj.credit
