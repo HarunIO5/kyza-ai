@@ -3,10 +3,11 @@ import { replicate } from "@/lib/replicate";
 import prisma from "@/lib/prisma";
 import { getUser, saveAnimateDiffVideos } from "@/lib/userFunctions";
 import { decrementalCreditLimit } from "@/lib/credit-check";
+import { utapi } from "@/lib/uploadthing";
 
 export async function POST(req: Request) {
 
-    console.log("AnimateDIFF Inputs")
+    // console.log("AnimateDIFF Inputs")
 
     const {prompt, negative, scale, style, email} = await req.json()
 
@@ -28,25 +29,17 @@ export async function POST(req: Request) {
         }
       );
 
-      console.log('ANIMATE DIFF')
-      console.log(output);
-
-      // const user = await getUser(email)
+      // console.log('ANIMATE DIFF')
+      // console.log(output);
 
      if (output) {
-      // await prisma.userSavedGenerations.create({
-      //   data: {
-      //     productType: 'animateDiff',
-      //     prompt: prompt,
-      //     model: 'AnimateDiff',
-      //     url: output.toString(),
-      //     userId: user?.id!,
-      //     style: style
-      //   }
-      // })
 
-      await saveAnimateDiffVideos({email: email as string, prompt: prompt as string, url: output.toString(), style: style as string })
+      const {data, error} = await utapi.uploadFilesFromUrl({url: output.toString(), name: prompt});
 
+      if (error) return NextResponse.json({error: `Couldn't uploaded video ${error}`}, {status: 400})
+
+
+      await saveAnimateDiffVideos({email: email as string, prompt: prompt as string, url: data?.url!, style: style as string, negativePrompt: negative as string, scale: scale.toString() })
       await decrementalCreditLimit({email: email as string})
 
     }         

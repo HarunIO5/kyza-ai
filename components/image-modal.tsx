@@ -12,7 +12,9 @@ import {
   import { DownloadIcon } from "./icons";
 import Link from "next/link";
 
-  export default function ImageModal ({onOpen, onOpenChange, srcName, srcUrl} : {onOpen: boolean, onOpenChange: () => void, srcName: string, srcUrl: string}) {
+  export default function ImageModal ({onOpen, onOpenChange, srcName, srcUrl, srcModel} : {onOpen: boolean, onOpenChange: () => void, srcName: string, srcUrl: string, srcModel?: string | 'Haiper' }) {
+
+
     return (
             <Modal isOpen={onOpen} onOpenChange={onOpenChange} placement="center" size="3xl" backdrop="blur"  className=" overflow-auto">
               <ModalContent className="p-4 max-md:h-[575px]">
@@ -32,7 +34,7 @@ import Link from "next/link";
                           Model:
                         </h3>
                         <p className="text-md font-semibold">
-                          Haiper
+                          {srcModel}
                         </p>
                       </div>
                         <div className="flex flex-col gap-2">

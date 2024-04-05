@@ -1,62 +1,59 @@
 'use client'
 
-import {Card, CardFooter} from "@nextui-org/react";
-import {
-  useDisclosure
-} from "@nextui-org/react";
+import { SavedVideoType } from "@/app/(main)/library/page";
+import { getSavedVideosProps } from "@/app/_action";
+import { Card, CardFooter, useDisclosure } from "@nextui-org/react";
 import { useEffect, useState } from "react";
-import ImageModal from "./image-modal";
 import { useInView } from "react-intersection-observer";
+import ImageModal from "./image-modal";
 
-import { fetchSearchedVideos, fetchVideos } from "@/app/_action";
-import { SearchVideosType } from "@/app/(main)/videos/page";
+export default function LibraryCards ({email, videoProp, videoLength} : {email: string, videoProp: SavedVideoType[], videoLength: number}) {
 
-export default function VidCard ({vidProp, search, videoLength} : {vidProp : SearchVideosType[], search: string, videoLength: number}) {
+    const {isOpen, onOpen, onOpenChange} = useDisclosure();
 
+    const [srcModel, setSrcModel] = useState<string>('')
     const [srcName, setSrcName] = useState<string>('')
     const [srcUrl, setSrcUrl] = useState<string>('')
-    const {isOpen, onOpen, onOpenChange} = useDisclosure();
-    const [videos, setVideos] = useState(vidProp)
+    const [videos, setVideos] = useState(videoProp)
     const [videoSkip, setVideoSkip] = useState(0)
     const [ref, inView] = useInView()
 
     async function loadMoreVideos() {
 
-      const skip = videoSkip + 12
-      const videos = await fetchSearchedVideos({ skip: skip, search: search})
-      if (videos?.length) {
-        setVideoSkip(skip)
-        setVideos((prev: SearchVideosType[] | undefined) => [
-          ...(prev?.length ? prev : []),
-          ...videos
-        ])
-      }
+        const skip = videoSkip + 9
+        const videos = await getSavedVideosProps({ email: email, skip: skip})
+        if (videos?.length) {
+          setVideoSkip(skip)
+          setVideos((prev: SavedVideoType[] | undefined) => [
+            ...(prev?.length ? prev : []),
+            ...videos
+          ])
+        }
     }
 
     useEffect(() => {
-      if (inView) {
-        loadMoreVideos()
-      }
+        if (inView) {
+          loadMoreVideos()
+        }
     }, [inView])
 
-    // console.log(videoSkip)
-    // console.log(videoLength)
 
     return (
         <>
-            <div className="w-full grid grid-cols-1 md:grid-cols-4 gap-4 p-4" >
-                {videos && (
-                    videos.map((file: SearchVideosType) => {
+            <div className="w-full grid grid-cols-1 md:grid-cols-4 gap-4 p-4">
+            {videos && (
+                    videos.map((file: SavedVideoType) => {
                         return (
                           <>
                             <Card
                             isFooterBlurred
                             className="rounded-xl"
-                            key={file.key}
+                            key={file.id}
                             onPress={() => {
-                              setSrcUrl(file.url)
-                              setSrcName(file.prompt)
-                              onOpen() 
+                                setSrcUrl(file.url!)
+                                setSrcName(file.prompt)
+                                setSrcModel(file.model!)
+                                onOpen() 
                             }} 
                             isPressable={true}
                             >
@@ -68,9 +65,9 @@ export default function VidCard ({vidProp, search, videoLength} : {vidProp : Sea
                                 muted
                                 loop
                               >
-                                <source src={file.url + '#t=0.1'} type="video/mp4" />
+                                <source src={file.url! + '#t=0.1'} type="video/mp4" />
                                 <track
-                                  src={file.url}
+                                  src={file.url!}
                                 />
                                 Your browser does not support the video tag.
                               </video>
@@ -84,8 +81,7 @@ export default function VidCard ({vidProp, search, videoLength} : {vidProp : Sea
                     })
                 )}
             </div>
-            <ImageModal onOpen={isOpen} onOpenChange={onOpenChange} srcName={srcName} srcUrl={srcUrl}/>
-            {/* loading spinner */}
+            <ImageModal onOpen={isOpen} onOpenChange={onOpenChange} srcName={srcName} srcUrl={srcUrl} srcModel={srcModel}/>
             {videoLength > videoSkip+12 && (
               <div
               ref={ref}
@@ -110,6 +106,6 @@ export default function VidCard ({vidProp, search, videoLength} : {vidProp : Sea
               <span className='sr-only'>Loading...</span>
             </div>
             )}
-        </>  
+        </>
     );
 }

@@ -5,6 +5,7 @@ import {Dropdown, DropdownTrigger, DropdownMenu, DropdownItem, Avatar, DropdownS
 import { signOut } from "next-auth/react"
 import { Session } from "next-auth";
 import { Sparkles } from 'lucide-react';
+import Link from "next/link";
 
 // USE checkCreditLimit to have a CTA to purchase via the UserNav
 
@@ -52,6 +53,9 @@ export default function UserNav({session}: {session: Session}) {
                 <DropdownItem key="profile" className="h-14 gap-2">
                   <p className="font-semibold">Signed in as</p>
                   <p className="font-semibold">{email!}</p>
+                </DropdownItem>
+                <DropdownItem key="library" href={'/library'}>
+                    Library
                 </DropdownItem>
             </DropdownSection>
             <DropdownItem key="logout" color="danger" onClick={() => signOut({callbackUrl: `${baseUrl}`})}>

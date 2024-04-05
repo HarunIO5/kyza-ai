@@ -1,13 +1,14 @@
 import prisma from "@/lib/prisma";
 
-export async function SaveSearchableVideos (key: string, prompt: string, url: string, fileSizeBytes?: number) {
+export async function SaveSearchableVideos ({key, prompt, url, fileSizeBytes, model}: {key: string, prompt: string, url: string, fileSizeBytes?: number, model?: string}) {
 
     const videos = await prisma.searchableVideos.create({
         data: {
             key: key,
             prompt: prompt,
             url: url,
-            fileSizeBytes: fileSizeBytes
+            fileSizeBytes: fileSizeBytes,
+            model: model,
         }
     })
 

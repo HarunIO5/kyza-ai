@@ -98,13 +98,15 @@ model OneTimePurchases {
 }
 
 model UserSavedGenerations {
-  id          String   @id @default(cuid())
-  productType String
-  model       String?
-  prompt      String
-  style       String?
-  createdAt   DateTime @default(now())
-  url         String?
-  userId      String
-  user        User     @relation(fields: [userId], references: [id])
+  id             String   @id @default(cuid())
+  productType    String
+  model          String?
+  prompt         String
+  style          String?
+  negativePrompt String?
+  scale          String?
+  createdAt      DateTime @default(now())
+  url            String?
+  userId         String
+  user           User     @relation(fields: [userId], references: [id])
 }

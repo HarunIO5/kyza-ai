@@ -1,7 +1,6 @@
-import { utapi } from "@/server/uploadthing";
+import { utapi } from "./uploadthing";
 import { cache } from "react";
 import prisma from "./prisma";
-import { PrismaClientUnknownRequestError } from "@prisma/client/runtime/library";
 
 export async function GetVideoFiles ({limit, offset} : {limit: number, offset: number}) {
 

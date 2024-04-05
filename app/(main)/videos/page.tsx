@@ -15,7 +15,7 @@ export type SearchVideosType = {
     fileSizeBytes: number | null;
 }
 
-export const dynamic = 'force-dynamic'
+// export const dynamic = 'force-dynamic'
 
 export default async function VideosFeed ({
     searchParams
@@ -34,7 +34,7 @@ export default async function VideosFeed ({
     // console.log(initialVideos)
     // console.log(videoLength)
 
-    revalidatePath('/videos', 'page')
+    // revalidatePath('/videos', 'page')
     return (
         <div className="w-full flex flex-col items-center justify-center gap-4 py-8 md:py-10">
             <LandingPageHeading />

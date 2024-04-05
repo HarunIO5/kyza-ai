@@ -30,7 +30,7 @@ export async function getUser (email:string) {
 
   }
 
-export async function saveAnimateDiffVideos ({email, prompt, url, style}: {email: string, prompt: string, url: string, style: string}) {
+export async function saveAnimateDiffVideos ({email, prompt, url, style, negativePrompt, scale}: {email: string, prompt: string, url: string, style: string, negativePrompt?: string, scale?: string}) {
 
   const user = await getUser(email)
 
@@ -41,8 +41,42 @@ export async function saveAnimateDiffVideos ({email, prompt, url, style}: {email
       model: 'AnimateDiff',
       url: url,
       userId: user?.id!,
-      style: style
+      style: style,
+      negativePrompt: negativePrompt,
+      scale: scale
     }
   })
 
 }  
+
+export async function getSavedVideos({email, skip}: {email: string, skip: number}) {
+
+  const user = await getUser(email)
+
+  const videos = await prisma.userSavedGenerations.findMany({
+    where: {
+      userId: user?.id
+    },
+    skip: skip,
+    take: 9
+  })
+
+
+  return JSON.parse(JSON.stringify(videos))
+
+}
+
+export async function getNumberOfSavedVideos({email}: {email: string}) {
+
+  const user = await getUser(email)
+
+  const videos = await prisma.userSavedGenerations.findMany({
+    where: {
+      userId: user?.id
+    }
+  })
+
+
+  return videos.length
+
+}

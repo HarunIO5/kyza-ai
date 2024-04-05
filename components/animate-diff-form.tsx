@@ -97,7 +97,7 @@ export default function AnimateDiffForm ({session, checkCreditLimit, getCreditCo
         } finally {
             setIsLoading(false)
             router.refresh()
-        }       
+        }   
     }
 
     // useEffect(() => {
