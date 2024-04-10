@@ -9,6 +9,7 @@ import SearchBar from "@/components/search";
 import FAQSection from "@/components/faqsection";
 import { BbblurryIcon } from "@/components/icons";
 import { SaveSearchableVideos } from "@/lib/uploadVideos";
+import ScrollingTestimonials from "@/components/testimonals";
 
 export default async function Home() {
 
@@ -53,6 +54,9 @@ export default async function Home() {
 			<div className="w-full py-12 px-4">
 				<LandingPageVideos/>
 			</div>
+			<div className="w-full py-12">
+      		  <ScrollingTestimonials />
+      		</div>
 			<div className="w-full py-12 px-12">
 			<FAQSection />
 			</div>

@@ -114,7 +114,7 @@ export const Navbar = () => {
         		        radius="sm"
         		        variant="light"
         		      >
-        		        Generations
+        		        Tools
         		      </Button>
         		    </DropdownTrigger>
         		  </NavbarItem>

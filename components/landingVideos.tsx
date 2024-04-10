@@ -1,10 +1,13 @@
 import { vidType } from "@/app/layout";
+import { Button } from "@nextui-org/button";
 import { Card } from "@nextui-org/react";
+import LandingPageVideoFilters from "@/components/video-filters";
 
 export default function LandingPageVideos ()  {
     const boxStyle =
     'rounded-xl brightness-110';
     return (
+      <>
         <div className="w-full grid md:grid-cols-4 auto-rows-[300px] gap-4" >
                 <Card
                   isFooterBlurred
@@ -238,5 +241,6 @@ export default function LandingPageVideos ()  {
                     </video>
                 </Card>
           </div>
+      </>   
     );
 }

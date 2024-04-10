@@ -7,6 +7,7 @@ import 	{
 } from "@/components/icons";
 import { Kbd } from "@nextui-org/kbd";
 import { Input } from "@nextui-org/input";
+import LandingPageVideoFilters from "./video-filters";
 
 
 export default function SearchBar () {
@@ -55,7 +56,7 @@ export default function SearchBar () {
     }
 
     return (
-        <div className="w-full flex gap-3 p-8 justify-center">
+        <div className="w-full flex flex-col gap-3 p-6 justify-center items-center">
 		    <Input
 		    	aria-label="Search"
                 onChange={handleChange}
@@ -82,6 +83,7 @@ export default function SearchBar () {
                 value={query}
                 onKeyDown={onKeyPressHandler}
 		      />
+              <LandingPageVideoFilters/>
 		  </div>
     );
 }
