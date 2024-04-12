@@ -9,6 +9,7 @@ import clsx from "clsx";
 import { SiteFooter } from "@/components/site-footer";
 import { Analytics } from "@vercel/analytics/react"
 import { ToasterProvider } from "@/components/toaster-provider";
+import { GoogleAnalytics } from '@next/third-parties/google'
 
 export const metadata: Metadata = {
 	title: {
@@ -60,6 +61,7 @@ export default async function RootLayout({
 						</div>
 				</Providers>
 				<Analytics />
+				<GoogleAnalytics gaId="G-7B3NSEDZTK" />
 			</body>
 		</html>
 	);

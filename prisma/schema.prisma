@@ -71,7 +71,7 @@ model VerificationToken {
 
 model SearchableVideos {
   id            String  @id @default(cuid())
-  key           String?
+  key           String? @unique
   prompt        String
   model         String?
   url           String

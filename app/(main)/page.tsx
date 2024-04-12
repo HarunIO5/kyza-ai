@@ -10,6 +10,7 @@ import FAQSection from "@/components/faqsection";
 import { BbblurryIcon } from "@/components/icons";
 import { SaveSearchableVideos } from "@/lib/uploadVideos";
 import ScrollingTestimonials from "@/components/testimonals";
+import prisma from "@/lib/prisma";
 
 export default async function Home() {
 
@@ -30,11 +31,20 @@ export default async function Home() {
 	// })
 	// })
 
-	// // console.log('LIST FILE')
+	// const findVideo = await prisma.searchableVideos.findUnique({
+    //     where: {
+    //         key: "fc07def8-cecf-4042-8d6b-822317a96344-vbp4dm"
+    //     }
+    // })
+
+	// console.log("FILE DOES NOT EXIST")
+	// console.log(findVideo)
+
+	// console.log('LIST FILE')
 
 	// const viewFiles = await fileList.json()
 	// console.log("VIEW FILES")
-	// console.log(viewFiles.files.length)
+	// console.log(viewFiles.files)
 
 	// let i = 0;
 

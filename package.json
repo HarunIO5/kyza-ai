@@ -12,6 +12,7 @@
   "dependencies": {
     "@auth/prisma-adapter": "^1.5.0",
     "@hookform/resolvers": "^3.3.4",
+    "@next/third-parties": "^14.2.0",
     "@nextui-org/button": "2.0.26",
     "@nextui-org/code": "2.0.24",
     "@nextui-org/input": "2.1.16",
@@ -50,7 +51,7 @@
     "intl-messageformat": "^10.5.0",
     "lucide-react": "^0.363.0",
     "nanoid": "^5.0.6",
-    "next": "^14.0.4",
+    "next": "^14.2.0",
     "next-auth": "^4.24.7",
     "next-sanity": "^8.3.2",
     "next-themes": "^0.2.1",
