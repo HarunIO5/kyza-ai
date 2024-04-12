@@ -74,7 +74,7 @@ export default function SearchBar () {
 		      		</Kbd>
 		      	}
 		      	labelPlacement="outside"
-		      	placeholder="Search..."
+		      	placeholder="Search &ldquo;Cars&ldquo;"
 		      	startContent={
 		      		<SearchIcon className="text-base text-default-400 pointer-events-none flex-shrink-0" />
 		      	}
