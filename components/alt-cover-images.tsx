@@ -15,7 +15,7 @@ export default function AltCoverImage(props: CoverImageProps) {
   const image = source?.asset?._ref ? (
     <div>
       <Image
-        className="h-auto w-full"
+        className="h-auto w-full rounded-lg"
         width={1000}
         height={1000}
         alt=""
@@ -31,7 +31,7 @@ export default function AltCoverImage(props: CoverImageProps) {
   return (
     <div className="sm:mx-0">
       {slug ? (
-        <Link href={`/blog/${slug}`} aria-label={title}>
+        <Link href={`/${slug}`} aria-label={title}>
           {image}
         </Link>
       ) : (

@@ -48,18 +48,20 @@ export default function UserNav({session}: {session: Session}) {
             // onClick={() => {onRefetch()}}
           />
         </DropdownTrigger>
-        <DropdownMenu aria-label="Profile Actions" variant="flat">
+        <DropdownMenu aria-label="Profile Actions" variant="flat" disabledKeys={["profile"]}>
             <DropdownSection showDivider>
                 <DropdownItem key="profile" className="h-14 gap-2">
                   <p className="font-semibold">Signed in as</p>
                   <p className="font-semibold">{email!}</p>
                 </DropdownItem>
-                <DropdownItem key="library" href={'/library'}>
-                    Library
-                </DropdownItem>
             </DropdownSection>
+            <DropdownItem key="library" href={'/library'} className="">
+                Library
+            </DropdownItem>
             <DropdownItem key="logout" color="danger" onClick={() => signOut({callbackUrl: `${baseUrl}`})}>
-              Log Out
+              <p className="text-red-500">
+                Log Out
+              </p>
             </DropdownItem>
         </DropdownMenu>
       </Dropdown>

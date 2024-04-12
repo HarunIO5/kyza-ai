@@ -1,8 +1,9 @@
-import Link from "next/link";
+import {Link} from "@nextui-org/react";
 import { getSavedVideosProps, getSavedVideosLength } from "@/app/_action";
 import { getServerSession } from "next-auth";
 import { authOptions } from "@/lib/auth";
 import LibraryCards from "@/components/library-cards";
+import Image from "next/image";
 
 export type SavedVideoType = {
   id: string;
@@ -38,11 +39,21 @@ export default async function LibraryPage () {
                     <Link href="/library" className="font-semibold text-secondary">
                         Library
                     </Link>
-                    <Link href="#">
+                    <Link href="#" color="foreground">
                         Setting
                     </Link>
                 </nav>
-                <LibraryCards email={email!} videoProp={videos} videoLength={videoLength}/>
+                {videoLength !=0 ? (
+                  <LibraryCards email={email!} videoProp={videos} videoLength={videoLength}/>
+                ) : (
+                  <div className="min-h-full flex flex-col justify-center items-center z-10">
+                      <h1 className="text-4xl text-center z-10 font-bold">No Videos Generated Yet</h1>
+                      <Image src={'/novideosavedgif.gif'} alt="No Videos Saved" width={350} height={350} className="py-4"/>
+                      <Link href={'/text-to-video'} underline="hover" color="foreground" showAnchorIcon>
+                        <h3>Generated a video, give it a try</h3>
+                      </Link>
+                  </div>
+                )}
               </div>
             </main>
         </div>

@@ -1,5 +1,5 @@
 import Avatar from '@/components/author-ava'
-import CoverImage from '@/components/cover-image'
+import AltCoverImage from '@/components/cover-image'
 import type { Post, AlternativesType } from '@/lib/sanity-queries'
 import { Button } from '@nextui-org/button'
 import { Card, CardBody } from '@nextui-org/react'
@@ -15,7 +15,7 @@ export default function AltPreview({
   return (
     <Card className=' bg-gray-900'>
       <div className="mb-5">
-        <CoverImage
+        <AltCoverImage
           slug={slug}
           title={title!}
           image={heroImage}
@@ -24,7 +24,7 @@ export default function AltPreview({
       </div>
       <CardBody className="p-4 flex justify-between">
         <h3 className="mb-3 text-3xl leading-snug text-balance">
-          <Link href={`/blog/${slug}`} className="hover:underline">
+          <Link href={`/${slug}`} className="hover:underline">
             {title}
           </Link>
         </h3>

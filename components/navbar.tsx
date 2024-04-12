@@ -124,6 +124,7 @@ export const Navbar = () => {
         		    itemClasses={{
         		      base: "gap-4",
         		    }}
+					disabledKeys={["wallpaper_engine"]}
         		  >
         		    <DropdownItem
         		      key="text_to_video"
@@ -191,16 +192,27 @@ export const Navbar = () => {
 						</Link>
 					</NavbarMenuItem>
 					{session ? (
-						<NavbarMenuItem key={`logout`}>
-						<Link
-							color={"danger"}
-							href={''}
-							onClick={() => signOut({callbackUrl: `${baseUrl}`})}
-							size="lg"
-						>
-							Logout
-						</Link>
-					</NavbarMenuItem>
+						<>
+							<NavbarMenuItem key={`library`}>
+								<Link
+									color={"primary"}
+									href={'/library'}
+									size="lg"
+								>
+									Library
+								</Link>
+							</NavbarMenuItem>
+							<NavbarMenuItem key={`logout`}>
+								<Link
+									color={"danger"}
+									href={''}
+									onClick={() => signOut({callbackUrl: `${baseUrl}`})}
+									size="lg"
+								>
+									Logout
+								</Link>
+							</NavbarMenuItem>
+						</>
 					) : (
 						<NavbarMenuItem key={`logout`}>
 						<Link

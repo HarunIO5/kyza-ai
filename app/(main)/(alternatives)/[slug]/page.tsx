@@ -2,7 +2,7 @@ import { client } from "@/lib/sanity";
 import { AlternativesType, alternativeFields } from "@/lib/sanity-queries";
 import { urlFor } from "@/lib/sanityImageUrl";
 import { Metadata } from "next";
-import { cache } from "react";
+import { Suspense, cache } from "react";
 import AltCoverImage from "@/components/alt-cover-images";
 import Image from "next/image";
 import PostBody from "@/components/post-body";
@@ -12,6 +12,7 @@ import MoreAlts from "@/components/more-alts";
 import AltBody from "@/components/alt-body";
 import { BounceCard } from "@/components/bounce-card";
 import { CardTitle } from "@/components/card-title";
+import { AuroraHero } from "@/components/aurora-hero";
 
 export async function generateStaticParams() {
 
@@ -56,7 +57,7 @@ const getAlternativePages = cache(async (slug: string): Promise<{ alternativePag
       "alternativePage": *[_type == "alternatives" && slug.current == "${slug}"][0]{
         ${alternativeFields}
       },
-      "moreAlternativePages": *[_type == "alternatives" && slug.current != "${slug}"] | order(date desc, _createdAt desc) {
+      "moreAlternativePages": *[_type == "alternatives" && slug.current != "${slug}"] | order(date desc, _createdAt desc) [0...9] {
         content,
         ${alternativeFields}
       }
@@ -72,15 +73,15 @@ export default async function AlternativePages ({
 }) {
 
     const { alternativePage, moreAlternativePages } = await getAlternativePages(params.slug)
-    console.log('MORE ALTS')
-    console.log(alternativePage)
+    // console.log('MORE ALTS')
+    // console.log(alternativePage)
 
     return (
       <>
-        <div className="min-h-screen w-full flex flex-col justify-center p-12">
-          <div className="pb-24 md:px-24">
-            <div className="w-full mx-auto flex flex-col md:flex-row justify-between gap-8">
-                <div className="h-full my-auto ">
+        <div className="min-h-screen w-full flex flex-col justify-center">
+          {/* <div className="pb-24 md:px-24"> */}
+            {/* <div className="w-full mx-auto flex flex-col md:flex-row justify-between gap-8">
+                <div className="h-full my-auto">
                     <p className="text-4xl font-bold leading-tight tracking-tighter">
                         {alternativePage.title}
                     </p>
@@ -91,9 +92,12 @@ export default async function AlternativePages ({
                 <div className="">
                   <AltCoverImage title={alternativePage.title!} image={alternativePage.heroImage} priority slug={alternativePage.slug} />
                 </div>
-            </div>
-          </div>
-            <section className="md:pt-12 pb-24">
+            </div> */}
+            <Suspense>
+              <AuroraHero title={alternativePage.title!} description={alternativePage.description!} image={alternativePage.heroImage} slug={alternativePage.slug}/>
+            </Suspense>
+          {/* </div> */}
+            <section id="learn-more" className="px-12 md:px-24 md:pt-12 pb-24 p-12">
                 <p className="text-4xl text-center font-bold leading-tight tracking-tighter pb-8 md:pb-24">
                   {alternativePage.agTitle}
                 </p>
@@ -156,14 +160,14 @@ export default async function AlternativePages ({
                   </div>
                 </div>
             </section>
-            <section className="md:px-24 md:pt-12 pb-24">
+            <section className="px-12 md:px-24 md:pt-12 pb-24">
                 <p className="text-4xl font-bold leading-tight tracking-tighter">
                   {alternativePage.slTitle}
                 </p>
                   <AltBody content={alternativePage.slBody!} />
             </section>
 
-            <section className="md:px-24 md:pt-12 pb-24">
+            <section className="px-12 md:px-24 md:pt-12 pb-24">
                 <p className="text-4xl font-bold leading-tight tracking-tighter text-center pb-12">
                   Feature
                 </p>
@@ -241,7 +245,7 @@ export default async function AlternativePages ({
                 </div>
             </section>
 
-            <section className="md:px-24 md:pt-12 pb-24">
+            <section className="px-12 md:px-24 md:pt-12 pb-24">
                 <p className="text-4xl font-bold leading-tight tracking-tighter text-center pb-12">
                   {alternativePage.companyTestimonalTitle}
                 </p>
@@ -294,7 +298,7 @@ export default async function AlternativePages ({
                 </div>
             </section >
 
-            <section className="md:px-24 md:pt-12 pb-24">
+            <section className="px-12 md:px-24 md:pt-12 pb-24">
                 <p className="text-4xl font-bold leading-tight tracking-tighter pb-12">
                   Customer Stories
                 </p>
@@ -380,7 +384,7 @@ export default async function AlternativePages ({
                 </div>
             </section>
 
-            <section className="md:px-24 md:pt-12 pb-24">
+            <section className="px-12 md:px-24 md:pt-12 pb-24">
                 {moreAlternativePages?.length > 0 && <MoreAlts alts={moreAlternativePages} />}
             </section>
         </div>

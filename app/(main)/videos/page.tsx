@@ -46,7 +46,7 @@ export default async function VideosFeed ({
                     <VidCard vidProp={initialVideos} search={search!} videoLength={videoLength as number}/>
                 </Suspense>
             ) : (
-                <SearchFailed />
+                <SearchFailed search={search!}/>
             )}
             
         </div>
