@@ -10,6 +10,7 @@ import { SiteFooter } from "@/components/site-footer";
 import { Analytics } from "@vercel/analytics/react"
 import { ToasterProvider } from "@/components/toaster-provider";
 import { GoogleAnalytics } from '@next/third-parties/google'
+import { CSPostHogProvider } from "@/components/ph-providers";
 
 export const metadata: Metadata = {
 	title: {
@@ -53,11 +54,13 @@ export default async function RootLayout({
 				<Providers themeProps={{ attribute: "class", defaultTheme: "dark" }}>
 					<ToasterProvider />
 						<div className="flex flex-col h-screen">
-							<main className="w-full mx-auto">
-								<AuthProvider>
-									{children}
-								</AuthProvider>
-							</main>
+							<CSPostHogProvider>
+								<main className="w-full mx-auto">
+									<AuthProvider>
+										{children}
+									</AuthProvider>
+								</main>
+							</CSPostHogProvider>
 						</div>
 				</Providers>
 				<Analytics />
