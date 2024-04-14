@@ -9,9 +9,7 @@ export async function SaveSearchableVideos ({key, prompt, url, fileSizeBytes, mo
         }
     })
 
-    if(findVideo) {
-        return "Video Already Exists"
-    } else {
+    if(!findVideo?.key) {
         const videos = await prisma.searchableVideos.create({
             data: {
                 key: key,
@@ -23,6 +21,10 @@ export async function SaveSearchableVideos ({key, prompt, url, fileSizeBytes, mo
         })
     
         return videos.id
+    } else {
+        // console.log('Video')
+        // console.log(findVideo)
+        return "Video Already Exists"
     }
 
 }

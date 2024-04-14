@@ -38,13 +38,17 @@ export default async function Home() {
     // })
 
 	// console.log("FILE DOES NOT EXIST")
-	// console.log(findVideo)
+	// console.log(typeof(findVideo?.key))
+
+	// if (!findVideo?.key) {
+	// 	console.log('Here')
+	// }
 
 	// console.log('LIST FILE')
 
 	// const viewFiles = await fileList.json()
-	// console.log("VIEW FILES")
-	// console.log(viewFiles.files)
+	// // console.log("VIEW FILES")
+	// // console.log(viewFiles.files)
 
 	// let i = 0;
 
