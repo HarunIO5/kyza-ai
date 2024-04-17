@@ -409,9 +409,17 @@ export default async function AlternativePages ({
                 </div>
             </section>
 
-            <section className="px-12 md:px-24 md:pt-12 pb-24">
-              <CTABanner bannerBtn={alternativePage.bannerBtn} bannerLink={alternativePage.bannerLink} bannerText={alternativePage.bannerText}/>
-            </section>
+            {alternativePage.bannerText && (
+              <section className="px-12 md:px-24 md:pt-12 pb-24">
+                
+                  <CTABanner 
+                    bannerBtn={alternativePage.bannerBtn} 
+                    bannerLink={alternativePage.bannerLink} 
+                    bannerText={alternativePage.bannerText}
+                  />
+                
+              </section>
+            )}
 
             <section className="px-12 md:px-24 md:pt-12 pb-24">
                 {moreAlternativePages?.length > 0 && <MoreAlts alts={moreAlternativePages} />}

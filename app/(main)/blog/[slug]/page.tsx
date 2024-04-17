@@ -94,13 +94,15 @@ export default async function SlugPage ({
             />
             <PostBody content={post.body} />
         </article>
-        <div className="mx-auto max-w-5xl pt-12">
-          <CTABanner 
-            bannerBtn={post.bannerBtn} 
-            bannerText={post.bannerText} 
-            bannerLink={post.bannerLink}
-          />
-        </div>
+        {post.bannerText && (
+          <div className="mx-auto max-w-5xl pt-12">
+              <CTABanner 
+              bannerBtn={post.bannerBtn} 
+              bannerText={post.bannerText} 
+              bannerLink={post.bannerLink}
+            />
+          </div>
+        )}
         <Divider className="mb-24 mt-28"/>
         {morePosts?.length > 0 && <MoreStories posts={morePosts} />}
       </div>
