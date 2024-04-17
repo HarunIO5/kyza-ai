@@ -13,6 +13,7 @@ import AltBody from "@/components/alt-body";
 import { BounceCard } from "@/components/bounce-card";
 import { CardTitle } from "@/components/card-title";
 import { AuroraHero } from "@/components/aurora-hero";
+import CTABanner from "@/components/cta-banner";
 
 export async function generateStaticParams() {
 
@@ -112,9 +113,15 @@ export default async function AlternativePages ({
                       sizes="100vw"
                       priority={true}
                     />
-                    <p className="text-md text-foreground-500 text-center pt-2">
-                      {alternativePage.agImage1.alt}
-                    </p>
+                    {alternativePage.agLink1 ? (
+                      <Link href={alternativePage.agLink1!} target="_blank" className="text-md text-foreground-500 text-center pt-2">
+                        {alternativePage.agImage1.alt}
+                      </Link>
+                    ) : (
+                      <p className="text-md text-foreground-500 text-center pt-2">
+                        {alternativePage.agImage1.alt}
+                      </p>
+                    )}
                   </div>
                   <div>
                     <Image
@@ -126,9 +133,15 @@ export default async function AlternativePages ({
                       sizes="100vw"
                       priority={true}
                     />
-                    <p className="text-md text-foreground-500 text-center pt-2">
-                      {alternativePage.agImage2.alt}
-                    </p>
+                    {alternativePage.agLink2 ? (
+                      <Link href={alternativePage.agLink2!} target="_blank" className="text-md text-foreground-500 text-center pt-2">
+                        {alternativePage.agImage2.alt}
+                      </Link>
+                    ) : (
+                      <p className="text-md text-foreground-500 text-center pt-2">
+                        {alternativePage.agImage2.alt}
+                      </p>
+                    )}
                   </div>
                   <div>
                     <Image
@@ -140,9 +153,15 @@ export default async function AlternativePages ({
                       sizes="100vw"
                       priority={true}
                     />
-                    <p className="text-md text-foreground-500 text-center pt-2">
-                      {alternativePage.agImage3.alt}
-                    </p>
+                    {alternativePage.agLink3 ? (
+                      <Link href={alternativePage.agLink3!} target="_blank" className="text-md text-foreground-500 text-center pt-2">
+                        {alternativePage.agImage3.alt}
+                      </Link>
+                    ) : (
+                      <p className="text-md text-foreground-500 text-center pt-2">
+                        {alternativePage.agImage3.alt}
+                      </p>
+                    )}
                   </div>
                   <div>
                     <Image
@@ -154,9 +173,15 @@ export default async function AlternativePages ({
                       sizes="100vw"
                       priority={true}
                     />
-                    <p className="text-md text-foreground-500 text-center pt-2">
-                      {alternativePage.agImage4.alt}
-                    </p>
+                    {alternativePage.agLink4 ? (
+                      <Link href={alternativePage.agLink4!} target="_blank" className="text-md text-foreground-500 text-center pt-2">
+                        {alternativePage.agImage4.alt}
+                      </Link>
+                    ) : (
+                      <p className="text-md text-foreground-500 text-center pt-2">
+                        {alternativePage.agImage4.alt}
+                      </p>
+                    )}
                   </div>
                 </div>
             </section>
@@ -382,6 +407,10 @@ export default async function AlternativePages ({
                     </Card>
                   </div>
                 </div>
+            </section>
+
+            <section className="px-12 md:px-24 md:pt-12 pb-24">
+              <CTABanner bannerBtn={alternativePage.bannerBtn} bannerLink={alternativePage.bannerLink} bannerText={alternativePage.bannerText}/>
             </section>
 
             <section className="px-12 md:px-24 md:pt-12 pb-24">

@@ -33,28 +33,30 @@ export default async function Home() {
 
 	// const findVideo = await prisma.searchableVideos.findUnique({
     //     where: {
-    //         key: "fc07def8-cecf-4042-8d6b-822317a96344-vbp4dm"
+    //         key: "fc07def8-cecf-4042-8d6b-822317a96344-vbp4dz"
     //     }
     // })
 
 	// console.log("FILE DOES NOT EXIST")
-	// console.log(typeof(findVideo?.key))
+	// console.log(findVideo)
 
-	// if (!findVideo?.key) {
-	// 	console.log('Here')
+	// if (!findVideo) {
+	// 	console.log('Video Not Found')
+	// } else {
+	// 	console.log('Video Found')
 	// }
 
 	// console.log('LIST FILE')
 
 	// const viewFiles = await fileList.json()
-	// // console.log("VIEW FILES")
-	// // console.log(viewFiles.files)
+	// console.log("VIEW FILES")
+	// console.log(typeof(viewFiles.files[1].status))
 
 	// let i = 0;
 
 	// do {
 	//   if (viewFiles.files[i].name.toLowerCase().indexOf("null") === -1 ){
-	// 	  const videos = await SaveSearchableVideos({key: viewFiles.files[i].key, prompt: viewFiles.files[i].name, url: `https://utfs.io/f/${viewFiles.files[i].key}`, model: "Haiper"})
+	// 	  const videos = await SaveSearchableVideos({key: viewFiles.files[i].key, prompt: viewFiles.files[i].name, url: `https://utfs.io/f/${viewFiles.files[i].key}`, model: "Haiper", status: viewFiles.files[i].status})
 	// 	  console.log(`DB Video Upload ${i}`)
 	// 	  console.log(videos)
 	//   }

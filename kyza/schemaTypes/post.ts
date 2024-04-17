@@ -76,6 +76,21 @@ export default defineType({
       title: 'Excerpt',
       type: 'text',
     }),
+    defineField({
+      name: 'bannerText',
+      title: 'Banner CTA Text',
+      type: 'text',
+    }),
+    defineField({
+      name: 'bannerBtn',
+      title: 'Banner CTA Button',
+      type: 'string',
+    }),
+    defineField({
+      name: 'bannerLink',
+      title: 'Banner CTA Link',
+      type: 'text',
+    }),
   ],
 
   preview: {

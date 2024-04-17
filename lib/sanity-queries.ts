@@ -8,6 +8,9 @@ export const postFields = groq`
   body,
   excerpt,
   mainImage,
+  bannerText,
+  bannerBtn,
+  bannerLink,
   "slug": slug.current,
   "author": author->{name, image},
 `
@@ -20,9 +23,13 @@ export const alternativeFields = groq`
   heroImage,
   agTitle,
   agImage1,
+  agLink1,
   agImage2,
+  agLink2,
   agImage3,
+  agLink3,
   agImage4,
+  agLink4,
   slTitle,
   slBody,
   firstFeatureTitle,
@@ -55,6 +62,9 @@ export const alternativeFields = groq`
   thirdPersonPosition,
   thirdPersonTestimonal,
   personImage3,
+  bannerText,
+  bannerBtn,
+  bannerLink,
   "slug": slug.current,
 `
 
@@ -108,6 +118,9 @@ export interface Post {
     }
     body: any;
     _createdAt: string;
+    bannerText?: string;
+    bannerBtn?: string;
+    bannerLink?: string;
 }
 
 export interface AlternativesType {
@@ -119,9 +132,13 @@ export interface AlternativesType {
   heroImage: any,
   agTitle?: string,
   agImage1?: any,
+  agLink1?: string,
   agImage2?: any,
+  agLink2?: string,
   agImage3?: any,
+  agLink3?: string,
   agImage4?: any,
+  agLink4?: string,
   slTitle?: string,
   slBody?: string,
   firstFeatureTitle?: string,
@@ -153,7 +170,10 @@ export interface AlternativesType {
   thirdPersonName?: string,
   thirdPersonPosition?: string,
   thirdPersonTestimonal?: string,
-  personImage3?: any
+  personImage3?: any,
+  bannerText?: string,
+  bannerBtn?: string,
+  bannerLink?: string
 }
 
 export interface Settings {

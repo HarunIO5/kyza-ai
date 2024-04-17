@@ -67,7 +67,12 @@ export default defineType({
                 },
           },
       ]
-      }),
+    }),
+    defineField({
+      name: 'agLink1',
+      title: 'Attention Grabbing - Link #1',
+      type: 'text',
+    }),  
     defineField({
       name: 'agImage2',
       title: 'Attention grabbing image #2',
@@ -86,6 +91,11 @@ export default defineType({
             },
         },
     ]
+    }),
+    defineField({
+      name: 'agLink2',
+      title: 'Attention Grabbing - Link #2',
+      type: 'text',
     }),
     defineField({
       name: 'agImage3',
@@ -107,6 +117,11 @@ export default defineType({
     ]
     }),
     defineField({
+      name: 'agLink3',
+      title: 'Attention Grabbing - Link #3',
+      type: 'text',
+    }),
+    defineField({
       name: 'agImage4',
       title: 'Attention grabbing image #4',
       type: 'image',
@@ -124,7 +139,12 @@ export default defineType({
             },
         },
     ]
-    }),  
+    }),
+    defineField({
+      name: 'agLink4',
+      title: 'Attention Grabbing - Link #4',
+      type: 'text',
+    }),
     defineField({
         name: 'slTitle',
         title: 'Superlative Title',
@@ -434,6 +454,21 @@ export default defineType({
         name: 'thirdPersonPosition',
         title: '3rd Individuals Position',
         type: 'string',
+    }),
+    defineField({
+      name: 'bannerText',
+      title: 'Banner CTA Text',
+      type: 'text',
+    }),
+    defineField({
+      name: 'bannerBtn',
+      title: 'Banner CTA Button',
+      type: 'string',
+    }),
+    defineField({
+      name: 'bannerLink',
+      title: 'Banner CTA Link',
+      type: 'text',
     }),
   ],
 

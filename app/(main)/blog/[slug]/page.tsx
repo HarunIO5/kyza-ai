@@ -8,8 +8,9 @@ import PostBody from "@/components/post-body";
 import { Metadata } from "next";
 import { cache } from "react";
 import Link from "next/link";
-import { Divider } from "@nextui-org/react";
+import { Card, CardBody, Divider } from "@nextui-org/react";
 import MoreStories from "@/components/more-stories";
+import CTABanner from "@/components/cta-banner";
 
 export async function generateStaticParams() {
 
@@ -71,6 +72,8 @@ export default async function SlugPage ({
   }) {
 
     const {post, morePosts} = (await getMorePost(params.slug));
+    console.log('POST')
+    console.log(post)
 
     return (
       <div>
@@ -91,6 +94,13 @@ export default async function SlugPage ({
             />
             <PostBody content={post.body} />
         </article>
+        <div className="mx-auto max-w-5xl pt-12">
+          <CTABanner 
+            bannerBtn={post.bannerBtn} 
+            bannerText={post.bannerText} 
+            bannerLink={post.bannerLink}
+          />
+        </div>
         <Divider className="mb-24 mt-28"/>
         {morePosts?.length > 0 && <MoreStories posts={morePosts} />}
       </div>
