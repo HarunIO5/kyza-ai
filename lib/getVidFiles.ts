@@ -56,12 +56,17 @@ export async function GetVideoFiles ({limit, offset} : {limit: number, offset: n
 
 export const SearchVideosDB = async ({search, skip}: {search?: string, skip: number}) => {
 
+	const fullTextSearch = search?.split(' ').join(' | ') as string
+	// console.log('FULL TEXT SEARCH')
+	// console.log(fullTextSearch)
+
 	try {
 		const videos = await prisma.searchableVideos.findMany(
 			{
 				where: {
 					prompt: {
-						search: search
+						search: fullTextSearch,
+						mode: "insensitive"
 					}
 				},
 				skip: skip,
@@ -79,13 +84,18 @@ export const SearchVideosDB = async ({search, skip}: {search?: string, skip: num
 
 export const SearchVideoLength = async ({search}: {search?: string}) => {
 
+	const fullTextSearch = search?.split(' ').join(' | ') as string
+	// console.log('FULL TEXT SEARCH')
+	// console.log(fullTextSearch)
+
 	try {
 
 		const videos = await prisma.searchableVideos.findMany(
 			{
 				where: {
 					prompt: {
-						search: search
+						search: fullTextSearch,
+						mode: "insensitive"
 					}
 				}
 			}
