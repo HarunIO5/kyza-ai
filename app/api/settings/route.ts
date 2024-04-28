@@ -5,7 +5,7 @@
 // import { decrementalCreditLimit } from "@/lib/credit-check";
 // import { utapi } from "@/lib/uploadthing";
 
-// export async function POST(req: Request) {
+export async function POST(req: Request) {
 
 //     // console.log("AnimateDIFF Inputs")
 
@@ -25,4 +25,4 @@
 
 //       return new NextResponse(JSON.stringify(output))
 
-// }
+}
