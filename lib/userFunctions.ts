@@ -1,4 +1,5 @@
 import prisma from "@/lib/prisma"
+import { nanoid } from 'nanoid'
 
 export async function getUser (email:string) {
 
@@ -34,16 +35,16 @@ export async function saveAnimateDiffVideos ({email, prompt, url, style, negativ
 
   const user = await getUser(email)
 
-  await prisma.userSavedGenerations.create({
+  await prisma.generations.create({
     data: {
-      productType: 'animateDiff',
       prompt: prompt,
       model: 'AnimateDiff',
       url: url,
       userId: user?.id!,
       style: style,
       negativePrompt: negativePrompt,
-      scale: scale
+      scale: scale,
+      key: nanoid(),
     }
   })
 
@@ -53,7 +54,7 @@ export async function getSavedVideos({email, skip}: {email: string, skip: number
 
   const user = await getUser(email)
 
-  const videos = await prisma.userSavedGenerations.findMany({
+  const videos = await prisma.generations.findMany({
     where: {
       userId: user?.id
     },
@@ -70,7 +71,7 @@ export async function getNumberOfSavedVideos({email}: {email: string}) {
 
   const user = await getUser(email)
 
-  const videos = await prisma.userSavedGenerations.findMany({
+  const videos = await prisma.generations.findMany({
     where: {
       userId: user?.id
     }

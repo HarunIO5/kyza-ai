@@ -36,7 +36,13 @@ export default function AnimateDiffForm ({session, checkCreditLimit, getCreditCo
 
     const router = useRouter()
 
-    const  {register, handleSubmit, formState: {errors}} = useForm<z.infer<typeof textToVideoSchema>>({
+    let loadPrompt
+
+    if (typeof window !== 'undefined') {
+      loadPrompt = localStorage.getItem('prompt')
+    }
+
+    const {register, handleSubmit, formState: {errors}} = useForm<z.infer<typeof textToVideoSchema>>({
         resolver: zodResolver(textToVideoSchema),
     })
 
@@ -168,7 +174,7 @@ export default function AnimateDiffForm ({session, checkCreditLimit, getCreditCo
             <div className="w-full flex flex-col gap-4">
                 <form onSubmit={handleSubmit(onSubmit)}>
                     <div className="w-full">
-                        <Textarea type="text" label="Describe your video" labelPlacement="outside" placeholder="masterpiece, best quality, 1girl, solo, cherry blossoms, hanami, pink flower, white flower, spring season, wisteria, petals, flower, plum blossoms, outdoors, falling petals, white hair, black eyes" className="pb-4" {...register("prompt")}/>
+                        <Textarea type="text" label="Describe your video" defaultValue={loadPrompt || ''}  labelPlacement="outside" placeholder="masterpiece, best quality, 1girl, solo, cherry blossoms, hanami, pink flower, white flower, spring season, wisteria, petals, flower, plum blossoms, outdoors, falling petals, white hair, black eyes" className="pb-4" {...register("prompt")}/>
                         {errors.prompt && (
                             <span className=" text-red-500">{errors.prompt?.message}</span>
                         )}

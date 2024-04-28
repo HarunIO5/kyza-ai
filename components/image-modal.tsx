@@ -11,12 +11,38 @@ import {
   import {Card, CardFooter, CardHeader, CardBody, Image, Button, Spinner, Divider } from "@nextui-org/react";
   import { DownloadIcon } from "./icons";
 import Link from "next/link";
+import { useState } from "react";
+import { Copy, Check, X } from "lucide-react";
+import { useRouter } from "next/navigation";
 
-  export default function ImageModal ({onOpen, onOpenChange, srcName, srcUrl, srcModel} : {onOpen: boolean, onOpenChange: () => void, srcName: string, srcUrl: string, srcModel?: string | 'Haiper' }) {
+  export default function ImageModal ({srcName, srcUrl, srcModel} : {srcName: string, srcUrl: string, srcModel?: string | 'Haiper' }) {
 
+    const [isCopied, setIsCopied] = useState(false);
+
+    const router = useRouter()
+    const handleClose = () => router.back()
+
+    const {isOpen, onOpen, onOpenChange} = useDisclosure();
+
+    const copyToClipboard = async (text: string) => {
+      try {
+        await navigator.clipboard.writeText(text);
+        setIsCopied(true);
+        setTimeout(() => {
+          setIsCopied(false);
+        }, 1000);
+      } catch (err) {
+        console.error(err);
+      }
+    };
+
+    const onRemix = () => {
+      localStorage.setItem('prompt',  srcName)
+      router.push('/text-to-video')
+    }
 
     return (
-            <Modal isOpen={onOpen} onOpenChange={onOpenChange} placement="center" size="3xl" backdrop="blur"  className=" overflow-auto">
+            <Modal isOpen={true} onOpenChange={onOpenChange} onClose={handleClose} placement="center" size="3xl" backdrop="blur"  className="overflow-auto bg-slate-900">
               <ModalContent className="p-4 max-md:h-[575px]">
                 {(onClose) => (
                   <>
@@ -25,16 +51,28 @@ import Link from "next/link";
                         <p className="font-semibold text-xl">
                               Prompt:
                         </p>
-                        <Card className=" bg-zinc-800 p-2 rounded-md w-full md:max-w-[300px]">
+                        <Card className=" bg-slate-950 p-2 rounded-md w-full md:max-w-[300px]">
                           <CardBody>
                               {srcName}
+                              <div className="flex flex-row items-center gap-2 mt-4">
+                                <Button className="w-fit bg-cyan-800" onClick={() => copyToClipboard(srcName)}>
+                                  {isCopied ? (
+                                    <Check className="h-7 w-7"/>
+                                  ) : (
+                                    <Copy className="h-7 w-7"/>
+                                  )}
+                                </Button>
+                                <Button onClick={() => {onRemix()}} className='relative inline-flex w-fit items-center justify-center bg-white font-medium text-gray-950 transition-colors focus:outline-none focus:ring-2 focus:ring-gray-400 focus:ring-offset-2 focus:ring-offset-gray-50'>
+                                  Remix
+                                </Button>
+                              </div>
                           </CardBody>
                         </Card>
                         <h3 className="text-md font-medium text-zinc-400">
                           Model:
                         </h3>
                         <p className="text-md font-semibold">
-                          {srcModel}
+                          {srcModel || 'Haiper'}
                         </p>
                       </div>
                         <div className="flex flex-col gap-2">
@@ -45,11 +83,14 @@ import Link from "next/link";
                               />
                               Your browser does not support the video tag.
                             </video>
-                            <Link href={srcUrl} target="_blank" className="w-full">
-                                <Button className="w-full" variant="ghost">
+                            <div className="w-full flex items-center justify-center">
+                            <Link href={`${srcUrl}`} target="_blank" className="w-fit">
+                                <Button className="w-fit bg-slate-950">
                                     <DownloadIcon />
+                                    Download
                                 </Button>
                             </Link>
+                            </div>
                         </div>
                     </ModalBody>
                   </>

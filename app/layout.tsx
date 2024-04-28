@@ -5,7 +5,7 @@ import { fontSans } from "@/config/fonts";
 import { Providers } from "./providers";
 import { Navbar } from "@/components/navbar";
 import AuthProvider from "@/components/providers";
-import clsx from "clsx";
+import clsx from 'clsx'
 import { SiteFooter } from "@/components/site-footer";
 import { Analytics } from "@vercel/analytics/react"
 import { ToasterProvider } from "@/components/toaster-provider";

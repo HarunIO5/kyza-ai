@@ -59,8 +59,17 @@ export const registerFormSchema = z.object({
     }).optional().or(z.literal(''))
   })
 
+  export const settingSchema = z.object({
+    username: z.string().min(3, 
+      "Username is required, minimum of 3 characters"
+    ).max(25,
+      "Username can't be longer than 25 characters"
+    ),
+  })
+
 export type loginFormSchema = z.infer<typeof loginFormSchema>
 export type registerFormSchema = z.infer<typeof registerFormSchema>
 export type resetPasswordFormSchema = z.infer<typeof resetPasswordFormSchema>
 export type EmailParams = z.infer<typeof emailFormSchema>
 export type textToVideoSchema = z.infer<typeof textToVideoSchema>
+export type settingSchema = z.infer<typeof settingSchema>

@@ -6,8 +6,13 @@ import { Card, CardFooter, useDisclosure } from "@nextui-org/react";
 import { useEffect, useState } from "react";
 import { useInView } from "react-intersection-observer";
 import ImageModal from "./image-modal";
+import { useRouter } from "next/navigation";
+import Link from "next/link";
 
 export default function LibraryCards ({email, videoProp, videoLength} : {email: string, videoProp: SavedVideoType[], videoLength: number}) {
+
+    const router = useRouter()
+    const handleClose = () => router.back()
 
     const {isOpen, onOpen, onOpenChange} = useDisclosure();
 
@@ -49,14 +54,15 @@ export default function LibraryCards ({email, videoProp, videoLength} : {email: 
                             isFooterBlurred
                             className="rounded-xl"
                             key={file.id}
-                            onPress={() => {
-                                setSrcUrl(file.url!)
-                                setSrcName(file.prompt)
-                                setSrcModel(file.model!)
-                                onOpen() 
-                            }} 
+                            // onPress={() => {
+                            //     setSrcUrl(file.url!)
+                            //     setSrcName(file.prompt)
+                            //     setSrcModel(file.model!)
+                            //     onOpen() 
+                            // }} 
                             isPressable={true}
                             >
+                              <Link href={`/media/${file.key}`} className="h-full w-full">
                               <video
                                 className="h-full w-full object-cover"
                                 preload="metadata"
@@ -74,6 +80,7 @@ export default function LibraryCards ({email, videoProp, videoLength} : {email: 
                             <CardFooter className="justify-start before:bg-white/10 border-white/20 border-1 overflow-hidden py-2 absolute before:rounded-xl rounded-large bottom-1 w-[calc(100%_-_8px)] shadow-small ml-1 z-10">
                               <p className="text-tiny text-white/80">{file.prompt.slice(0, 30)}...</p>
                             </CardFooter>
+                            </Link>
                           </Card>
                           
                           </>
@@ -81,7 +88,7 @@ export default function LibraryCards ({email, videoProp, videoLength} : {email: 
                     })
                 )}
             </div>
-            <ImageModal onOpen={isOpen} onOpenChange={onOpenChange} srcName={srcName} srcUrl={srcUrl} srcModel={srcModel}/>
+            {/* <ImageModal srcName={srcName} srcUrl={srcUrl} srcModel={srcModel}/> */}
             {videoLength > videoSkip+12 && (
               <div
               ref={ref}

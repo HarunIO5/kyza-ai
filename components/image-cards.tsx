@@ -7,9 +7,10 @@ import {
 import { useEffect, useState } from "react";
 import ImageModal from "./image-modal";
 import { useInView } from "react-intersection-observer";
-
+import { useRouter } from "next/navigation";
 import { fetchSearchedVideos, fetchVideos } from "@/app/_action";
-import { SearchVideosType } from "@/app/(main)/videos/page";
+import { SearchVideosType } from "@/app/(main)/media/page";
+import Link from "next/link";
 
 export default function VidCard ({vidProp, search, videoLength} : {vidProp : SearchVideosType[], search: string, videoLength: number}) {
 
@@ -19,6 +20,8 @@ export default function VidCard ({vidProp, search, videoLength} : {vidProp : Sea
     const [videos, setVideos] = useState(vidProp)
     const [videoSkip, setVideoSkip] = useState(0)
     const [ref, inView] = useInView()
+
+    const router = useRouter();
 
     async function loadMoreVideos() {
 
@@ -53,13 +56,15 @@ export default function VidCard ({vidProp, search, videoLength} : {vidProp : Sea
                             isFooterBlurred
                             className="rounded-xl"
                             key={file.key}
-                            onPress={() => {
-                              setSrcUrl(file.url)
-                              setSrcName(file.prompt)
-                              onOpen() 
-                            }} 
+                            // onPress={() => {
+                            //   // setSrcUrl(file.url)
+                            //   // setSrcName(file.prompt)
+                            //   // onOpen() 
+                            //   // router.push()
+                            // }}
                             isPressable={true}
                             >
+                              <Link href={`/media/${file.key}`} className="h-full w-full">
                               <video
                                 className="h-full w-full object-cover"
                                 preload="metadata"
@@ -77,14 +82,14 @@ export default function VidCard ({vidProp, search, videoLength} : {vidProp : Sea
                             <CardFooter className="justify-start before:bg-white/10 border-white/20 border-1 overflow-hidden py-2 absolute before:rounded-xl rounded-large bottom-1 w-[calc(100%_-_8px)] shadow-small ml-1 z-10">
                               <p className="text-tiny text-white/80">{file.prompt.slice(0, 30)}...</p>
                             </CardFooter>
+                            </Link>
                           </Card>
-                          
                           </>
                         )
                     })
                 )}
             </div>
-            <ImageModal onOpen={isOpen} onOpenChange={onOpenChange} srcName={srcName} srcUrl={srcUrl}/>
+            {/* <ImageModal onOpen={isOpen} onOpenChange={onOpenChange} srcName={srcName} srcUrl={srcUrl}/> */}
             {/* loading spinner */}
             {videoLength > videoSkip+12 && (
               <div

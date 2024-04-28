@@ -46,10 +46,10 @@ export default function SearchBar () {
 
     const onKeyPressHandler = (event: {key: any}) => {
         if (event.key === 'Enter' && query.length == 0) {
-            router.push('/videos')
+            router.push('/media')
         } else if (event.key === 'Enter' && query.length >=1) {
             console.log('Check') 
-            router.push(`/videos?search=${query}`)
+            router.push(`/media?search=${query}`)
         }
 
 

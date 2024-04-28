@@ -52,11 +52,14 @@ export default function UserNav({session}: {session: Session}) {
             <DropdownSection showDivider>
                 <DropdownItem key="profile" className="h-14 gap-2">
                   <p className="font-semibold">Signed in as</p>
-                  <p className="font-semibold">{email!}</p>
+                  <p className="font-semibold">{name!}</p>
                 </DropdownItem>
             </DropdownSection>
             <DropdownItem key="library" href={'/library'} className="">
                 Library
+            </DropdownItem>
+            <DropdownItem key="library" href={'/settings'} className="">
+                Settings
             </DropdownItem>
             <DropdownItem key="logout" color="danger" onClick={() => signOut({callbackUrl: `${baseUrl}`})}>
               <p className="text-red-500">

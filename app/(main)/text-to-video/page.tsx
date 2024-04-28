@@ -6,6 +6,11 @@ import { authOptions } from "@/lib/auth";
 import { getAnimateDiffOrder, getUser } from "@/lib/userFunctions";
 import { Suspense } from "react";
 import { checkCreditLimit, getTotalCreditCount } from "@/lib/credit-check";
+import { Metadata } from "next";
+
+export const metadata: Metadata = {
+    title: 'Text to video'
+}
 
 export default async function TextToVideoPage () {
 

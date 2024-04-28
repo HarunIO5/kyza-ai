@@ -15,6 +15,21 @@ datasource db {
   directUrl = env("DIRECT_URL")
 }
 
+enum Type {
+  SHORTVIDEO
+  IMAGE
+}
+
+enum Status {
+  PUBLIC
+  PRIVATE
+}
+
+enum ReactionType {
+  LIKE
+  DISLIKE
+}
+
 model Account {
   id                String  @id @default(cuid())
   userId            String
@@ -59,6 +74,10 @@ model User {
   sessions                  Session[]
   OneTimePurchases          OneTimePurchases[]
   UserSavedGenerations      UserSavedGenerations[]
+  Like                      Like[]
+  FollowedBy                User[]                 @relation("UserFollows")
+  Following                 User[]                 @relation("UserFollows")
+  Generations               Generations[]
 }
 
 model VerificationToken {
@@ -109,4 +128,34 @@ model UserSavedGenerations {
   url            String?
   userId         String
   user           User     @relation(fields: [userId], references: [id])
+}
+
+model Like {
+  id           Int          @id @default(autoincrement())
+  createdAt    DateTime     @default(now())
+  user         User         @relation(fields: [userId], references: [id])
+  userId       String
+  generation   Generations  @relation(fields: [generationId], references: [id])
+  generationId String
+  reaction     ReactionType @default(LIKE)
+
+  @@unique([userId, generationId])
+}
+
+model Generations {
+  id             String   @id @default(cuid())
+  createdAt      DateTime @default(now())
+  key            String?  @unique
+  prompt         String?
+  negativePrompt String?
+  model          String?
+  url            String?  @unique
+  style          String?
+  scale          String?
+  fileSizeBytes  Int?
+  type           Type     @default(SHORTVIDEO)
+  status         Status   @default(PUBLIC)
+  user           User     @relation(fields: [userId], references: [id])
+  userId         String
+  Like           Like[]
 }

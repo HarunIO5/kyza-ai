@@ -53,6 +53,19 @@ export async function GetVideoFiles ({limit, offset} : {limit: number, offset: n
 
 }
 
+export const GetMediaForModals = async ({id} : {id: string}) => {
+
+	const media = await prisma.generations.findUnique({
+		where: {
+			key: id!
+		}
+	})
+
+
+	return JSON.parse(JSON.stringify(media))
+
+}
+
 
 export const SearchVideosDB = async ({search, skip}: {search?: string, skip: number}) => {
 
@@ -61,7 +74,7 @@ export const SearchVideosDB = async ({search, skip}: {search?: string, skip: num
 	// console.log(fullTextSearch)
 
 	try {
-		const videos = await prisma.searchableVideos.findMany(
+		const videos = await prisma.generations.findMany(
 			{
 				where: {
 					prompt: {
@@ -90,7 +103,7 @@ export const SearchVideoLength = async ({search}: {search?: string}) => {
 
 	try {
 
-		const videos = await prisma.searchableVideos.findMany(
+		const videos = await prisma.generations.findMany(
 			{
 				where: {
 					prompt: {
