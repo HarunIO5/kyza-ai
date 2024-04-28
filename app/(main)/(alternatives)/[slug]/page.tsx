@@ -274,7 +274,7 @@ export default async function AlternativePages ({
                 <p className="text-4xl font-bold leading-tight tracking-tighter text-center pb-12">
                   {alternativePage.companyTestimonalTitle}
                 </p>
-                <div className="grid grid-cols-5">
+                <div className="grid grid-cols-5 bg-slate-900 rounded-xl">
                   <Image
                       className="h-auto w-full rounded"
                       width={1000}
@@ -329,7 +329,7 @@ export default async function AlternativePages ({
                 </p>
                 <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
                   <div>
-                    <Card className="p-4 bg-slate-900">
+                    <Card className="p-4 bg-slate-200 dark:bg-slate-900">
                       <CardHeader className="w-full flex items-center justify-center">
                         <Image
                           className="h-[150px] w-[150px] rounded-full"
@@ -355,7 +355,7 @@ export default async function AlternativePages ({
                     </Card>
                   </div>
                   <div>
-                    <Card className="pt-8 bg-slate-900">
+                    <Card className="pt-8 bg-slate-200 dark:bg-slate-900">
                       <CardHeader className="w-full flex items-center justify-center">
                         <Image
                           className="h-[150px] w-[150px] rounded-full"
@@ -381,7 +381,7 @@ export default async function AlternativePages ({
                     </Card>
                   </div>
                   <div>
-                    <Card className="pt-8 bg-slate-900">
+                    <Card className="pt-8 bg-slate-200 dark:bg-slate-900">
                       <CardHeader className="w-full flex items-center justify-center">
                         <Image
                           className="h-[150px] w-[150px] rounded-full"

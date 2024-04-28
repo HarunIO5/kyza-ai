@@ -13,7 +13,7 @@ export default function AltPreview({
   slug,
 }: Omit<AlternativesType, '_id'>) {
   return (
-    <Card className=' bg-gray-900'>
+    <Card className='bg-slate-200 dark:bg-gray-900'>
       <div className="mb-5">
         <AltCoverImage
           slug={slug}
@@ -31,7 +31,7 @@ export default function AltPreview({
         <div className="mb-4 text-lg flex flex-row justify-between">
             {new Date(_createdAt!).toISOString().split("T")[0]}
             <Link href={`/${slug}`}>
-                <Button className='bg-cyan-500 rounded-2xl'>
+                <Button className=' bg-fuchsia-500 dark:bg-cyan-500 rounded-2xl'>
                     View
                 </Button>
             </Link>

@@ -141,6 +141,9 @@ export const Navbar = () => {
         		    </DropdownItem>
         		  </DropdownMenu>
         		</Dropdown>
+				<NavbarItem className="flex h-full items-center">
+          			<ThemeSwitch />
+        		</NavbarItem>
 				{session ? (
 					<UserNav session={session} />	
 				) : (
@@ -156,6 +159,7 @@ export const Navbar = () => {
 			</NavbarContent>
 
 			<NavbarContent className="sm:hidden basis-1 pl-4" justify="end">
+          		<ThemeSwitch />
 				<NavbarMenuToggle />
 			</NavbarContent>
 

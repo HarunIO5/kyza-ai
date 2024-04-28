@@ -122,8 +122,8 @@ export default function AnimateDiffForm ({session, checkCreditLimit, getCreditCo
           recycle={false}
         />
         )}
-            <Card className="w-full md:w-1/3 h-fit border-1 border-slate-700 bg-black">
-                <CardHeader className=" text-gray-300 text-sm">
+            <Card className="w-full md:w-1/3 h-fit border-1 border-gray-300 dark:border-slate-700 dark:bg-black">
+                <CardHeader className=" dark:text-gray-300 text-sm">
                     AnimateDiff
                 </CardHeader>
                 <CardBody className="w-full flex flex-col">

@@ -11,7 +11,7 @@ export default function CTABanner ({
     bannerLink?: string
 }) {
     return (
-        <Card className=" border border-cyan-900 bg-gradient-to-tr from-slate-950 to-cyan-900">
+        <Card className=" border border-cyan-600 dark:border-cyan-900 bg-gradient-to-tr from-white to-cyan-700 dark:from-slate-950 dark:to-cyan-900">
           <CardBody>
             <div className="flex flex-col gap-8 md:flex-row justify-between items-center">
               <div className="">

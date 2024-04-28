@@ -42,7 +42,7 @@ import { useRouter } from "next/navigation";
     }
 
     return (
-            <Modal isOpen={true} onOpenChange={onOpenChange} onClose={handleClose} placement="center" size="3xl" backdrop="blur"  className="overflow-auto bg-slate-900">
+            <Modal isOpen={true} onOpenChange={onOpenChange} onClose={handleClose} placement="center" size="3xl" backdrop="blur"  className="overflow-auto dark:bg-slate-900">
               <ModalContent className="p-4 max-md:h-[575px]">
                 {(onClose) => (
                   <>
@@ -51,7 +51,7 @@ import { useRouter } from "next/navigation";
                         <p className="font-semibold text-xl">
                               Prompt:
                         </p>
-                        <Card className=" bg-slate-950 p-2 rounded-md w-full md:max-w-[300px]">
+                        <Card className=" dark:bg-slate-950 p-2 rounded-md w-full md:max-w-[300px]">
                           <CardBody>
                               {srcName}
                               <div className="flex flex-row items-center gap-2 mt-4">
@@ -62,7 +62,7 @@ import { useRouter } from "next/navigation";
                                     <Copy className="h-7 w-7"/>
                                   )}
                                 </Button>
-                                <Button onClick={() => {onRemix()}} className='relative inline-flex w-fit items-center justify-center bg-white font-medium text-gray-950 transition-colors focus:outline-none focus:ring-2 focus:ring-gray-400 focus:ring-offset-2 focus:ring-offset-gray-50'>
+                                <Button onClick={() => {onRemix()}} className='relative inline-flex w-fit items-center justify-center dark:bg-white font-medium text-gray-950 transition-colors focus:outline-none focus:ring-2 focus:ring-gray-400 focus:ring-offset-2 focus:ring-offset-gray-50'>
                                   Remix
                                 </Button>
                               </div>
@@ -85,7 +85,7 @@ import { useRouter } from "next/navigation";
                             </video>
                             <div className="w-full flex items-center justify-center">
                             <Link href={`${srcUrl}`} target="_blank" className="w-fit">
-                                <Button className="w-fit bg-slate-950">
+                                <Button className="w-fit dark:bg-slate-950">
                                     <DownloadIcon />
                                     Download
                                 </Button>
