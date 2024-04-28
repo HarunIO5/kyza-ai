@@ -202,6 +202,15 @@ export const Navbar = () => {
 									Library
 								</Link>
 							</NavbarMenuItem>
+							<NavbarMenuItem key={`settings`}>
+								<Link
+									color={"foreground"}
+									href={'/settings'}
+									size="lg"
+								>
+									Settings
+								</Link>
+							</NavbarMenuItem>
 							<NavbarMenuItem key={`logout`}>
 								<Link
 									color={"danger"}

@@ -42,7 +42,7 @@ export default async function LibraryPage () {
                     <Link href="/library" className="font-semibold text-secondary">
                         Library
                     </Link>
-                    <Link href="/setting" color="foreground">
+                    <Link href="/settings" color="foreground">
                         Setting
                     </Link>
                 </nav>
