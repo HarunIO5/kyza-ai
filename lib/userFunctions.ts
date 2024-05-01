@@ -17,6 +17,22 @@ export async function getUser (email:string) {
     return userInfo
   }
 
+  export async function updateUsername (email: string, username: string) {
+    const usernameUpdate = await prisma.user.update({
+      where: {
+        email: email
+      },
+      data: {
+        name: username
+      }
+    })
+
+    console.log("SERVER SIDE - Update Username")
+    console.log(usernameUpdate)
+
+    return usernameUpdate
+  }
+
   export async function getAnimateDiffOrder (email: string) {
     const user = await getUser(email)
 

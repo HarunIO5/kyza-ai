@@ -4,6 +4,7 @@ import { getServerSession } from "next-auth";
 import { authOptions } from "@/lib/auth";
 import LibraryCards from "@/components/library-cards";
 import Image from "next/image";
+import { Metadata } from "next";
 
 export type SavedVideoType = {
   id: string;
@@ -20,6 +21,10 @@ export type SavedVideoType = {
   type: any;
   status: any;
 } 
+
+export const metadata: Metadata = {
+  title: 'My Library'
+}
 
 export default async function LibraryPage () {
 

@@ -2,6 +2,24 @@ import { utapi } from "./uploadthing";
 import { cache } from "react";
 import prisma from "./prisma";
 
+export type MediaType = {
+	id: string,
+	createdAt: any,
+	key?: string,
+	prompt?: string,
+	negativePrompt?: string,
+	model?: string,
+	url?: string,
+	style?: string,
+	scale?: string,
+	fileSizeBytes?: number,
+	type?: any,
+	status?: any,
+	userId: string,
+	user: any,
+	like?: any,
+}
+
 export async function GetVideoFiles ({limit, offset} : {limit: number, offset: number}) {
 
     // const fileList = await fetch('https://uploadthing.com/api/listFiles', {
@@ -64,6 +82,13 @@ export const GetMediaForModals = async ({id} : {id: string}) => {
 
 	return JSON.parse(JSON.stringify(media))
 
+}
+
+export const GetLatestMedia = async () => {
+
+	const media = await prisma.generations.findMany()
+
+	return JSON.parse(JSON.stringify(media))
 }
 
 

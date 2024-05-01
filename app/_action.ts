@@ -1,6 +1,6 @@
 'use server'
 
-import { GetMediaForModals, GetVideoFiles, SearchVideosDB } from "@/lib/getVidFiles"
+import { GetLatestMedia, GetMediaForModals, GetVideoFiles, SearchVideosDB } from "@/lib/getVidFiles"
 import { getUser, getSavedVideos, getNumberOfSavedVideos } from "@/lib/userFunctions"
 import { sendEmail } from "@/lib/email/mailer"
 
@@ -44,6 +44,12 @@ export async function getSavedVideosLength ({email}: {email: string}) {
 
 export async function getMediaModal ({id}: {id: string}){
     const media = await GetMediaForModals({id: id})
+
+    return media
+}
+
+export async function getLatestMediaPosts() {
+    const media  = await GetLatestMedia()
 
     return media
 }

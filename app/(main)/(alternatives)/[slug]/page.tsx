@@ -51,7 +51,7 @@ async function getLatestAltPages() {
     return data
 }
 
-const getAlternativePages = cache(async (slug: string): Promise<{ alternativePage: AlternativesType; moreAlternativePages: AlternativesType[] }> => {
+export const getAlternativePages = cache(async (slug: string): Promise<{ alternativePage: AlternativesType; moreAlternativePages: AlternativesType[] }> => {
 
     const query = `
     {

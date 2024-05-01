@@ -2,7 +2,7 @@ export type SiteConfig = typeof siteConfig;
 
 export const siteConfig = {
 	name: "KYZA",
-	description: "Visualise The Best AI Video Generations",
+	description: "Visualise The Best AI Video & Image Generations",
 	navItems: [
 		{
 			label: "Home",

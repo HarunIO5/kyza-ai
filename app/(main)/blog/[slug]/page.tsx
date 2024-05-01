@@ -49,7 +49,7 @@ async function getLatestPost() {
     return data;
   }
 
-  const getMorePost = cache(async (slug: string): Promise<{ post: Post; morePosts: Post[] }> => {
+const getMorePost = cache(async (slug: string): Promise<{ post: Post; morePosts: Post[] }> => {
 
   const query = `
   {

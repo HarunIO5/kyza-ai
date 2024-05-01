@@ -1,28 +1,38 @@
-// import { NextRequest, NextResponse } from "next/server";
+import { NextRequest, NextResponse } from "next/server";
 // import { replicate } from "@/lib/replicate";
 // import prisma from "@/lib/prisma";
 // import { getUser, saveAnimateDiffVideos } from "@/lib/userFunctions";
 // import { decrementalCreditLimit } from "@/lib/credit-check";
 // import { utapi } from "@/lib/uploadthing";
+import prisma from "@/lib/prisma"
+import { updateUsername } from "@/lib/userFunctions"
 
 export async function POST(req: Request) {
 
 //     // console.log("AnimateDIFF Inputs")
 
-//     const {prompt, negative, scale, style, email} = await req.json()
+    const {username, email} = await req.json()
+       
+    const user = await prisma.user.findUnique({
+        where: {
+          email: email
+        }
+      })
 
-//      if (output) {
+    console.log("API ROUTE - Find User")
+    console.log(user)  
+    
+    if (!user) {
+        return new NextResponse("User doesn't exist", { status: 404 });
+    }
 
-//       const {data, error} = await utapi.uploadFilesFromUrl({url: output.toString(), name: prompt});
+    const usernameUpdate = await updateUsername(email, username)
 
-//       if (error) return NextResponse.json({error: `Couldn't uploaded video ${error}`}, {status: 400})
+    console.log("API ROUTE - Username")
+    console.log(usernameUpdate)
 
+    if (usernameUpdate) return new NextResponse(JSON.stringify(usernameUpdate))
 
-//       await saveAnimateDiffVideos({email: email as string, prompt: prompt as string, url: data?.url!, style: style as string, negativePrompt: negative as string, scale: scale.toString() })
-//       await decrementalCreditLimit({email: email as string})
-
-//     }         
-
-//       return new NextResponse(JSON.stringify(output))
+    return new NextResponse("Failed to update username", {status: 4000})
 
 }
