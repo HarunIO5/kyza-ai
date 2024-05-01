@@ -37,7 +37,7 @@ export default function PromptSectionComponent ({srcName} : {srcName: string}) {
               <Copy className="h-7 w-7"/>
             )}
           </Button>
-          <Button onClick={() => {onRemix()}} className='relative inline-flex w-fit items-center justify-center bg-white font-medium text-gray-950 transition-colors focus:outline-none focus:ring-2 focus:ring-gray-400 focus:ring-offset-2 focus:ring-offset-gray-50'>
+          <Button onClick={() => {onRemix()}} className='relative inline-flex w-fit items-center justify-center dark:bg-white font-medium text-gray-950 transition-colors focus:outline-none focus:ring-2 focus:ring-gray-400 focus:ring-offset-2 focus:ring-offset-gray-50'>
             Remix
           </Button>
         </div>
