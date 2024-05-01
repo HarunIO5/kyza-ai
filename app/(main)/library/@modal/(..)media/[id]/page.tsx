@@ -18,12 +18,12 @@ export async function generateStaticParams() {
 export async function generateMetadata({
   params,
 }: {
-  params: { slug: string };
+  params: { id: string };
 }): Promise<Metadata> {
 
   // const media = await getMediaModal({id: params.slug!}) as MediaType
 
-  const media = await getMedia({params: {id: params.slug!}})
+  const media = await getMedia({params: {id: params.id!}})
 
   return {
     title: media.prompt,

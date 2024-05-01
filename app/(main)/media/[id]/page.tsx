@@ -60,7 +60,7 @@ export default async function StandardMediaView ({
                 <p className="font-semibold text-xl">
                       Prompt:
                 </p>
-                <Card className="bg-slate-900 p-2 rounded-md w-full md:max-w-[300px]">
+                <Card className="dark:bg-slate-900 p-2 rounded-md w-full md:max-w-[300px]">
                   <CardBody>
                       {media.prompt}
                       <PromptSectionComponent srcName={media.prompt!}/>
@@ -83,7 +83,7 @@ export default async function StandardMediaView ({
                     </video>
                     <div className="w-full flex items-center justify-center">
                     <Link href={`${media.url!}`} target="_blank" className="w-fit">
-                        <Button className="w-fit bg-slate-950">
+                        <Button className="w-fit dark:bg-slate-950">
                             <DownloadIcon />
                             Download
                         </Button>
