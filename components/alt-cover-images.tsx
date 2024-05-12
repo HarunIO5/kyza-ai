@@ -8,10 +8,11 @@ interface CoverImageProps {
   slug?: string
   image: any
   priority?: boolean
+  width?: number
 }
 
 export default function AltCoverImage(props: CoverImageProps) {
-  const { title, slug, image: source, priority } = props
+  const { title, slug, image: source, priority, width } = props
   const image = source?.asset?._ref ? (
     <div>
       <Image
@@ -19,7 +20,7 @@ export default function AltCoverImage(props: CoverImageProps) {
         width={1000}
         height={1000}
         alt=""
-        src={urlFor(source).height(1000).width(1000).url()}
+        src={urlFor(source).height(1000).width(width || 1000).url()}
         sizes="100vw"
         priority={priority}
       />

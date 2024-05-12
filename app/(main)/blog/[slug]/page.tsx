@@ -72,8 +72,8 @@ export default async function SlugPage ({
   }) {
 
     const {post, morePosts} = (await getMorePost(params.slug));
-    console.log('POST')
-    console.log(post)
+    // console.log('POST')
+    // console.log(post)
 
     return (
       <div>

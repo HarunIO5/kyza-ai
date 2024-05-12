@@ -139,6 +139,30 @@ export const Navbar = () => {
         		    >
         		      Wallpaper Engine - Coming Soon
         		    </DropdownItem>
+					<DropdownItem
+        		      key="wallpaper_engine"
+        		      startContent={icons.Construction}
+        		    >
+        		      Spotify Canvas Maker
+        		    </DropdownItem>
+					<DropdownItem
+        		      key="wallpaper_engine"
+        		      startContent={icons.Construction}
+        		    >
+        		      Iphone Screensavers
+        		    </DropdownItem>
+					<DropdownItem
+        		      key="wallpaper_engine"
+        		      startContent={icons.Construction}
+        		    >
+        		      AI Movie Generator
+        		    </DropdownItem>
+					<DropdownItem
+        		      key="wallpaper_engine"
+        		      startContent={icons.Construction}
+        		    >
+        		      Macbook Background Generator
+        		    </DropdownItem>
         		  </DropdownMenu>
         		</Dropdown>
 				<NavbarItem className="flex h-full items-center">

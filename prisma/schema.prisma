@@ -30,6 +30,12 @@ enum ReactionType {
   DISLIKE
 }
 
+enum ToolType {
+  WALLPAPER_ENGINE
+  TEXT_TO_VIDEO
+  SPOTIFY_CANVAS
+}
+
 model Account {
   id                String  @id @default(cuid())
   userId            String
@@ -58,25 +64,24 @@ model Session {
 }
 
 model User {
-  id                        String                 @id @default(cuid())
-  name                      String?                @unique
-  email                     String?                @unique
+  id                        String             @id @default(cuid())
+  name                      String?            @unique
+  email                     String?            @unique
   hashedPassword            String?
   emailVerified             DateTime?
   image                     String?
-  freeCredits               Int                    @default(3)
-  credits                   Int                    @default(0)
-  forgotPasswordToken       String?                @unique
+  freeCredits               Int                @default(3)
+  credits                   Int                @default(0)
+  forgotPasswordToken       String?            @unique
   forgotPasswordTokenExpiry DateTime?
-  verifyToken               String?                @unique
+  verifyToken               String?            @unique
   verifyTokenExpiry         DateTime?
   accounts                  Account[]
   sessions                  Session[]
   OneTimePurchases          OneTimePurchases[]
-  UserSavedGenerations      UserSavedGenerations[]
   Like                      Like[]
-  FollowedBy                User[]                 @relation("UserFollows")
-  Following                 User[]                 @relation("UserFollows")
+  FollowedBy                User[]             @relation("UserFollows")
+  Following                 User[]             @relation("UserFollows")
   Generations               Generations[]
 }
 
@@ -86,15 +91,6 @@ model VerificationToken {
   expires    DateTime
 
   @@unique([identifier, token])
-}
-
-model SearchableVideos {
-  id            String  @id @default(cuid())
-  key           String? @unique
-  prompt        String
-  model         String?
-  url           String
-  fileSizeBytes Int?
 }
 
 model LandingPageVideos {
@@ -114,20 +110,6 @@ model OneTimePurchases {
   status      String   @default("Pending")
   userId      String
   user        User     @relation(fields: [userId], references: [id])
-}
-
-model UserSavedGenerations {
-  id             String   @id @default(cuid())
-  productType    String
-  model          String?
-  prompt         String
-  style          String?
-  negativePrompt String?
-  scale          String?
-  createdAt      DateTime @default(now())
-  url            String?
-  userId         String
-  user           User     @relation(fields: [userId], references: [id])
 }
 
 model Like {
@@ -158,4 +140,14 @@ model Generations {
   user           User     @relation(fields: [userId], references: [id])
   userId         String
   Like           Like[]
+}
+
+model ToolWaitlist {
+  id        String    @id @default(cuid())
+  createdAt DateTime  @default(now())
+  email     String
+  tool      ToolType?
+  toolType  String?
+
+  @@unique([email, tool])
 }

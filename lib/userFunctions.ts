@@ -97,3 +97,16 @@ export async function getNumberOfSavedVideos({email}: {email: string}) {
   return videos.length
 
 }
+
+export async function saveToWailist ({email, tool} : {email: string, tool: string}) {
+
+  const waitlist  = await prisma.toolWaitlist.create({
+    data: {
+      email: email,
+      toolType: tool as any,
+    }
+  })
+
+  return waitlist
+
+}

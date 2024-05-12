@@ -96,30 +96,34 @@ import { useRouter } from "next/navigation";
                             Purchase a package to continue
                         </p>
                         <div className="w-full flex flex-col md:flex-row items-center md:justify-between gap-4">
-                            <Card className=" bg-zinc-800 p-2 rounded-md w-full md:max-w-[300px]">
-                                <CardHeader className="flex items-center justify-center text-violet-500">
-                                    10 generations
-                                </CardHeader>
-                                <CardBody className="flex items-center justify-center">
-                                    £2.99
-                                </CardBody>
-                            </Card>
-                            <Card className=" bg-zinc-800 p-2 rounded-md w-full md:max-w-[300px]">
-                                <CardHeader className="flex items-center justify-center text-violet-500">
-                                    50 generations
-                                </CardHeader>
-                                <CardBody className="flex items-center justify-center">
-                                    £4.99
-                                </CardBody>
-                            </Card>
-                            <Card className=" bg-zinc-800 p-2 rounded-md w-full md:max-w-[300px]">
-                                <CardHeader className="flex items-center justify-center text-violet-500">
-                                    100 generations
-                                </CardHeader>
-                                <CardBody className="flex items-center justify-center">
-                                    £8.99
-                                </CardBody>
-                            </Card>
+
+                          <div className='relative w-full h-[110px] overflow-hidden rounded-xl border border-gray-800 p-[2px] backdrop-blur-3xl'>
+                            <div className="absolute inset-0 flex flex-col items-center justify-center">
+                                <h2 className=" z-10 text-white text-xl font-bold">10 Generations</h2>
+                                <h4 className=" z-10 text-white text-md font-normal">£2.99</h4>
+                            </div>
+                            <span className='absolute inset-[-1000%] animate-[spin_2s_linear_infinite] bg-[conic-gradient(from_90deg_at_50%_50%,#E2CBFF_0%,#393BB2_50%,#E2CBFF_100%)]' />
+                            <div className='inline-flex h-full w-full items-center justify-center rounded-xl  px-3 py-1 text-sm font-medium text-gray-50 backdrop-blur-3xl' />
+                          </div>
+
+                          <div className='relative w-full h-[110px] overflow-hidden rounded-xl border border-gray-800 p-[2px] backdrop-blur-3xl'>
+                            <div className="absolute inset-0 flex flex-col items-center justify-center">
+                                <h2 className=" z-10 text-white text-xl font-bold">50 Generations</h2>
+                                <h4 className=" z-10 text-white text-md font-normal">£4.99</h4>
+                            </div>
+                            <span className='absolute inset-[-1000%] animate-[spin_2s_linear_infinite] bg-[conic-gradient(from_90deg_at_50%_50%,#69a4f9_0%,#0028ad_50%,#69a4f9_100%)]' />
+                            <div className='inline-flex h-full w-full items-center justify-center rounded-xl  px-3 py-1 text-sm font-medium text-gray-50 backdrop-blur-3xl' />
+                          </div>
+
+                          <div className='relative w-full h-[110px] overflow-hidden rounded-xl border border-gray-800 p-[2px] backdrop-blur-3xl'>
+                            <div className="absolute inset-0 flex flex-col items-center justify-center">
+                                <h2 className=" z-10 text-white text-xl font-bold">100 Generations</h2>
+                                <h4 className=" z-10 text-white text-md font-normal">£8.99</h4>
+                            </div>
+                            <span className='absolute inset-[-1000%] animate-[spin_2s_linear_infinite] bg-[conic-gradient(from_90deg_at_50%_50%,#30ff9f_0%,#2d7556_50%,#30ff9f_100%)]' />
+                            <div className='inline-flex h-full w-full items-center justify-center rounded-xl  px-3 py-1 text-sm font-medium text-gray-50 backdrop-blur-3xl' />
+                          </div>
+
                         </div>
                         <Select
                           label="Select a package"
@@ -140,8 +144,11 @@ import { useRouter } from "next/navigation";
                               £8.99
                             </SelectItem>
                         </Select>
-                        <Button className="w-full" color="secondary" disabled={isLoading} onClick={onSubscribe}>
+                        <Button className='relative inline-flex h-12 w-full overflow-hidden rounded-full p-[2px] focus:outline-none focus:ring-2 focus:ring-gray-400 focus:ring-offset-2 focus:ring-offset-gray-50' disabled={isLoading} onClick={onSubscribe}>
+                          <span className='absolute inset-[-1000%] animate-[spin_2s_linear_infinite] bg-[conic-gradient(from_90deg_at_50%_50%,#E2CBFF_0%,#393BB2_50%,#E2CBFF_100%)]' />
+                          <span className='inline-flex h-full w-full cursor-pointer items-center justify-center rounded-full bg-white dark:bg-gray-950 px-8 py-1 text-xl font-extrabold dark:text-gray-50 backdrop-blur-3xl'>
                             Purchase
+                          </span>  
                         </Button>
                     </ModalBody>
                   </>

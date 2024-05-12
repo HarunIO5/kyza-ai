@@ -33,6 +33,6 @@ export async function POST(req: Request) {
 
     if (usernameUpdate) return new NextResponse(JSON.stringify(usernameUpdate))
 
-    return new NextResponse("Failed to update username", {status: 4000})
+    return new NextResponse("Failed to update username", {status: 400})
 
 }

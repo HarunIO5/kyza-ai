@@ -5,8 +5,8 @@ import prisma from "@/lib/prisma";
 export async function POST(req: Request) {
     const params = await req.json()
 
-    console.log("PARANS")
-    console.log(params)
+    // console.log("PARANS")
+    // console.log(params)
 
     try {
 

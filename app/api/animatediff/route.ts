@@ -13,6 +13,9 @@ export async function POST(req: Request) {
 
     // console.log(prompt)
     // console.log(negative)
+    // console.log(scale)
+    // console.log(style)
+    // console.log(email)
 
     const output = await replicate.run(
         "lucataco/animate-diff:beecf59c4aee8d81bf04f0381033dfa10dc16e845b4ae00d281e2fa377e48a9f",
