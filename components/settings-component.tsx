@@ -7,12 +7,13 @@ import { Input } from "@nextui-org/input";
 import { Avatar } from "@nextui-org/react";
 import { Loader2 } from "lucide-react";
 import { useRouter } from "next/navigation";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { useForm } from "react-hook-form";
 import { z } from "zod";
 
 export default function SettingsComponent ({email, name, image}: {email: string, name: string, image?: any}) {
 
+    const [isMounted, setIsMounted] = useState(false);
     const [username, setUsername] = useState<String>(name)
     const [updateIsLoading, setUpdateIsLoading] = useState<boolean>(false)
     const [updateLoadingError, setUpdateLoadingError] = useState<boolean>(false)
@@ -23,7 +24,16 @@ export default function SettingsComponent ({email, name, image}: {email: string,
         resolver: zodResolver(settingSchema),
     })
 
+    useEffect(() => {
+        setIsMounted(true);
+    }, []);
+    
+    if (!isMounted) {
+       return null;
+    }
+
     const onSubmit = async (values: z.infer<typeof settingSchema>, e?: React.BaseSyntheticEvent) => {
+        setUpdateIsLoading(true)
         e?.preventDefault()
 
         const response = await fetch('/api/settings', {
@@ -32,6 +42,7 @@ export default function SettingsComponent ({email, name, image}: {email: string,
               'Content-Type': 'application/json',
             },
             body: JSON.stringify({
+                'email': email,
                 'username': values.username,
             })
         })

@@ -32,6 +32,54 @@ export function SiteFooter() {
           >
             Alternatives
           </Link>
+          <Link
+							href={'/tools/text-to-video'}
+							className="transition-colors hover:text-foreground/80 text-lg"
+						>
+							Text-to-Video
+					</Link>
+          <Link
+							href={'/tools/wallpaper-engine'}
+							className="transition-colors hover:text-foreground/80 text-lg"
+						>
+							Wallpaper Engine
+					</Link>
+          <Link
+							href={'/tools/brand-logo-generator'}
+							className="transition-colors hover:text-foreground/80 text-lg"
+						>
+							AI Logo Generator
+					</Link>
+          <Link
+							href={'/tools/prompt-detector-discover-any-prompt'}
+							className="transition-colors hover:text-foreground/80 text-lg"
+						>
+							Prompt Detector
+					</Link>
+          <Link
+							href={'/tools/a-i-movie-generator'}
+							className="transition-colors hover:text-foreground/80 text-lg"
+						>
+							AI Movie Generator
+					</Link>
+          <Link
+							href={'/tools/video-caption-online'}
+							className="transition-colors hover:text-foreground/80 text-lg"
+						>
+							Auto Captioning
+					</Link>
+          <Link
+							href={'/tools/generative-art-maker'}
+							className="transition-colors hover:text-foreground/80 text-lg"
+						>
+							Generative Art
+					</Link>
+          <Link
+							href={'/tools/kyza-interior-ai'}
+							className="transition-colors hover:text-foreground/80 text-lg"
+						>
+							AI Interior Designer
+					</Link>
         </nav>
       </div>
     </footer>

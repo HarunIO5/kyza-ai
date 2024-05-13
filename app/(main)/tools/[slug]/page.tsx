@@ -10,6 +10,7 @@ import { cache } from "react";
 import MoreTools from "@/components/more-tools";
 import { title } from "@/components/primitives";
 import FAQSections from "@/components/faqsection";
+import TTVInputs from "@/components/text-to-video-inputs";
 
 export async function generateStaticParams() {
 
@@ -73,8 +74,8 @@ export default async function ToolsPages ({
 
     const { toolPage, moreToolPages } = await getToolPages(params.slug)
 
-    console.log('TOOL PAGE')
-    console.log(toolFields)
+    // console.log('TOOL PAGE')
+    // console.log(toolFields)
 
     return (
         <div className="min-h-screen w-full flex flex-col justify-center p-12">
@@ -89,7 +90,11 @@ export default async function ToolsPages ({
                     </p>
                     {/* Create the client-sided inputs that activates this tool */}
                     {toolPage.emailWaitlist && (
-                        <EmailInput tool={toolPage._type!}/>
+                        <EmailInput tool={toolPage.toolType!}/>
+                    )}
+
+                    {(toolPage.emailWaitlist != true && toolPage.toolType == "TEXT_TO_VIDEO") && (
+                        <TTVInputs />
                     )}
                     
                 </div>
@@ -114,7 +119,7 @@ export default async function ToolsPages ({
                     <div className="flex flex-col">
                         <Card className="col-span-1 h-[300px]">
                             <Image
-                                className="z-0 w-full h-full object-cover opacity-50"
+                                className="z-0 w-full h-full object-cover"
                                 width={1000}
                                 height={1000}
                                 priority
@@ -123,14 +128,14 @@ export default async function ToolsPages ({
                             />
                         </Card>
                         <div>
-                            <p className=" text-center text-white font-medium text-large">{toolPage.subTitle1}</p>
+                            <p className=" text-center dark:text-white font-medium text-large">{toolPage.subTitle1}</p>
                             <h4 className="text-center font-normal">{toolPage.subDescription1}</h4>
                         </div>
                     </div>
                     <div className="flex flex-col">
                         <Card className="col-span-1 h-[300px]">
                             <Image
-                                className="z-0 w-full h-full object-cover opacity-50"
+                                className="z-0 w-full h-full object-cover"
                                 width={1000}
                                 height={1000}
                                 priority
@@ -139,14 +144,14 @@ export default async function ToolsPages ({
                             />
                         </Card>
                         <div>
-                            <p className=" text-center text-white font-medium text-large">{toolPage.subTitle2}</p>
+                            <p className=" text-center dark:text-white font-medium text-large">{toolPage.subTitle2}</p>
                             <h4 className="text-center font-normal">{toolPage.subDescription2}</h4>
                         </div>
                     </div>
                     <div className="flex flex-col">
                         <Card className="col-span-1 h-[300px]">
                             <Image
-                                className="z-0 w-full h-full object-cover opacity-50"
+                                className="z-0 w-full h-full object-cover"
                                 width={1000}
                                 height={1000}
                                 priority
@@ -155,7 +160,7 @@ export default async function ToolsPages ({
                             />
                         </Card>
                         <div>
-                            <p className=" text-center text-white font-medium text-large">{toolPage.subTitle3}</p>
+                            <p className=" text-center dark:text-white font-medium text-large">{toolPage.subTitle3}</p>
                             <h4 className="text-center font-normal">{toolPage.subDescription3}</h4>
                         </div>
                     </div>
@@ -166,7 +171,7 @@ export default async function ToolsPages ({
                 <div className="w-full mx-auto flex flex-col md:flex-row justify-between gap-8">
                     <div className="">
                         <Image
-                            className="h-auto w-full rounded-xl"
+                            className="h-auto w-full rounded-sm"
                             width={500}
                             height={500}
                             src={urlFor(toolPage.featureImage1.asset?._ref).height(500).width(500).url()}
@@ -195,7 +200,7 @@ export default async function ToolsPages ({
                     </div>
                     <div className="">
                         <Image
-                            className="h-auto w-full rounded-xl"
+                            className="h-auto w-full rounded-sm"
                             width={500}
                             height={500}
                             src={urlFor(toolPage.featureImage2.asset?._ref).height(500).width(500).url()}

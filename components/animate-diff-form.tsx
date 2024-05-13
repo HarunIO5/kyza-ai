@@ -135,7 +135,7 @@ export default function AnimateDiffForm ({session, checkCreditLimit, getCreditCo
     // console.log("Default Prompt:", defaultPrompt);
     // console.log("Default Negative Prompt:", defaultNegativePrompt);
 
-    const {register, handleSubmit, formState: {errors}, getValues } = useForm<z.infer<typeof textToVideoSchema>>({
+    const {register, handleSubmit, formState: {errors} } = useForm<z.infer<typeof textToVideoSchema>>({
         resolver: zodResolver(textToVideoSchema),
         values: {
           prompt: prompt,
@@ -202,6 +202,7 @@ export default function AnimateDiffForm ({session, checkCreditLimit, getCreditCo
             setIsLoading(false)
         } finally {
             setIsLoading(false)
+            localStorage.removeItem('prompt')
             router.refresh()
         }   
     }
@@ -253,7 +254,8 @@ export default function AnimateDiffForm ({session, checkCreditLimit, getCreditCo
         />
         )}
             <Card className="w-full h-full md:w-1/3 px-4 py-8 border-1 border-gray-300 dark:border-slate-700 dark:bg-black">
-                <CardHeader>
+                {session && (
+                  <CardHeader>
                   <span className='relative inline-block mx-auto overflow-hidden rounded-full p-[2px]'>
                     <span className='absolute inset-[-1000%] animate-[spin_2s_linear_infinite] bg-[conic-gradient(from_90deg_at_50%_50%,#53d1ff_0%,#ac4cf5_50%,#53d1ff_100%)]' />
                     <div className='inline-flex h-full w-full cursor-pointer items-center justify-center rounded-full bg-white dark:bg-gray-950 px-3 py-1 text-sm font-medium dark:text-gray-50 backdrop-blur-3xl'>
@@ -261,6 +263,7 @@ export default function AnimateDiffForm ({session, checkCreditLimit, getCreditCo
                     </div>
                   </span>
                 </CardHeader>
+                )}
                 <CardBody className="w-full h-full flex flex-col justify-between gap-8">
                     <Select
                       items={styles}
@@ -339,7 +342,7 @@ export default function AnimateDiffForm ({session, checkCreditLimit, getCreditCo
                                   </Button>
                               )}
                               {!session && (
-                                  <Link href={'/login'}>
+                                  <Link href={'/login'} className="w-full">
                                       <Button className='relative w-full my-4 inline-flex h-12 overflow-hidden rounded-full p-[1px] focus:outline-none focus:ring-2 focus:ring-gray-400 focus:ring-offset-2 focus:ring-offset-gray-50' >
                                         <span className='absolute inset-[-1000%] animate-[spin_2s_linear_infinite] bg-[conic-gradient(from_90deg_at_50%_50%,#53d1ff_0%,#ac4cf5_50%,#53d1ff_100%)]' />
                                         <span className='inline-flex h-full w-full cursor-pointer items-center justify-center rounded-full px-8 py-1 text-lg font-semibold text-gray-50 backdrop-blur-3xl'>

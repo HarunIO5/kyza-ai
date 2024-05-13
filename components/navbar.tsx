@@ -26,7 +26,8 @@ import {
 	DropdownItem, 
 	DropdownTrigger, 
 	Dropdown, 
-	DropdownMenu
+	DropdownMenu,
+	DropdownSection
 } from '@nextui-org/react' 
 
 import { Logo } from "@/components/icons";
@@ -124,44 +125,70 @@ export const Navbar = () => {
         		    itemClasses={{
         		      base: "gap-4",
         		    }}
-					disabledKeys={["wallpaper_engine"]}
         		  >
-        		    <DropdownItem
-        		      key="text_to_video"
-        		      startContent={icons.Video}
-					  href="/text-to-video"
-        		    >
-        		      Text-to-Video
-        		    </DropdownItem>
-        		    <DropdownItem
-        		      key="wallpaper_engine"
-        		      startContent={icons.Construction}
-        		    >
-        		      Wallpaper Engine - Coming Soon
-        		    </DropdownItem>
+					<DropdownSection showDivider>
+        		    	<DropdownItem
+        		    	  key="text_to_video"
+        		    	  startContent={'📹'}
+						  href="/tools/text-to-video"
+        		    	>
+        		    		Text-to-Video
+        		    	</DropdownItem>
+        		    	<DropdownItem
+        		    	  key="wallpaper_engine"
+        		    	  startContent={'🖼️'}
+						  href="/tools/wallpaper-engine"
+        		    	>
+        		    	  Wallpaper Engine
+        		    	</DropdownItem>
+						<DropdownItem
+        		    	  key="logo_generator"
+        		    	  startContent={'💫'}
+						  href="/tools/brand-logo-generator"
+        		    	>
+        		    	  AI Logo Generator
+        		    	</DropdownItem>
+						<DropdownItem
+        		    	  key="prompt_detector"
+        		    	  startContent={'🕵️'}
+						  href="/tools/prompt-detector-discover-any-prompt"
+        		    	>
+        		    	  Prompt Detector
+        		    	</DropdownItem>
+						<DropdownItem
+        		    	  key="movie_generator"
+        		    	  startContent={'📽️'}
+						  href="/tools/a-i-movie-generator"
+        		    	>
+        		    	  AI Movie Generator
+        		    	</DropdownItem>
+						<DropdownItem
+        		    	  key="auto_caption"
+        		    	  startContent={'✍️'}
+						  href="/tools/video-caption-online"
+        		    	>
+        		    	  Auto Captioning 
+        		    	</DropdownItem>
+						<DropdownItem
+        		    	  key="generative_art"
+        		    	  startContent={'🎨'}
+						  href="/tools/generative-art-maker"
+        		    	>
+        		    	  Generative Art
+        		    	</DropdownItem>
+						<DropdownItem
+        		    	  key="interior_ai"
+        		    	  startContent={'🏡'}
+						  href="/tools/kyza-interior-ai"
+        		    	>
+        		    	  AI Interior Designer
+        		    	</DropdownItem>
+					</DropdownSection>
 					<DropdownItem
-        		      key="wallpaper_engine"
-        		      startContent={icons.Construction}
-        		    >
-        		      Spotify Canvas Maker
-        		    </DropdownItem>
-					<DropdownItem
-        		      key="wallpaper_engine"
-        		      startContent={icons.Construction}
-        		    >
-        		      Iphone Screensavers
-        		    </DropdownItem>
-					<DropdownItem
-        		      key="wallpaper_engine"
-        		      startContent={icons.Construction}
-        		    >
-        		      AI Movie Generator
-        		    </DropdownItem>
-					<DropdownItem
-        		      key="wallpaper_engine"
-        		      startContent={icons.Construction}
-        		    >
-        		      Macbook Background Generator
+        		    	  key="all_tools"
+						  href="/tools"
+        		    	>
+        		    	  All Tools
         		    </DropdownItem>
         		  </DropdownMenu>
         		</Dropdown>
@@ -203,7 +230,7 @@ export const Navbar = () => {
 					<NavbarMenuItem key={`text_to_video`}>
 						<Link
 							color={"foreground"}
-							href={'/text-to-video'}
+							href={'/tools/text-to-video'}
 							size="lg"
 						>
 							Text-to-Video
@@ -212,11 +239,65 @@ export const Navbar = () => {
 					<NavbarMenuItem key={`wallpaper_engine`}>
 						<Link
 							color={"foreground"}
-							href={'/'}
+						  href="/tools/wallpaper-engine"
 							size="lg"
-							isDisabled
+							
 						>
-							Wallpaper Engine - Coming Soon
+							Wallpaper Engine
+						</Link>
+					</NavbarMenuItem>
+					<NavbarMenuItem key={`logo_generator`}>
+						<Link
+							color={"foreground"}
+							href="/tools/brand-logo-generator"
+							size="lg"
+						>
+							AI Logo Generator
+						</Link>
+					</NavbarMenuItem>
+					<NavbarMenuItem key={`prompt_detector`}>
+						<Link
+							color={"foreground"}
+							href="/tools/prompt-detector-discover-any-prompt"
+							size="lg"
+						>
+							Prompt Detector
+						</Link>
+					</NavbarMenuItem>
+					<NavbarMenuItem key={`movie_generator`}>
+						<Link
+							color={"foreground"}
+							href="/tools/a-i-movie-generator"
+							size="lg"
+						>
+							AI Movie Generator
+						</Link>
+					</NavbarMenuItem>
+					<NavbarMenuItem key={`auto_caption`}>
+						<Link
+							color={"foreground"}
+							href="/tools/video-caption-online"
+							size="lg"
+						>
+							Auto Captioning 
+						</Link>
+					</NavbarMenuItem>
+					<NavbarMenuItem key={`auto_caption`}>
+						<Link
+							color={"foreground"}
+							href="/tools/generative-art-maker"
+							size="lg"
+						>
+							Generative Art
+						</Link>
+					</NavbarMenuItem>
+					<NavbarMenuItem key={`interior_ai`}>
+						<Link
+							color={"foreground"}
+							href="/tools/kyza-interior-ai"
+							size="lg"
+						>
+							AI Interior Designer
 						</Link>
 					</NavbarMenuItem>
 					{session ? (

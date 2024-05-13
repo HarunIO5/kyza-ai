@@ -19,6 +19,7 @@ export default function MoreTools({ tools }: { tools: ToolPageType[] }) {
             _createdAt={tool._createdAt}
             _type={tool._type}
             emailWaitlist={tool.emailWaitlist}
+            toolType={tool.toolType}
           />
         ))}
       </div>

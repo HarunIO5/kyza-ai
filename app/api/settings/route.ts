@@ -12,6 +12,9 @@ export async function POST(req: Request) {
 //     // console.log("AnimateDIFF Inputs")
 
     const {username, email} = await req.json()
+
+    // console.log(email)
+    // console.log(username)
        
     const user = await prisma.user.findUnique({
         where: {

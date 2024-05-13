@@ -59,6 +59,12 @@ export const registerFormSchema = z.object({
     }).optional().or(z.literal(''))
   })
 
+  export const textToVideoInputSchema = z.object({
+    prompt: z.string().min(3, {
+      message: "Prompt must be a minimum of 3 characters"
+    })
+  })
+
   export const settingSchema = z.object({
     username: z.string().min(3, 
       "Username is required, minimum of 3 characters"
