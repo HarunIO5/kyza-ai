@@ -183,6 +183,13 @@ export const Navbar = () => {
         		    	>
         		    	  AI Interior Designer
         		    	</DropdownItem>
+						<DropdownItem
+        		    	  key="interior_ai"
+        		    	  startContent={'🖌️'}
+						  href="/tools/qr-code-art-generator "
+        		    	>
+        		    	  QR Code Art Maker
+        		    	</DropdownItem>
 					</DropdownSection>
 					<DropdownItem
         		    	  key="all_tools"
@@ -233,17 +240,17 @@ export const Navbar = () => {
 							href={'/tools/text-to-video'}
 							size="lg"
 						>
-							Text-to-Video
+							📹 Text-to-Video
 						</Link>
 					</NavbarMenuItem>
 					<NavbarMenuItem key={`wallpaper_engine`}>
 						<Link
 							color={"foreground"}
-						  href="/tools/wallpaper-engine"
+						  	href="/tools/wallpaper-engine"
 							size="lg"
 							
 						>
-							Wallpaper Engine
+							🖼️ Wallpaper Engine
 						</Link>
 					</NavbarMenuItem>
 					<NavbarMenuItem key={`logo_generator`}>
@@ -252,7 +259,7 @@ export const Navbar = () => {
 							href="/tools/brand-logo-generator"
 							size="lg"
 						>
-							AI Logo Generator
+							💫 AI Logo Generator
 						</Link>
 					</NavbarMenuItem>
 					<NavbarMenuItem key={`prompt_detector`}>
@@ -261,7 +268,7 @@ export const Navbar = () => {
 							href="/tools/prompt-detector-discover-any-prompt"
 							size="lg"
 						>
-							Prompt Detector
+							🕵️ Prompt Detector
 						</Link>
 					</NavbarMenuItem>
 					<NavbarMenuItem key={`movie_generator`}>
@@ -270,7 +277,7 @@ export const Navbar = () => {
 							href="/tools/a-i-movie-generator"
 							size="lg"
 						>
-							AI Movie Generator
+							📽️ AI Movie Generator
 						</Link>
 					</NavbarMenuItem>
 					<NavbarMenuItem key={`auto_caption`}>
@@ -279,7 +286,7 @@ export const Navbar = () => {
 							href="/tools/video-caption-online"
 							size="lg"
 						>
-							Auto Captioning 
+							✍️ Auto Captioning 
 						</Link>
 					</NavbarMenuItem>
 					<NavbarMenuItem key={`auto_caption`}>
@@ -288,7 +295,7 @@ export const Navbar = () => {
 							href="/tools/generative-art-maker"
 							size="lg"
 						>
-							Generative Art
+							🎨 Generative Art
 						</Link>
 					</NavbarMenuItem>
 					<NavbarMenuItem key={`interior_ai`}>
@@ -297,7 +304,16 @@ export const Navbar = () => {
 							href="/tools/kyza-interior-ai"
 							size="lg"
 						>
-							AI Interior Designer
+							🏡 AI Interior Designer
+						</Link>
+					</NavbarMenuItem>
+					<NavbarMenuItem key={`interior_ai`}>
+						<Link
+							color={"foreground"}
+							href="/tools/qr-code-art-generator"
+							size="lg"
+						>
+							🖌️ QR Code Art Maker
 						</Link>
 					</NavbarMenuItem>
 					{session ? (

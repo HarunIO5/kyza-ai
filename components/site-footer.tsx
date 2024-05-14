@@ -3,8 +3,8 @@ import Link from "next/link"
 export function SiteFooter() {
   return (
     <footer className="w-full flex justify-center md:px-8 border-t border-zinc-800 bg-white dark:bg-black z-10">
-      <div className="basis-4/5 flex  gap-8 py-10 justify-between">
-        <div className="flex flex-col items-start justify-center gap-4">
+      <div className="w-full max-md:px-4 md:basis-4/5 flex gap-8 py-10 justify-between">
+        <div className="flex flex-col items-start md:justify-center gap-4">
         <Link className="flex justify-start items-center gap-1" href="/">
 			    <p className="font-bold text-inherit">KYZA</p>
 		    </Link>
@@ -19,7 +19,8 @@ export function SiteFooter() {
 			<p className="text-primary">Diffused</p>
 	    </Link>
         </div>
-        <nav className="grid grid-cols-1 md:grid-cols-2 items-start gap-2 text-sm">
+		<div className="flex flex-col md:flex-row gap-2 md:gap-4">
+        <nav className="flex flex-col items-start gap-2 text-sm">
           <Link
             href="/blog"
             className="transition-colors hover:text-foreground/80 text-lg"
@@ -32,7 +33,10 @@ export function SiteFooter() {
           >
             Alternatives
           </Link>
-          <Link
+          
+        </nav>
+		<nav className="grid grid-cols-1 md:grid-cols-2 items-start gap-2 text-sm">
+		<Link
 							href={'/tools/text-to-video'}
 							className="transition-colors hover:text-foreground/80 text-lg"
 						>
@@ -75,12 +79,19 @@ export function SiteFooter() {
 							Generative Art
 					</Link>
           <Link
-							href={'/tools/kyza-interior-ai'}
-							className="transition-colors hover:text-foreground/80 text-lg"
-						>
-							AI Interior Designer
-					</Link>
-        </nav>
+				href={'/tools/kyza-interior-ai'}
+				className="transition-colors hover:text-foreground/80 text-lg"
+			>
+				AI Interior Designer
+			</Link>
+			<Link
+				href={'/tools/qr-code-art-generator '}
+				className="transition-colors hover:text-foreground/80 text-lg"
+			>
+				QR Code Art Maker
+			</Link>
+		</nav>
+		</div>
       </div>
     </footer>
   )
