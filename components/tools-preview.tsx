@@ -12,6 +12,7 @@ export default function ToolsPreview({
   _createdAt,
   description,
   slug,
+  thumbnailImage,
 }: Omit<ToolPageType, '_id'>) {
   return (
     <Card className='bg-slate-200 dark:bg-gray-900' isFooterBlurred>
@@ -30,13 +31,6 @@ export default function ToolsPreview({
             {title}
           </Link>
         </h3>
-        <div className="w-full mb-4 text-lg flex flex-row justify-between">
-            <Link href={`/tools/${slug}`} className='w-full'>
-                <Button className='w-full font-semibold text-lg bg-fuchsia-500 dark:bg-cyan-500 rounded-2xl'>
-                    Try App
-                </Button>
-            </Link>
-        </div>
       </CardFooter>
     </Card>
   )

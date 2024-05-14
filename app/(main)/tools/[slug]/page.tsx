@@ -225,7 +225,7 @@ export default async function ToolsPages ({
 			    	faqDescription5={toolPage.faqDescription5!}
 			    />
 			</section>
-            <section className="px-12 md:px-24 md:pt-12 pb-24">
+            <section className="px-2 md:px-24 md:pt-12 pb-24">
                 {moreToolPages?.length > 0 && <MoreTools tools={moreToolPages} />}
             </section>
         </div>

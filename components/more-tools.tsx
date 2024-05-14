@@ -8,7 +8,7 @@ export default function MoreTools({ tools }: { tools: ToolPageType[] }) {
       <h2 className="mb-8 text-6xl font-bold leading-tight tracking-tighter md:text-7xl">
         Other Tools
       </h2>
-      <div className="mb-32 grid grid-cols-1 gap-y-20 md:grid-cols-3 md:gap-x-16 md:gap-y-16 lg:gap-x-16">
+      <div className="mb-32 grid grid-cols-1 gap-y-20 md:grid-cols-3 md:gap-x-16 md:gap-y-16">
         {tools.map((tool) => (
           <ToolsPreview
             key={tool._id}
@@ -20,6 +20,7 @@ export default function MoreTools({ tools }: { tools: ToolPageType[] }) {
             _type={tool._type}
             emailWaitlist={tool.emailWaitlist}
             toolType={tool.toolType}
+            thumbnailImage={tool.thumbnailImage}
           />
         ))}
       </div>

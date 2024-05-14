@@ -40,6 +40,21 @@ export default defineType({
     ]
     }),
     defineField({
+        name: 'thumbnailImage',
+        title: 'Thumbnail image',
+        type: 'image',
+        options: {
+          hotspot: true,
+        },
+        fields: [
+          {
+            type: 'text',
+            name: 'alt',
+            title: 'Alternative Text',
+          },
+      ]
+    }),
+    defineField({
       name: 'publishedAt',
       title: 'Published at',
       type: 'datetime',
