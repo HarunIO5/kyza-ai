@@ -1,6 +1,6 @@
 import { MetadataRoute } from "next";
 import { client } from "@/lib/sanity";
-import { AlternativesType, Post } from "@/lib/sanity-queries";
+import { AlternativesType, Post, ToolPageType } from "@/lib/sanity-queries";
 import { getLatestMediaPosts } from "./_action";
 import { MediaType } from "@/lib/getVidFiles";
 import { url } from "inspector";
@@ -9,6 +9,7 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     
     const alternativePages = await client.fetch('*[_type == "alternatives"]') as AlternativesType[]
     const blogs = await client.fetch('*[_type == "post"]') as Post[]
+    const tools = await client.fetch('*[_type == "toolPage"]') as ToolPageType[]
     const media = (await getLatestMediaPosts()) as MediaType[]
 
     const blogPages: MetadataRoute.Sitemap = blogs.map((blog) => ({
@@ -17,6 +18,10 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     
     const altPages: MetadataRoute.Sitemap = alternativePages.map((alt) => ({
         url: `${process.env.NEXT_PUBLIC_BASE_URL}/${alt.slug?.current}`
+    }))
+
+    const toolPages: MetadataRoute.Sitemap = tools.map((tool) => ({
+        url: `${process.env.NEXT_PUBLIC_BASE_URL}/tools/${tool.slug?.current}`
     }))
 
     const mediaPages: MetadataRoute.Sitemap = media.map((med) => ({
@@ -31,7 +36,7 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
             url: `${process.env.NEXT_PUBLIC_BASE_URL}/media`
         },
         {
-            url: `${process.env.NEXT_PUBLIC_BASE_URL}/text-to-video`
+            url: `${process.env.NEXT_PUBLIC_BASE_URL}/tools/text-to-video/generate`
         },
         {
             url: `${process.env.NEXT_PUBLIC_BASE_URL}/library`
@@ -50,6 +55,7 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
         },
         ...blogPages,
         ...altPages,
+        ...toolPages,
         ...mediaPages
     ]
 }

@@ -114,7 +114,6 @@ export default function AnimateDiffForm ({session, checkCreditLimit, getCreditCo
 
     // console.log("STYLE")
     
-
     const info = style as Set<any>
 
     let defaultPrompt: string;
@@ -242,6 +241,52 @@ export default function AnimateDiffForm ({session, checkCreditLimit, getCreditCo
     // const { onChange, onBlur, name, ref } = register('prompt');
     
     // console.log('REGISTER')
+
+
+    // useEffect(() => {
+
+    //   async function firstGeneration ({prompt} : {prompt: string}) {
+    //     setIsLoading(true)
+
+    //     const response = await fetch('/api/animatediff', {
+    //         method: 'POST',
+    //         headers: {
+    //           'Content-Type': 'application/json',
+    //         },
+    //         body: JSON.stringify({
+    //             'prompt': prompt,
+    //             'negative': "nsfw, ng_deepnegative_v1_75t, badhandv4, worst quality, low quality, normal quality, lowres, watermark, monochrome",
+    //             'scale': 7.5,
+    //             'style': "majicmixRealistic_v5Preview.safetensors",
+    //             'email': session?.user?.email!
+    //         })
+    //     })
+
+    //     try {
+            
+    //         const video = await response.json()
+
+    //         if (video) {
+    //             setGenVideo(video)
+    //             console.log('VIDEO')
+    //             console.log(typeof(video))
+    //             console.log(genVideo)
+    //         }
+    //     } catch (error) {
+    //         console.log(error)
+    //         setVideoError(true)
+    //         setIsLoading(false)
+    //     } finally {
+    //         setIsLoading(false)
+    //         localStorage.removeItem('prompt')
+    //         router.refresh()
+    //     }
+    //   }
+
+    //   if (loadPrompt) {
+    //     firstGeneration({prompt: loadPrompt})
+    //   }
+    // }, [])
 
     return (
     <>
