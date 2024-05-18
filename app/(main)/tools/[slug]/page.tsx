@@ -28,7 +28,7 @@ export async function generateMetadata({
 
     const { toolPage, moreToolPages } = await getToolPages(params.slug)
 
-    console.log(toolPage)
+    
 
     return {
         title: toolPage.title,
@@ -76,6 +76,7 @@ export default async function ToolsPages ({
 
     // console.log('TOOL PAGE')
     // console.log(toolFields)
+    // console.log(params.slug)
 
     return (
         <div className="min-h-screen w-full flex flex-col justify-center p-12">

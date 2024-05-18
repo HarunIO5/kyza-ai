@@ -39,6 +39,9 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
             url: `${process.env.NEXT_PUBLIC_BASE_URL}/tools/text-to-video/generate`
         },
         {
+            url: `${process.env.NEXT_PUBLIC_BASE_URL}/tools`
+        },
+        {
             url: `${process.env.NEXT_PUBLIC_BASE_URL}/library`
         },
         {
