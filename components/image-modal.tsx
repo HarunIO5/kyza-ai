@@ -38,7 +38,7 @@ import { useRouter } from "next/navigation";
 
     const onRemix = () => {
       localStorage.setItem('prompt',  srcName)
-      router.push('/text-to-video')
+      router.push('/tools/text-to-video/generate')
     }
 
     return (
