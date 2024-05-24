@@ -184,11 +184,18 @@ export const Navbar = () => {
         		    	  AI Interior Designer
         		    	</DropdownItem>
 						<DropdownItem
-        		    	  key="interior_ai"
+        		    	  key="qr_code_art"
         		    	  startContent={'🖌️'}
 						  href="/tools/qr-code-art-generator "
         		    	>
         		    	  QR Code Art Maker
+        		    	</DropdownItem>
+						<DropdownItem
+        		    	  key="ai_image_enhancer"
+        		    	  startContent={'📷'}
+						  href="/tools/ai-imagine-enhancer"
+        		    	>
+        		    	  AI Imagine Enhancer
         		    	</DropdownItem>
 					</DropdownSection>
 					<DropdownItem
@@ -289,7 +296,7 @@ export const Navbar = () => {
 							✍️ Auto Captioning 
 						</Link>
 					</NavbarMenuItem>
-					<NavbarMenuItem key={`auto_caption`}>
+					<NavbarMenuItem key={`generative_art`}>
 						<Link
 							color={"foreground"}
 							href="/tools/generative-art-maker"
@@ -307,13 +314,22 @@ export const Navbar = () => {
 							🏡 AI Interior Designer
 						</Link>
 					</NavbarMenuItem>
-					<NavbarMenuItem key={`interior_ai`}>
+					<NavbarMenuItem key={`qr_code_art`}>
 						<Link
 							color={"foreground"}
 							href="/tools/qr-code-art-generator"
 							size="lg"
 						>
 							🖌️ QR Code Art Maker
+						</Link>
+					</NavbarMenuItem>
+					<NavbarMenuItem key={`ai_image_enhancer`}>
+						<Link
+							color={"foreground"}
+							href="/tools/ai-imagine-enhancer"
+							size="lg"
+						>
+							📷 AI Imagine Enhancer
 						</Link>
 					</NavbarMenuItem>
 					{session ? (

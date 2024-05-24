@@ -90,6 +90,12 @@ export function SiteFooter() {
 			>
 				QR Code Art Maker
 			</Link>
+			<Link
+				href={'/tools/ai-imagine-enhancer'}
+				className="transition-colors hover:text-foreground/80 text-lg"
+			>
+				AI Image Enhancer
+			</Link>
 		</nav>
 		</div>
       </div>
