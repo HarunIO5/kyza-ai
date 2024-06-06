@@ -16,7 +16,7 @@ export default function LandingPageVideos ()  {
                   >
                     <video 
                       className="h-full w-full object-cover"
-                      preload="metadata"
+                      preload="auto"
                       poster={'https://xlbwajpxfttzluwdymao.supabase.co/storage/v1/object/public/LandingPage/Large%20round%20chrome%20orb.mp4#t=0.1'}
                       autoPlay
                       loop
@@ -37,7 +37,7 @@ export default function LandingPageVideos ()  {
                   >
                     <video 
                       className="h-full w-full object-cover"
-                      preload="metadata"
+                      preload="auto"
                       poster={'https://xlbwajpxfttzluwdymao.supabase.co/storage/v1/object/public/LandingPage/spaceship%20oblivion.mp4#t=0.1'}
                       autoPlay
                       loop
@@ -58,7 +58,7 @@ export default function LandingPageVideos ()  {
                   >
                     <video 
                       className="h-full w-full object-cover"
-                      preload="metadata"
+                      preload="auto"
                       poster={'https://xlbwajpxfttzluwdymao.supabase.co/storage/v1/object/public/LandingPage/Fisherman%20of%20Maldives.mp4#t=0.1'}
                       autoPlay
                       loop
@@ -79,7 +79,7 @@ export default function LandingPageVideos ()  {
                   >
                     <video 
                       className="h-full w-full object-cover"
-                      preload="metadata"
+                      preload="auto"
                       poster={'https://xlbwajpxfttzluwdymao.supabase.co/storage/v1/object/public/LandingPage/ancient%20fantasy%20lands.mp4#t=0.1'}
                       autoPlay
                       loop
@@ -100,7 +100,7 @@ export default function LandingPageVideos ()  {
                   >
                     <video 
                       className="h-full w-full object-cover"
-                      preload="metadata"
+                      preload="auto"
                       poster={'https://xlbwajpxfttzluwdymao.supabase.co/storage/v1/object/public/LandingPage/1970%20red%20porsche.mp4#t=0.1'}
                       autoPlay
                       loop
@@ -121,7 +121,7 @@ export default function LandingPageVideos ()  {
                   >
                     <video 
                       className="h-full w-full object-cover"
-                      preload="metadata"
+                      preload="auto"
                       poster={'https://xlbwajpxfttzluwdymao.supabase.co/storage/v1/object/public/LandingPage/hearding%20cows.mp4#t=0.1'}
                       autoPlay
                       loop
@@ -142,7 +142,7 @@ export default function LandingPageVideos ()  {
                   >
                     <video 
                       className="h-full w-full object-cover"
-                      preload="metadata"
+                      preload="auto"
                       poster={'https://xlbwajpxfttzluwdymao.supabase.co/storage/v1/object/public/LandingPage/magical%20flowers.mp4#t=0.1'}
                       autoPlay
                       loop
@@ -163,7 +163,7 @@ export default function LandingPageVideos ()  {
                   >
                     <video 
                       className="h-full w-full object-cover"
-                      preload="metadata"
+                      preload="auto"
                       poster={'https://xlbwajpxfttzluwdymao.supabase.co/storage/v1/object/public/LandingPage/Cyberpunk%20man.mp4#t=0.1'}
                       autoPlay
                       loop
@@ -184,7 +184,7 @@ export default function LandingPageVideos ()  {
                   >
                     <video 
                       className="h-full w-full object-cover"
-                      preload="metadata"
+                      preload="auto"
                       poster={'https://xlbwajpxfttzluwdymao.supabase.co/storage/v1/object/public/LandingPage/staring%20at%20the%20meda.mp4#t=0.1'}
                       autoPlay
                       loop
@@ -205,7 +205,7 @@ export default function LandingPageVideos ()  {
                   >
                     <video 
                       className="h-full w-full object-cover"
-                      preload="metadata"
+                      preload="auto"
                       poster={'https://xlbwajpxfttzluwdymao.supabase.co/storage/v1/object/public/LandingPage/gecko%20skateboard.mp4#t=0.1'}
                       autoPlay
                       loop
@@ -226,7 +226,7 @@ export default function LandingPageVideos ()  {
                   >
                     <video 
                       className="h-full w-full object-cover"
-                      preload="metadata"
+                      preload="auto"
                       poster={'https://xlbwajpxfttzluwdymao.supabase.co/storage/v1/object/public/LandingPage/horses%20running.mp4#t=0.1'}
                       autoPlay
                       loop
