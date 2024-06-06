@@ -197,6 +197,13 @@ export const Navbar = () => {
         		    	>
         		    	  AI Imagine Enhancer
         		    	</DropdownItem>
+						<DropdownItem
+        		    	  key="ai_cricut_designer"
+        		    	  startContent={'🧵'}
+						  href="/tools/ai-cricut-designer"
+        		    	>
+        		    	  AI Cricut Designer
+        		    	</DropdownItem>
 					</DropdownSection>
 					<DropdownItem
         		    	  key="all_tools"
@@ -323,13 +330,23 @@ export const Navbar = () => {
 							🖌️ QR Code Art Maker
 						</Link>
 					</NavbarMenuItem>
-					<NavbarMenuItem key={`ai_image_enhancer`}>
+					<NavbarMenuItem
+					 key={`ai_image_enhancer`}>
 						<Link
 							color={"foreground"}
 							href="/tools/ai-imagine-enhancer"
 							size="lg"
 						>
 							📷 AI Imagine Enhancer
+						</Link>
+					</NavbarMenuItem>
+					<NavbarMenuItem key={`ai_cricut_designer`}>
+						<Link
+							color={"foreground"}
+							href="/tools/ai-cricut-designer"
+							size="lg"
+						>
+							🧵 AI Cricut Designer
 						</Link>
 					</NavbarMenuItem>
 					{session ? (

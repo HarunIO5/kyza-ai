@@ -96,6 +96,12 @@ export function SiteFooter() {
 			>
 				AI Image Enhancer
 			</Link>
+			<Link
+				href={'/tools/ai-cricut-designer'}
+				className="transition-colors hover:text-foreground/80 text-lg"
+			>
+				AI Cricut Designer
+			</Link>
 		</nav>
 		</div>
       </div>
