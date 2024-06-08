@@ -102,10 +102,10 @@ export default async function ToolsPages ({
                 <div className="">
                     <Image
                         className="h-auto w-full rounded-xl"
-                        width={1000}
+                        width={1200}
                         height={1000}
                         alt={toolPage.heroImage.alt || "Hero Image"}
-                        src={urlFor(toolPage.thumbnailImage.asset?._ref).height(1000).width(1000).url()}
+                        src={urlFor(toolPage.thumbnailImage.asset?._ref).height(1000).width(1200).url()}
                         sizes="100vw"
                         priority
                     />
