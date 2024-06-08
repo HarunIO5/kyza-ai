@@ -105,7 +105,7 @@ export default async function ToolsPages ({
                         width={1000}
                         height={1000}
                         alt={toolPage.heroImage.alt || "Hero Image"}
-                        src={urlFor(toolPage.heroImage.asset?._ref).height(1000).width(1000).url()}
+                        src={urlFor(toolPage.thumbnailImage.asset?._ref).height(1000).width(1000).url()}
                         sizes="100vw"
                         priority
                     />
