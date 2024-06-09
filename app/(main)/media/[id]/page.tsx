@@ -96,8 +96,8 @@ export default async function StandardMediaView ({
                       Your browser does not support the video tag.
                     </video>
                     <div className="w-full flex items-center justify-center">
-                    <Link href={``} target="_blank" className="w-fit" download={`${media.prompt!}.mp4`} type="video/mp4">
-                        <Button className="w-fit dark:bg-slate-950">
+                    <Link href={``} target="_blank" className="w-fit">
+                        <Button className="w-fit dark:bg-slate-950" download={`${media.prompt!}.mp4`} type="video/mp4">
                             <DownloadIcon />
                             Download
                         </Button>

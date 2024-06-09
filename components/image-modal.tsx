@@ -99,12 +99,12 @@ import { useRouter } from "next/navigation";
                             </video>
                             <div className="w-full flex items-center justify-center">
                     {/* onClick={() => {onDownload(srcUrl, srcName, srcModel || 'Haiper')}} */}
-                              <Link href={``} target="_blank" className="w-fit" download={`${srcName}.mp4`} type="video/mp4">
-                                <Button className="w-fit dark:bg-slate-950" >
+                              {/* <Link href={``} target="_blank" className="w-fit"> */}
+                                <Button className="w-fit dark:bg-slate-950" download={`${srcName}.mp4`} type="video/mp4">
                                     <DownloadIcon />
                                     Download
                                 </Button>
-                              </Link>
+                              {/* </Link> */}
                             </div>
                         </div>
                     </ModalBody>
