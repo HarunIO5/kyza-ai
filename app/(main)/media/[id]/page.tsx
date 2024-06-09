@@ -96,12 +96,12 @@ export default async function StandardMediaView ({
                       Your browser does not support the video tag.
                     </video>
                     <div className="w-full flex items-center justify-center">
-                    <Link href={``} target="_blank" className="w-fit">
-                        <Button className="w-fit dark:bg-slate-950" download={`${media.prompt!}.mp4`} type="video/mp4">
+                    {/* <Link href={``} target="_blank" className="w-fit"> */}
+                        <Button className="w-fit dark:bg-slate-950" onClick={() => {onDownload(media.url!, media.prompt!, media.model || 'Haiper')}}>
                             <DownloadIcon />
                             Download
                         </Button>
-                    </Link>
+                    {/* </Link> */}
                     </div>
                 </div>
             </div>
