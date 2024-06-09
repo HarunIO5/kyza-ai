@@ -53,6 +53,20 @@ export default async function StandardMediaView ({
 
     const media = await getMediaModal({id: id!}) as MediaType
 
+    const onDownload = async (url: string, name: string, model: string) => {
+      const response = await fetch('/api/download', {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+          },
+          body: JSON.stringify({url: url, filename: name, model: model})
+      })
+
+      const downloadUrl = await response.json()
+
+      window.open(downloadUrl.url, '_blank')
+  }
+
     return (
         <div className="w-full flex items-center justify-center py-8 px-4">
             <div className="flex flex-col-reverse md:flex-row items-start justify-between gap-4">
@@ -82,7 +96,7 @@ export default async function StandardMediaView ({
                       Your browser does not support the video tag.
                     </video>
                     <div className="w-full flex items-center justify-center">
-                    <Link href={`${media.url!}`} target="_blank" className="w-fit">
+                    <Link href={``} target="_blank" className="w-fit" download={`${media.prompt!}.mp4`} type="video/mp4">
                         <Button className="w-fit dark:bg-slate-950">
                             <DownloadIcon />
                             Download

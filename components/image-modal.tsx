@@ -40,6 +40,20 @@ import { useRouter } from "next/navigation";
       localStorage.setItem('prompt',  srcName)
       router.push('/tools/text-to-video/generate')
     }
+    
+    const onDownload = async (url: string, name: string, model: string) => {
+        const response = await fetch('/api/download', {
+            method: 'POST',
+            headers: {
+              'Content-Type': 'application/json',
+            },
+            body: JSON.stringify({url: url, filename: name, model: model})
+        })
+
+        const downloadUrl = await response.json()
+
+        window.open(downloadUrl.url, '_blank')
+    }
 
     return (
             <Modal isOpen={true} onOpenChange={onOpenChange} onClose={handleClose} placement="center" size="3xl" backdrop="blur"  className="overflow-auto dark:bg-slate-900">
@@ -84,12 +98,13 @@ import { useRouter } from "next/navigation";
                               Your browser does not support the video tag.
                             </video>
                             <div className="w-full flex items-center justify-center">
-                            <Link href={`${srcUrl}`} target="_blank" className="w-fit">
-                                <Button className="w-fit dark:bg-slate-950">
+                    {/* onClick={() => {onDownload(srcUrl, srcName, srcModel || 'Haiper')}} */}
+                              <Link href={``} target="_blank" className="w-fit" download={`${srcName}.mp4`} type="video/mp4">
+                                <Button className="w-fit dark:bg-slate-950" >
                                     <DownloadIcon />
                                     Download
                                 </Button>
-                            </Link>
+                              </Link>
                             </div>
                         </div>
                     </ModalBody>
