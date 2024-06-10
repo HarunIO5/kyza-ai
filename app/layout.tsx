@@ -11,6 +11,7 @@ import { Analytics } from "@vercel/analytics/react"
 import { ToasterProvider } from "@/components/toaster-provider";
 import { GoogleAnalytics } from '@next/third-parties/google'
 import { CSPostHogProvider } from "@/components/ph-providers";
+import ProgressBarProviders from "@/components/ProgressBarProvider";
 
 export const metadata: Metadata = {
 	title: {
@@ -57,7 +58,9 @@ export default async function RootLayout({
 							<CSPostHogProvider>
 								<main className="w-full mx-auto">
 									<AuthProvider>
-										{children}
+										<ProgressBarProviders>
+											{children}
+										</ProgressBarProviders>
 									</AuthProvider>
 								</main>
 							</CSPostHogProvider>

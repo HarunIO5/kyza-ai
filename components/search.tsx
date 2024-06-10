@@ -1,7 +1,8 @@
 'use client'
 
 import { useState, useEffect, ChangeEvent, useRef } from "react";
-import { useRouter } from "next/navigation";
+// import { useRouter } from "next/navigation";
+import { useRouter } from "next-nprogress-bar";
 import 	{
     SearchIcon,
 } from "@/components/icons";
