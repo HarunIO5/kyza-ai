@@ -165,13 +165,7 @@ export default function AnimateDiffForm ({session, checkCreditLimit, getCreditCo
       }
     },[searchParams])
 
-    let width
-    let height
-
-    if (typeof window !== 'undefined') {
-      width = useWindowSize().width
-      height = useWindowSize().height
-    }
+    const { width, height } = useWindowSize()
 
     const onSubmit = async (values: z.infer<typeof textToVideoSchema>, e?: React.BaseSyntheticEvent) => {
         e?.preventDefault()
