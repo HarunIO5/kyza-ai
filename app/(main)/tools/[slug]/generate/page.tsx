@@ -7,6 +7,8 @@ import { getAnimateDiffOrder, getUser } from "@/lib/userFunctions";
 import { Suspense } from "react";
 import { checkCreditLimit, getTotalCreditCount } from "@/lib/credit-check";
 import { Metadata } from "next";
+import SSRGenerateForm from "@/components/ssr-generate-form";
+import LoadingGeneratePage from "@/components/loading-generate";
 
 export const metadata: Metadata = {
     title: `Generate AI Videos`
@@ -20,20 +22,13 @@ export default async function GeneratePage () {
 
     // const user = await getUser(session?.user?.email!) // GET RID AFTER CREDIT CHECK WORKS
 
-    let checkCredits
-	let getCreditCount
-
-	if (session) {
-		checkCredits = await checkCreditLimit({email: session?.user?.email!})
-
-    	getCreditCount = await getTotalCreditCount({email: session?.user?.email!})
-	}
+    
 
     return (
         <div className="w-full h-full flex flex-col items-center justify-center py-12">
             <WavesIcon className="absolute -z-8 bottom-0 left-0 right-0 top-60 md:top-12 h-120% w-full opacity-40"/>
-            <Suspense>
-                <AnimateDiffForm session={session!} checkCreditLimit={checkCredits!} getCreditCount={getCreditCount!}/>
+            <Suspense fallback={<LoadingGeneratePage />}>
+                <SSRGenerateForm session={session!}/>
             </Suspense>
         </div>
     );

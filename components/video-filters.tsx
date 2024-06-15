@@ -16,12 +16,15 @@ export default function LandingPageVideoFilters() {
 
   const searchQuery = ({ query }: { query: string }) => {
     // setIsLoading(true);
+    const params = new URLSearchParams();
+    params.set("search", query);
+    router.push(`/media?${params}`);
 
-    if (query.length == 0) {
-      router.push("/media");
-    } else {
-      router.push(`/media?search=${query}`);
-    }
+    // if (query.length == 0) {
+    //   router.prefetch("/media");
+    // } else {
+    //   router.replace(`/media?search=${query}`);
+    // }
   };
 
   // console.log("LOADING STATE AFTER");

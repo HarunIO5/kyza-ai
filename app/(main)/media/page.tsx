@@ -8,6 +8,7 @@ import { Suspense } from "react";
 import SearchFailed from "@/components/search-failed";
 import { Spinner } from "@nextui-org/react";
 import LoadingSearchResults from "@/components/loading-search";
+import LibraryLoader from "@/components/library-loader";
 
 export type SearchVideosType = {
   id: string;
@@ -24,13 +25,12 @@ export default async function VideosFeed({
 }: {
   searchParams: { [key: string]: string | string[] | undefined };
 }) {
-  const search =
-    typeof searchParams.search === "string" ? searchParams.search : undefined;
+  const search = typeof searchParams.search === "string" ? searchParams.search : undefined;
   // console.log("params")
-  // console.log(search)
+  // console.log(JSON.stringify(search))
 
-  const initialVideos = await SearchVideosDB({ search: search!, skip: 0 });
-  const videoLength = await SearchVideoLength({ search: search! });
+  // const initialVideos = await SearchVideosDB({ search: search!, skip: 0 });
+  // const videoLength = await SearchVideoLength({ search: search! });
 
   // console.log('SEARCH RESULTS')
   // console.log(initialVideos)
@@ -40,23 +40,13 @@ export default async function VideosFeed({
   return (
     <div className="w-full flex flex-col items-center justify-center gap-4 py-8 md:py-10">
       <LandingPageHeading />
-      <Suspense>
-        <SearchBar />
-      </Suspense>
-      {videoLength != 0 ? (
+      <SearchBar />
         <Suspense
-          key={`search=${searchParams?.search}`}
-          fallback={<LoadingSearchResults />}
+          key={JSON.stringify(search)}
+          fallback={<LoadingSearchResults/>}
         >
-          <VidCard
-            vidProp={initialVideos}
-            search={search!}
-            videoLength={videoLength as number}
-          />
-        </Suspense>
-      ) : (
-        <SearchFailed search={search!} />
-      )}
+        <LibraryLoader search={search!}/>
+      </Suspense>
     </div>
   );
 }

@@ -51,7 +51,7 @@ export async function saveAnimateDiffVideos ({email, prompt, url, style, negativ
 
   const user = await getUser(email)
 
-  await prisma.generations.create({
+  const video = await prisma.generations.create({
     data: {
       prompt: prompt,
       model: 'AnimateDiff',
@@ -63,6 +63,8 @@ export async function saveAnimateDiffVideos ({email, prompt, url, style, negativ
       key: nanoid(),
     }
   })
+
+  return JSON.parse(JSON.stringify(video))
 
 }  
 

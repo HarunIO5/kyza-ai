@@ -1,32 +1,22 @@
-'use client'
-
-import { dotWave } from "ldrs";
-import { Typewriter } from "react-simple-typewriter";
-
+import { Skeleton } from "@nextui-org/react";
+import { Card } from "@nextui-org/react";
 
 export default function LoadingSearchResults () {
 
-  dotWave.register();
-
   return (
-    <div className="w-full h-full flex flex-col items-center justify-center">
-      <l-dot-wave
-        size="65"
-        speed="1.75" 
-        color="purple" 
-      ></l-dot-wave>
-      <span className="mt-4 font-medium mx-12">
-        {/* Style will be inherited from the parent element */}
-        <Typewriter
-          words={['Searching for your video...']}
-          loop={false}
-          cursor
-          cursorStyle='_'
-          typeSpeed={70}
-          deleteSpeed={50}
-          delaySpeed={2000}
-        />
-      </span>
+    <div className="w-full grid grid-cols-1 md:grid-cols-4 gap-4 p-4" >
+      <Skeleton className="rounded-lg">
+        <div className="h-48 rounded-lg bg-default-200"></div>
+      </Skeleton>
+      <Skeleton className="rounded-lg">
+        <div className="h-48 rounded-lg bg-default-200"></div>
+      </Skeleton>
+      <Skeleton className="rounded-lg">
+        <div className="h-48 rounded-lg bg-default-200"></div>
+      </Skeleton>
+      <Skeleton className="rounded-lg">
+        <div className="h-48 rounded-lg bg-default-200"></div>
+      </Skeleton>
     </div>
   );
 }

@@ -13,14 +13,24 @@ import {
   const EmailInput = ({tool} : {tool: string}) => {
 
     const { theme, setTheme } = useTheme();
+    const [isMounted, setIsMounted] = useState(false);
+
+    useEffect(() => {
+      setIsMounted(true);
+    }, []);
+  
+    if (!isMounted) {
+      return null;
+    }
 
     return (
       <div
         className="flex h-[200px] items-center justify-center dark:bg-black px-4"
       >
-        {theme === "light" ? (
+        {theme === "light" && (
             <LightBeamInput tool = {tool}/>
-        ) : (
+        )} 
+        {theme === "dark" && (
             <BeamInput tool = {tool}/>
         )}
         

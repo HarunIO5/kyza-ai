@@ -7,6 +7,7 @@ import { getLatestMediaPosts, getMediaModal } from "@/app/_action"
 import { MediaType } from "@/lib/getVidFiles"
 import { Metadata } from "next"
 import { cache } from "react"
+import DownloadBtn from "@/components/download-btn"
 
 
 export async function generateStaticParams() {
@@ -51,21 +52,10 @@ export default async function StandardMediaView ({
     params: { id: string }
   }) {
 
-    const media = await getMediaModal({id: id!}) as MediaType
+  const media = await getMediaModal({id: id!}) as MediaType
 
-    const onDownload = async (url: string, name: string, model: string) => {
-      const response = await fetch('/api/download', {
-          method: 'POST',
-          headers: {
-            'Content-Type': 'application/json',
-          },
-          body: JSON.stringify({url: url, filename: name, model: model})
-      })
+  
 
-      const downloadUrl = await response.json()
-
-      window.open(downloadUrl.url, '_blank')
-  }
 
     return (
         <div className="w-full flex items-center justify-center py-8 px-4">
@@ -96,12 +86,7 @@ export default async function StandardMediaView ({
                       Your browser does not support the video tag.
                     </video>
                     <div className="w-full flex items-center justify-center">
-                    <Link href={``} target="_blank" className="w-fit" download={`${media.prompt!}.mp4`} type="video/mp4">
-                        <Button className="w-fit dark:bg-slate-950">
-                            <DownloadIcon />
-                            Download
-                        </Button>
-                    </Link>
+                        <DownloadBtn srcName={media.prompt!} srcUrl={media.url!}/>
                     </div>
                 </div>
             </div>

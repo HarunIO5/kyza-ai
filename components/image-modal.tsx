@@ -14,6 +14,8 @@ import Link from "next/link";
 import { useState } from "react";
 import { Copy, Check, X } from "lucide-react";
 import { useRouter } from "next/navigation";
+import { saveAs } from 'file-saver';
+import DownloadBtn from "@/components/download-btn"
 
   export default function ImageModal ({srcName, srcUrl, srcModel} : {srcName: string, srcUrl: string, srcModel?: string | 'Haiper' }) {
 
@@ -40,19 +42,9 @@ import { useRouter } from "next/navigation";
       localStorage.setItem('prompt',  srcName)
       router.push('/tools/text-to-video/generate')
     }
-    
-    const onDownload = async (url: string, name: string, model: string) => {
-        const response = await fetch('/api/download', {
-            method: 'POST',
-            headers: {
-              'Content-Type': 'application/json',
-            },
-            body: JSON.stringify({url: url, filename: name, model: model})
-        })
 
-        const downloadUrl = await response.json()
-
-        window.open(downloadUrl.url, '_blank')
+    const saveFile = ({srcUrl, srcName}: {srcUrl: string, srcName: string}) => {
+      saveAs(srcUrl, `${srcName}.mp4`)
     }
 
     return (
@@ -98,13 +90,7 @@ import { useRouter } from "next/navigation";
                               Your browser does not support the video tag.
                             </video>
                             <div className="w-full flex items-center justify-center">
-                    {/* onClick={() => {onDownload(srcUrl, srcName, srcModel || 'Haiper')}} */}
-                              <Link href={``} target="_blank" className="w-fit" download={`${srcName}.mp4`} type="video/mp4">
-                                <Button className="w-fit dark:bg-slate-950" >
-                                    <DownloadIcon />
-                                    Download
-                                </Button>
-                                </Link>
+                              <DownloadBtn srcName={srcName} srcUrl={srcUrl}/>
                             </div>
                         </div>
                     </ModalBody>

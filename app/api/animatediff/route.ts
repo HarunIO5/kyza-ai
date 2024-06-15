@@ -5,6 +5,11 @@ import { getUser, saveAnimateDiffVideos } from "@/lib/userFunctions";
 import { decrementalCreditLimit } from "@/lib/credit-check";
 import { utapi } from "@/lib/uploadthing";
 
+export type VideoInfo = {
+  video: any;
+  key: string;
+}
+
 export async function POST(req: Request) {
 
     // console.log("AnimateDIFF Inputs")
@@ -35,18 +40,25 @@ export async function POST(req: Request) {
       // console.log('ANIMATE DIFF')
       // console.log(output);
 
-     if (output) {
+    if (!output) {
+      return new NextResponse("Failed to generate video", {status: 400})
+    }
 
-      const {data, error} = await utapi.uploadFilesFromUrl({url: output.toString(), name: prompt});
+    const {data, error} = await utapi.uploadFilesFromUrl({url: output.toString(), name: prompt});
+    
+    if (error) return NextResponse.json({error: `Couldn't uploaded video ${error}`}, {status: 400})
+    
+    const returnedInfo = await saveAnimateDiffVideos({email: email as string, prompt: prompt as string, url: data?.url!, style: style as string, negativePrompt: negative as string, scale: scale.toString() })
+    await decrementalCreditLimit({email: email as string})
 
-      if (error) return NextResponse.json({error: `Couldn't uploaded video ${error}`}, {status: 400})
+    // console.log("ANIMATEDIFF")
+    // console.log(returnedInfo)
 
+    const dataReturned: VideoInfo = {
+      video: output,
+      key: returnedInfo.key,
+    }
 
-      await saveAnimateDiffVideos({email: email as string, prompt: prompt as string, url: data?.url!, style: style as string, negativePrompt: negative as string, scale: scale.toString() })
-      await decrementalCreditLimit({email: email as string})
-
-    }         
-
-      return new NextResponse(JSON.stringify(output))
+    return new NextResponse(JSON.stringify(dataReturned))
 
 }

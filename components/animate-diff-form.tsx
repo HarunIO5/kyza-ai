@@ -3,9 +3,8 @@
 import { Input, Textarea } from "@nextui-org/input";
 import { Button } from "@nextui-org/button";
 import { Card, CardBody, CardHeader, Slider, SliderValue, useDisclosure, Select, SelectItem, Avatar, Selection  } from "@nextui-org/react";
-import {RadioGroup, Radio} from "@nextui-org/react";
 import { useEffect, useState } from "react";
-import { AlertCircle, Loader2, Sparkles } from "lucide-react";
+import { AlertCircle, Check, ExternalLink, Loader2, Sparkles } from "lucide-react";
 import {useForm} from "react-hook-form"
 import {zodResolver} from "@hookform/resolvers/zod"
 import { textToVideoSchema } from "@/lib/validations/kyzaValidations";
@@ -25,6 +24,7 @@ import Autoplay from 'embla-carousel-autoplay'
 import { Typewriter } from 'react-simple-typewriter'
 import { cn } from "@nextui-org/react";
 import { quantum } from 'ldrs'
+import DownloadBtn from "@/components/download-btn"
 
 
 interface Style {
@@ -94,8 +94,11 @@ export default function AnimateDiffForm ({session, checkCreditLimit, getCreditCo
     const [ isLoading, setIsLoading ] = useState<boolean>(false)
     const [ genError, setGenLoading ] = useState<boolean>(false)
     const [ genVideo, setGenVideo ] = useState<string>('')
+    const [videoKey, setVideoKey] = useState<string>('')
+    const [isCopied, setIsCopied] = useState(false);
     const [ success, setSuccess ] = useState<boolean>(false)
     const [ videoError, setVideoError ] = useState<boolean>(false)
+
 
     const [emblaRef] = useEmblaCarousel({loop: true}, [Autoplay({delay: 2000})])
 
@@ -162,7 +165,13 @@ export default function AnimateDiffForm ({session, checkCreditLimit, getCreditCo
       }
     },[searchParams])
 
-    const { width, height } = useWindowSize()
+    let width
+    let height
+
+    if (typeof window !== 'undefined') {
+      width = useWindowSize().width
+      height = useWindowSize().height
+    }
 
     const onSubmit = async (values: z.infer<typeof textToVideoSchema>, e?: React.BaseSyntheticEvent) => {
         e?.preventDefault()
@@ -189,10 +198,11 @@ export default function AnimateDiffForm ({session, checkCreditLimit, getCreditCo
             
             const video = await response.json()
 
-            if (video) {
-                setGenVideo(video)
+            if (video.video) {
+                setGenVideo(video.video)
+                setVideoKey(video.key)
                 console.log('VIDEO')
-                console.log(typeof(video))
+                console.log(typeof(video.video))
                 console.log(genVideo)
             }
         } catch (error) {
@@ -267,10 +277,11 @@ export default function AnimateDiffForm ({session, checkCreditLimit, getCreditCo
             const video = await response.json()
 
             if (video) {
-                setGenVideo(video)
-                console.log('VIDEO')
-                console.log(typeof(video))
-                console.log(genVideo)
+                setGenVideo(video.video)
+                setVideoKey(video.key)
+                // console.log('VIDEO')
+                // console.log(typeof(video))
+                // console.log(genVideo)
             }
         } catch (error) {
             console.log(error)
@@ -283,18 +294,30 @@ export default function AnimateDiffForm ({session, checkCreditLimit, getCreditCo
         }
       }
 
-      if (loadPrompt && session) {
+      if (loadPrompt && session && !checkCreditLimit) {
         firstGeneration({prompt: loadPrompt})
       }
-    }, [])
+    }, [loadPrompt && session])
+
+    const copyToClipboard = async (text: string) => {
+      try {
+        await navigator.clipboard.writeText(text);
+        setIsCopied(true);
+        setTimeout(() => {
+          setIsCopied(false);
+        }, 1000);
+      } catch (err) {
+        console.error(err);
+      }
+    };
 
     return (
     <>
         <div className="w-3/4 md:h-full flex flex-col md:flex-row gap-8">
         {success && (
           <Confetti
-          width={width-50}
-          height={height}
+          width={width!-50}
+          height={height!}
           recycle={false}
         />
         )}
@@ -505,9 +528,10 @@ export default function AnimateDiffForm ({session, checkCreditLimit, getCreditCo
                   </>
                 )}
                 {(genVideo && !videoError && !isLoading) && (
+                  <>
                   <Card
                     isFooterBlurred
-                    className={`${genVideo ? 'visible' : 'hidden'}`}
+                    className={`${genVideo ? 'visible' : 'hidden'} mb-4`}
                     key={`${genVideo}`}
 
                     >
@@ -527,6 +551,21 @@ export default function AnimateDiffForm ({session, checkCreditLimit, getCreditCo
                           Your browser does not support the video tag.
                       </video>
                   </Card>
+                  <div className="w-full flex items-center justify-center gap-4">
+                    <DownloadBtn srcName={prompt} srcUrl={genVideo}/>
+                    <Button className="w-fit dark:bg-slate-800" onClick={() => copyToClipboard(`${process.env.NEXT_PUBLIC_BASE_URL}/media/${videoKey}`)}>
+                      {isCopied && (
+                        <Check className="h-7 w-7"/>
+                      )}
+                      {!isCopied && (
+                        <p className="flex items-center gap-1.5">
+                          <ExternalLink/>
+                          Copy Link 
+                        </p>
+                      )}
+                    </Button>
+                  </div>
+                  </>
                 )}
               </Card>
 
