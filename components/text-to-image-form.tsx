@@ -2,12 +2,12 @@
 
 import { Input, Textarea } from "@nextui-org/input";
 import { Button } from "@nextui-org/button";
-import { Card, CardBody, CardHeader, Slider, SliderValue, useDisclosure, Select, SelectItem, Avatar, Selection  } from "@nextui-org/react";
+import { Card, CardBody, CardHeader, Slider, SliderValue, useDisclosure, Select, SelectItem, Avatar, Selection,  cn, Switch, RadioGroup, Radio  } from "@nextui-org/react";
 import { useEffect, useState } from "react";
-import { AlertCircle, Check, ExternalLink, Loader2, Sparkles } from "lucide-react";
+import { AlertCircle, Check, ExternalLink, Loader2, Sparkles, Rabbit, Turtle, Square, RectangleVertical, RectangleHorizontal } from "lucide-react";
 import {useForm} from "react-hook-form"
 import {zodResolver} from "@hookform/resolvers/zod"
-import { textToVideoSchema } from "@/lib/validations/kyzaValidations";
+import { textToImageSchema, textToVideoSchema } from "@/lib/validations/kyzaValidations";
 import { z } from "zod"
 import { Session } from "next-auth";
 import Link from "next/link";
@@ -22,9 +22,11 @@ import React from 'react'
 import useEmblaCarousel from 'embla-carousel-react'
 import Autoplay from 'embla-carousel-autoplay'
 import { Typewriter } from 'react-simple-typewriter'
-import { cn } from "@nextui-org/react";
 import { quantum } from 'ldrs'
 import DownloadBtn from "@/components/download-btn"
+import {Image} from "@nextui-org/image";
+import NextImage from "next/image";
+
 
 
 interface Style {
@@ -85,7 +87,7 @@ const styles: Style[] = [
   },
 ]
 
-export default function AnimateDiffForm ({session, checkCreditLimit, getCreditCount} : {session: Session, checkCreditLimit?: boolean, getCreditCount?: number}) {
+export default function TextToImageForm ({session, checkCreditLimit, getCreditCount} : {session: Session, checkCreditLimit?: boolean, getCreditCount?: number}) {
 
     const [ prompt, setPrompt ] = useState<string>('')
     const [ negative, setNegative ] = useState<string>('')
@@ -93,9 +95,11 @@ export default function AnimateDiffForm ({session, checkCreditLimit, getCreditCo
     const [ style, setStyle ] = useState<Selection>(new Set(["toonyou_beta3.safetensors"]))
     const [ isLoading, setIsLoading ] = useState<boolean>(false)
     const [ genError, setGenLoading ] = useState<boolean>(false)
-    const [ genVideo, setGenVideo ] = useState<string>('')
-    const [videoKey, setVideoKey] = useState<string>('')
-    const [isCopied, setIsCopied] = useState(false);
+    const [ speed, setSpeed ] = useState<boolean>(false)
+    const [ ratio, setRatio ] = useState<string>('3:2')
+    const [ genImage, setGenImage ] = useState<string>('')
+    const [ imageKey, setImageKey ] = useState<string>('')
+    const [ isCopied, setIsCopied ] = useState<boolean>(false);
     const [ success, setSuccess ] = useState<boolean>(false)
     const [ videoError, setVideoError ] = useState<boolean>(false)
 
@@ -137,8 +141,8 @@ export default function AnimateDiffForm ({session, checkCreditLimit, getCreditCo
     // console.log("Default Prompt:", defaultPrompt);
     // console.log("Default Negative Prompt:", defaultNegativePrompt);
 
-    const {register, handleSubmit, formState: {errors} } = useForm<z.infer<typeof textToVideoSchema>>({
-        resolver: zodResolver(textToVideoSchema),
+    const {register, handleSubmit, formState: {errors} } = useForm<z.infer<typeof textToImageSchema>>({
+        resolver: zodResolver(textToImageSchema),
         values: {
           prompt: prompt,
           negative_prompt: negative
@@ -174,7 +178,11 @@ export default function AnimateDiffForm ({session, checkCreditLimit, getCreditCo
 
         setIsLoading(true)
 
-        const response = await fetch('/api/animatediff', {
+        console.log(values)
+        console.log(speed)
+        console.log(ratio)
+
+        const response = await fetch('/api/stableDiffuse', {
             method: 'POST',
             headers: {
               'Content-Type': 'application/json',
@@ -183,21 +191,22 @@ export default function AnimateDiffForm ({session, checkCreditLimit, getCreditCo
                 'prompt': values.prompt,
                 'negative': values.negative_prompt,
                 'scale': scale,
-                'style': Array.from(style)[0],
+                'spees': speed,
+                'aspect_ratio': ratio,
                 'email': session?.user?.email!
             })
         })
 
         try {
             
-            const video = await response.json()
+            const image = await response.json()
 
-            if (video.video) {
-                setGenVideo(video.video)
-                setVideoKey(video.key)
-                console.log('VIDEO')
-                console.log(typeof(video.video))
-                console.log(genVideo)
+            // console.log("IMAGE")
+            // console.log(image)
+
+            if (image.image) {
+                setGenImage(image.image)
+                setImageKey(image.key)
             }
         } catch (error) {
             console.log(error)
@@ -252,7 +261,7 @@ export default function AnimateDiffForm ({session, checkCreditLimit, getCreditCo
       async function firstGeneration ({prompt} : {prompt: string}) {
         setIsLoading(true)
 
-        const response = await fetch('/api/animatediff', {
+        const response = await fetch('/api/stableDiffuse', {
             method: 'POST',
             headers: {
               'Content-Type': 'application/json',
@@ -260,23 +269,24 @@ export default function AnimateDiffForm ({session, checkCreditLimit, getCreditCo
             body: JSON.stringify({
                 'prompt': prompt,
                 'negative': "nsfw, ng_deepnegative_v1_75t, badhandv4, worst quality, low quality, normal quality, lowres, watermark, monochrome",
-                'scale': 7.5,
-                'style': "majicmixRealistic_v5Preview.safetensors",
+                'scale': scale,
+                'spees': speed,
+                'aspect_ratio': ratio,
                 'email': session?.user?.email!
             })
         })
 
         try {
             
-            const video = await response.json()
+          const image = await response.json()
 
-            if (video) {
-                setGenVideo(video.video)
-                setVideoKey(video.key)
-                // console.log('VIDEO')
-                // console.log(typeof(video))
-                // console.log(genVideo)
-            }
+          // console.log("IMAGE")
+          // console.log(image)
+
+          if (image.image) {
+              setGenImage(image.image)
+              setImageKey(image.key)
+          }
         } catch (error) {
             console.log(error)
             setVideoError(true)
@@ -327,7 +337,8 @@ export default function AnimateDiffForm ({session, checkCreditLimit, getCreditCo
                 </CardHeader>
                 )}
                 <CardBody className="w-full h-full flex flex-col justify-between gap-8">
-                    <Select
+
+                    {/* <Select
                       items={styles}
                       label="Choose Video Style"
                       placeholder="Select a style"
@@ -346,7 +357,8 @@ export default function AnimateDiffForm ({session, checkCreditLimit, getCreditCo
                           </div>
                         </SelectItem>
                       )}
-                    </Select>
+                    </Select> */}
+
                     <Slider 
                       size="sm"
                       label="Select guidance scale"
@@ -385,6 +397,51 @@ export default function AnimateDiffForm ({session, checkCreditLimit, getCreditCo
                               {errors.negative_prompt && (
                                   <span className=" text-red-500">{errors.negative_prompt?.message}</span>
                               )}
+                          </div>
+                          <div className="w-full flex flex-col gap-8 pt-6 pb-2">
+                            <Switch
+                              defaultSelected
+                              isSelected={speed}
+                              onChange={(e) => {
+                                setSpeed(e.target.checked)
+                              }}
+                              size="lg"
+                              color="secondary"
+                              thumbIcon={({ isSelected, className }) =>
+                                isSelected ? (
+                                  <Rabbit className={'h-5 w-5 text-black'} />
+                                ) : (
+                                    <Turtle className={'h-5 w-5 text-black'} />
+                                )}
+                            > 
+                              <p className="text-sm">
+                                Slow or Fast
+                              </p>
+                              <p className=" text-xs text-foreground-500">
+                                Select to receive your image quickier
+                              </p>
+                            </Switch>
+                          </div>
+                          <div className="w-full flex flex-col gap-8 pt-4 pb-4">
+                            <RadioGroup
+                              label="Select your image dimensions"
+                              orientation="horizontal"
+                              color="secondary"
+                              defaultValue="3:2"
+                              onChange={(e) => {
+                                setRatio(e.target.value)
+                              }}
+                            >
+                                <Radio value="3:2">
+                                  <Square className="h-5 w-5" />
+                                </Radio>
+                                <Radio value="16:9">
+                                  <RectangleHorizontal className="h-5 w-5" />
+                                </Radio>
+                                <Radio value="9:16">
+                                  <RectangleVertical className="h-5 w-5" />
+                                </Radio>
+                              </RadioGroup>
                           </div>
                           <div className="w-full flex justify-end">
                               {(session && isLoading) && (
@@ -457,97 +514,68 @@ export default function AnimateDiffForm ({session, checkCreditLimit, getCreditCo
                     </CardBody>
                   </Card>
                 )}
-                {(!genVideo && !isLoading && !videoError) && (
+                {(!genImage && !isLoading && !videoError) && (
                   <>
                     <div className="absolute inset-0 flex items-center justify-center">
-                        <h2 className="dark:text-white text-4xl font-extrabold">Time To Create 🪄</h2>
+                        <h2 className="text-white text-4xl font-extrabold z-10">Time To Create 🪄</h2>
                     </div>
                     <div className="embla mx-auto w-full" ref={emblaRef}>
                       <div className="embla__container w-full">
 
                         <div className="embla__slide flex items-center justify-center">
-
-                        <video
-                            className="h-full w-full object-cover blur-sm opacity-30"
-                            preload="metadata"
-                            poster={'https://xlbwajpxfttzluwdymao.supabase.co/storage/v1/object/public/LandingPage/Large%20round%20chrome%20orb.mp4'}
-                            autoPlay
-                            playsInline
-                            muted
-                            loop
-                        >
-                            <source src={'https://xlbwajpxfttzluwdymao.supabase.co/storage/v1/object/public/LandingPage/Large%20round%20chrome%20orb.mp4'} type="video/mp4" />
-                            <track
-                              src={'https://xlbwajpxfttzluwdymao.supabase.co/storage/v1/object/public/LandingPage/Large%20round%20chrome%20orb.mp4'}
+                            <Image
+                                as={NextImage}
+                                width={500}
+                                height={1000}
+                                src="https://xlbwajpxfttzluwdymao.supabase.co/storage/v1/object/public/tools/text-to-image/A_chicken_wearing_a_ski_mask_cause_up_logo_robbery.webp"
+                                alt="A chicken wearing a ski mask cause up logo robbery"
+                                className="h-full w-full object-cover blur-sm opacity-30"
                             />
-                            Your browser does not support the video tag.
-                        </video>
                         </div>
                         <div className="embla__slide flex items-center justify-center">
-                        <video
-                            className="h-full w-full object-cover blur-sm opacity-30"
-                            preload="metadata"
-                            poster={'https://xlbwajpxfttzluwdymao.supabase.co/storage/v1/object/public/LandingPage/spaceship%20oblivion.mp4'}
-                            autoPlay
-                            playsInline
-                            muted
-                            loop
-                        >
-                            <source src={'https://xlbwajpxfttzluwdymao.supabase.co/storage/v1/object/public/LandingPage/spaceship%20oblivion.mp4'} type="video/mp4" />
-                            <track
-                              src={'https://xlbwajpxfttzluwdymao.supabase.co/storage/v1/object/public/LandingPage/spaceship%20oblivion.mp4'}
+                            <Image
+                                as={NextImage}
+                                width={500}
+                                height={1000}
+                                src="https://xlbwajpxfttzluwdymao.supabase.co/storage/v1/object/public/tools/text-to-image/a_humanoid_havana_brown_cat_wearing_inmate_orange_.webp"
+                                alt="A humanoid Havana brown cat wearing inmate orange"
+                                className="h-full w-full object-cover blur-sm opacity-30"
                             />
-                            Your browser does not support the video tag.
-                        </video>
                         </div>
                         <div className="embla__slide flex items-center justify-center">
-                        <video
-                            className="h-full w-full object-cover blur-sm opacity-30"
-                            preload="metadata"
-                            poster={'https://xlbwajpxfttzluwdymao.supabase.co/storage/v1/object/public/LandingPage/Fisherman%20of%20Maldives.mp4'}
-                            autoPlay
-                            playsInline
-                            muted
-                            loop
-                        >
-                            <source src={'https://xlbwajpxfttzluwdymao.supabase.co/storage/v1/object/public/LandingPage/Fisherman%20of%20Maldives.mp4'} type="video/mp4" />
-                            <track
-                              src={'https://xlbwajpxfttzluwdymao.supabase.co/storage/v1/object/public/LandingPage/Fisherman%20of%20Maldives.mp4'}
+                            <Image
+                                as={NextImage}
+                                width={500}
+                                height={1000}
+                                src="https://xlbwajpxfttzluwdymao.supabase.co/storage/v1/object/public/tools/text-to-image/detailed.webp"
+                                alt="A humanoid Havana brown cat wearing inmate orange"
+                                className="h-full w-full object-cover blur-sm opacity-30"
                             />
-                            Your browser does not support the video tag.
-                        </video>
                         </div>
                       </div>
                     </div>
                   </>
                 )}
-                {(genVideo && !videoError && !isLoading) && (
+                {(genImage && !videoError && !isLoading) && (
                   <>
                   <Card
                     isFooterBlurred
-                    className={`${genVideo ? 'visible' : 'hidden'} mb-4`}
-                    key={`${genVideo}`}
+                    className={`${genImage ? 'visible' : 'hidden'} mb-4`}
+                    key={`${genImage}`}
 
                     >
-                      <video
+                      <Image
+                          as={NextImage}
+                          width={400}
+                          height={400}
+                          src={genImage}
+                          alt={prompt}
                           className="h-full w-full object-cover"
-                          preload="metadata"
-                          poster={genVideo + '#t=0.1'}
-                          autoPlay
-                          playsInline
-                          muted
-                          loop
-                      >
-                          <source src={genVideo + '#t=0.1'} type="video/mp4" />
-                          <track
-                            src={genVideo}
-                          />
-                          Your browser does not support the video tag.
-                      </video>
+                      />
                   </Card>
                   <div className="w-full flex items-center justify-center gap-4">
-                    <DownloadBtn srcName={prompt} srcUrl={genVideo} etx="mp4"/>
-                    <Button className="w-fit dark:bg-slate-800" onClick={() => copyToClipboard(`${process.env.NEXT_PUBLIC_BASE_URL}/media/${videoKey}`)}>
+                    <DownloadBtn srcName={prompt} srcUrl={genImage} etx="webp"/>
+                    <Button className="w-fit dark:bg-slate-800" onClick={() => copyToClipboard(`${process.env.NEXT_PUBLIC_BASE_URL}/media/${imageKey}`)}>
                       {isCopied && (
                         <Check className="h-7 w-7"/>
                       )}

@@ -8,6 +8,7 @@ import { MediaType } from "@/lib/getVidFiles"
 import { Metadata } from "next"
 import { cache } from "react"
 import DownloadBtn from "@/components/download-btn"
+import Image from "next/image"
 
 
 export async function generateStaticParams() {
@@ -78,15 +79,26 @@ export default async function StandardMediaView ({
                 </p>
               </div>
                 <div className="flex flex-col gap-2">
-                    <video autoPlay loop className="h-[450px] md:h-[600px] w-[600px] object-cover rounded-md" playsInline={true} muted preload="metadata">
+                    {media.type === 'SHORTVIDEO' && (
+                      <video autoPlay loop className="h-[450px] md:h-[600px] w-[600px] object-cover rounded-md" playsInline={true} muted preload="metadata">
                       <source src={media.url!} type="video/mp4" />
                       <track
                         src={media.url! + '#t=0.1'}
                       />
                       Your browser does not support the video tag.
                     </video>
+                    )}
+                    {media.type === 'IMAGE' && (
+                      <Image 
+                        src={media.url!} 
+                        alt={media.prompt!} 
+                        className="h-full w-full object-cover" 
+                        width={500} 
+                        height={500}
+                      />
+                    )}
                     <div className="w-full flex items-center justify-center">
-                        <DownloadBtn srcName={media.prompt!} srcUrl={media.url!}/>
+                        <DownloadBtn srcName={media.prompt!} srcUrl={media.url!} etx={media.type! === 'SHORTVIDEO' ? 'mp4' : 'webp'}/>
                     </div>
                 </div>
             </div>

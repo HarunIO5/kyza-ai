@@ -59,6 +59,15 @@ export const registerFormSchema = z.object({
     }).optional().or(z.literal(''))
   })
 
+  export const textToImageSchema = z.object({
+    prompt: z.string().min(3, {
+      message: "Prompt must be a minimum of 3 characters"
+    }),
+    negative_prompt: z.string().min(3, {
+      message: "Negative prompt must be a minimum of 3 characters"
+    }).optional().or(z.literal(''))
+  })
+
   export const textToVideoInputSchema = z.object({
     prompt: z.string().min(3, {
       message: "Prompt must be a minimum of 3 characters"
@@ -78,5 +87,6 @@ export type registerFormSchema = z.infer<typeof registerFormSchema>
 export type resetPasswordFormSchema = z.infer<typeof resetPasswordFormSchema>
 export type EmailParams = z.infer<typeof emailFormSchema>
 export type textToVideoSchema = z.infer<typeof textToVideoSchema>
+export type textToImageSchema = z.infer<typeof textToImageSchema>
 export type textToVideoInputSchema = z.infer<typeof textToVideoInputSchema>
 export type settingSchema = z.infer<typeof settingSchema>

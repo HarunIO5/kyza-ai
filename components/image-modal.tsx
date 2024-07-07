@@ -17,7 +17,7 @@ import { useRouter } from "next/navigation";
 import { saveAs } from 'file-saver';
 import DownloadBtn from "@/components/download-btn"
 
-  export default function ImageModal ({srcName, srcUrl, srcModel} : {srcName: string, srcUrl: string, srcModel?: string | 'Haiper' }) {
+  export default function ImageModal ({srcName, srcUrl, srcModel, srcType} : {srcName: string, srcUrl: string, srcModel?: string | 'Haiper', srcType?: string,}) {
 
     const [isCopied, setIsCopied] = useState(false);
 
@@ -40,7 +40,11 @@ import DownloadBtn from "@/components/download-btn"
 
     const onRemix = () => {
       localStorage.setItem('prompt',  srcName)
-      router.push('/tools/text-to-video/generate')
+      if (srcType === 'SHORTVIDEO') {
+        router.push('/tools/text-to-video/generate')
+      } else if (srcType === 'IMAGE') {
+        router.push('/tools/text-to-image/generate')
+      }
     }
 
     const saveFile = ({srcUrl, srcName}: {srcUrl: string, srcName: string}) => {
@@ -82,15 +86,26 @@ import DownloadBtn from "@/components/download-btn"
                         </p>
                       </div>
                         <div className="flex flex-col gap-2">
-                            <video autoPlay loop className="h-[250px] md:h-[600px] w-[400px] object-cover rounded-md" playsInline={true} muted preload="metadata">
+                            {srcType === 'SHORTVIDEO' && (
+                              <video autoPlay loop className="h-[250px] md:h-[600px] w-[400px] object-cover rounded-md" playsInline={true} muted preload="metadata">
                               <source src={srcUrl} type="video/mp4" />
                               <track
                                 src={srcUrl + '#t=0.1'}
                               />
                               Your browser does not support the video tag.
                             </video>
+                            )}
+                            {srcType === 'IMAGE' && (
+                              <Image 
+                                src={srcUrl!} 
+                                alt={srcName} 
+                                className="h-full w-full object-cover" 
+                                width={800} 
+                                height={800}
+                              />
+                            )}
                             <div className="w-full flex items-center justify-center">
-                              <DownloadBtn srcName={srcName} srcUrl={srcUrl}/>
+                              <DownloadBtn srcName={srcName} srcUrl={srcUrl} etx={srcType === 'SHORTVIDEO' ? "mp4" : "webp"}/>
                             </div>
                         </div>
                     </ModalBody>

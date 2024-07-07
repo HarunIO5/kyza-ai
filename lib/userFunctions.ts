@@ -68,6 +68,29 @@ export async function saveAnimateDiffVideos ({email, prompt, url, style, negativ
 
 }  
 
+export async function saveSD3Images ({email, prompt, url, negativePrompt, scale, aspectRatio}: {email: string, prompt: string, url: string, negativePrompt?: string, scale?: string, aspectRatio?: string}) {  
+
+  const user = await getUser(email)
+
+  const video = await prisma.generations.create({
+    data: {
+      prompt: prompt,
+      model: 'StableDiffusion3',
+      url: url,
+      userId: user?.id!,
+      negativePrompt: negativePrompt,
+      scale: scale,
+      key: nanoid(),
+      aspectRatio: aspectRatio,
+      outputFormat: 'webp',
+      type: 'IMAGE',
+    }
+  })
+
+  return JSON.parse(JSON.stringify(video))
+
+}  
+
 export async function getSavedVideos({email, skip}: {email: string, skip: number}) {
 
   const user = await getUser(email)
@@ -77,7 +100,10 @@ export async function getSavedVideos({email, skip}: {email: string, skip: number
       userId: user?.id
     },
     skip: skip,
-    take: 9
+    take: 9,
+    orderBy: {
+      createdAt: 'desc'
+    }
   })
 
 

@@ -102,6 +102,12 @@ export function SiteFooter() {
 			>
 				AI Cricut Designer
 			</Link>
+			<Link
+				href={'/tools/text-to-image'}
+				className="transition-colors hover:text-foreground/80 text-lg"
+			>
+				Text-to-Image
+			</Link>
 		</nav>
 		</div>
       </div>

@@ -49,7 +49,7 @@ export async function POST(req: Request) {
     if (error) return NextResponse.json({error: `Couldn't uploaded video ${error}`}, {status: 400})
     
     const returnedInfo = await saveAnimateDiffVideos({email: email as string, prompt: prompt as string, url: data?.url!, style: style as string, negativePrompt: negative as string, scale: scale.toString() })
-    await decrementalCreditLimit({email: email as string})
+    await decrementalCreditLimit({email: email as string, productType: 'TextToVideo'})
 
     // console.log("ANIMATEDIFF")
     // console.log(returnedInfo)

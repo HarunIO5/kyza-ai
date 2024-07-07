@@ -1,42 +1,68 @@
 import prisma from "@/lib/prisma";
 import { getUser } from "@/lib/userFunctions";
 
-export const decrementalCreditLimit = async ({email}: {email: string}) => {
+const getUserCredits = async ({email, productType}: {email: string, productType: string}) => {
 
-    const user = await getUser(email)
+    const user = await prisma.user.findUnique(
+      {
+        where: {
+          email: email
+        },
+        include: {
+          Credits: true
+        }
+      }
+    )
 
-    if (user?.freeCredits != 0) {
+    // console.log("USER")
+    // console.log(user)
 
-        await prisma.user.update({
-          where: {
-            email: email
-          },
-          data: {
-            freeCredits: user?.freeCredits!-1
-          }
-        })
+    const credits = user?.Credits.find((credit) => credit.productType === productType)
 
-       } else if (user?.freeCredits == 0 && user?.credits != 0){
+    // console.log("CREDITS")
+    // console.log(credits)
 
-        await prisma.user.update({
-          where: {
-            email: email
-          },
-          data: {
-            credits: user?.credits!-1
-          }
-        })
-
-    } 
+    return credits
 }
 
-export const checkCreditLimit = async ({email}: {email: string}) => {
+export const decrementalCreditLimit = async ({email, productType}: {email: string, productType: string}) => {
 
-    const user = await getUser(email)
+    // const user = await getUser(email)
 
-    if (user?.freeCredits! > 0 || user?.credits! > 0) {
+    const credits = await getUserCredits({email: email, productType: productType})
+
+    if (credits?.credits != 0) {
+
+        // await prisma.user.update({
+        //   where: {
+        //     email: email
+        //   },
+        //   data: {
+        //     freeCredits: user?.freeCredits!-1
+        //   }
+        // })
+
+        await prisma.credits.update({
+          where: {
+            id: credits?.id
+          },
+          data: {
+            credits: credits?.credits!-1
+          }
+        })
+
+       }
+}
+
+export const checkCreditLimit = async ({email, productType}: {email: string, productType: string}) => {
+
+    // const user = await getUser(email)
+
+    const credits = await getUserCredits({email: email, productType: productType})
+
+    if (credits?.credits! > 0) {
         return false
-    } else if (user?.freeCredits == 0 && user?.credits == 0) {
+    } else if (credits?.credits == 0) {
         return true
     } else {
         return true
@@ -44,11 +70,13 @@ export const checkCreditLimit = async ({email}: {email: string}) => {
 
 }
 
-export const getTotalCreditCount = async ({email}: {email: string}) => {
+export const getTotalCreditCount = async ({email, productType}: {email: string, productType: string}) => {
 
-    const user = await getUser(email)
+    // const user = await getUser(email)
 
-    const totalCredits = user?.freeCredits! + user?.credits!
+    const credits = await getUserCredits({email: email, productType: productType})
+
+    const totalCredits = credits?.credits!
 
     return totalCredits
 }

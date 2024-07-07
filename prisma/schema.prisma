@@ -83,6 +83,7 @@ model User {
   FollowedBy                User[]             @relation("UserFollows")
   Following                 User[]             @relation("UserFollows")
   Generations               Generations[]
+  Credits                   Credits[]
 }
 
 model VerificationToken {
@@ -135,6 +136,8 @@ model Generations {
   style          String?
   scale          String?
   fileSizeBytes  Int?
+  aspectRatio    String?
+  outputFormat   String?
   type           Type     @default(SHORTVIDEO)
   status         Status   @default(PUBLIC)
   user           User     @relation(fields: [userId], references: [id])
@@ -150,4 +153,14 @@ model ToolWaitlist {
   toolType  String?
 
   @@unique([email, tool])
+}
+
+model Credits {
+  id          String   @id @default(cuid())
+  createdAt   DateTime @default(now())
+  productType String
+  creditType  String
+  credits     Int
+  userId      String
+  user        User     @relation(fields: [userId], references: [id])
 }

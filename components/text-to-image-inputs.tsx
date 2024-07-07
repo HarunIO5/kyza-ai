@@ -10,7 +10,7 @@ import { useRouter } from "next/navigation";
 import { useState } from "react";
 
 
-export default function TTVInputs () {
+export default function TTIInputs () {
 
     const [isLoading, setIsLoading] = useState<boolean>(false)
 
@@ -25,7 +25,7 @@ export default function TTVInputs () {
         e?.preventDefault()
 
         localStorage.setItem('prompt',  values.prompt)
-        router.push('/tools/text-to-video/generate')
+        router.push('/tools/text-to-image/generate')
     }
 
     return (

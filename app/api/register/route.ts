@@ -41,7 +41,25 @@ export async function POST(req: NextRequest) {
         data: {
             name: username,
             email: email.toLowerCase(),
-            hashedPassword: hashedPassword
+            hashedPassword: hashedPassword,
+        }
+    })
+
+    const TextToVideoCredit = await prisma.credits.create({
+        data: {
+            productType: 'TextToVideo',
+            userId: user.id,
+            creditType: 'FREE',
+            credits: 3
+        }
+    })
+
+    const TextToImageCredit = await prisma.credits.create({
+        data: {
+            productType: 'TextToImage',
+            userId: user.id,
+            creditType: 'FREE',
+            credits: 3
         }
     })
 

@@ -134,6 +134,13 @@ export const Navbar = () => {
         		    	>
         		    		Text-to-Video
         		    	</DropdownItem>
+						<DropdownItem
+        		    	  key="text_to_image"
+        		    	  startContent={'🛠️'}
+						  href="/tools/text-to-image"
+        		    	>
+        		    		Text-to-Image
+        		    	</DropdownItem>
         		    	<DropdownItem
         		    	  key="wallpaper_engine"
         		    	  startContent={'🖼️'}
@@ -255,6 +262,15 @@ export const Navbar = () => {
 							size="lg"
 						>
 							📹 Text-to-Video
+						</Link>
+					</NavbarMenuItem>
+					<NavbarMenuItem key={`text_to_image`}>
+						<Link
+							color={"foreground"}
+							href={'/tools/text-to-image'}
+							size="lg"
+						>
+							🛠️ Text-to-Image
 						</Link>
 					</NavbarMenuItem>
 					<NavbarMenuItem key={`wallpaper_engine`}>

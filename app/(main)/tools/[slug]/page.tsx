@@ -11,6 +11,7 @@ import MoreTools from "@/components/more-tools";
 import { title } from "@/components/primitives";
 import FAQSections from "@/components/faqsection";
 import TTVInputs from "@/components/text-to-video-inputs";
+import TTIInputs from "@/components/text-to-image-inputs";
 
 export async function generateStaticParams() {
 
@@ -50,7 +51,7 @@ async function getLatestToolsPages() {
     return data
 }
 
-const getToolPages = cache(async (slug: string): Promise<{ toolPage: ToolPageType; moreToolPages: ToolPageType[] }> => {
+const getToolPages = async (slug: string): Promise<{ toolPage: ToolPageType; moreToolPages: ToolPageType[] }> => {
 
     const query = `
     {
@@ -64,8 +65,8 @@ const getToolPages = cache(async (slug: string): Promise<{ toolPage: ToolPageTyp
     }`
 
     // , {}, { next: { revalidate: 0 } }
-    return await client.fetch(query)
-})
+    return await client.fetch(query, {}, { next: { revalidate: 0 } })
+}
 
 export default async function ToolsPages ({
     params
@@ -97,6 +98,10 @@ export default async function ToolsPages ({
 
                     {(toolPage.emailWaitlist != true && toolPage.toolType == "TEXT_TO_VIDEO") && (
                         <TTVInputs />
+                    )}
+
+                    {(toolPage.emailWaitlist != true && toolPage.toolType == "TEXT_TO_IMAGE") && (
+                        <TTIInputs />
                     )}
                     
                 </div>
@@ -173,7 +178,7 @@ export default async function ToolsPages ({
                 <div className="w-full mx-auto flex flex-col md:flex-row justify-between gap-8">
                     <div className="">
                         <Image
-                            className="h-auto w-full rounded-sm"
+                            className="h-auto w-full rounded-xl"
                             width={500}
                             height={500}
                             src={urlFor(toolPage.featureImage1.asset?._ref).height(500).width(500).url()}
@@ -202,7 +207,7 @@ export default async function ToolsPages ({
                     </div>
                     <div className="">
                         <Image
-                            className="h-auto w-full rounded-sm"
+                            className="h-auto w-full rounded-xl"
                             width={500}
                             height={500}
                             src={urlFor(toolPage.featureImage2.asset?._ref).height(500).width(500).url()}

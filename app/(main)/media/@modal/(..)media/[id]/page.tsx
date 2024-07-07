@@ -57,7 +57,7 @@ export default async function MediaModal({
 
     return (
         <>
-            <ImageModal srcName={media.prompt!} srcUrl={media.url!}/>
+            <ImageModal srcName={media.prompt!} srcUrl={media.url!} srcType={media.type!} srcModel={media.model!}/>
         </>
     )
   }

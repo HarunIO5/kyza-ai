@@ -7,14 +7,19 @@ import { getAnimateDiffOrder, getUser } from "@/lib/userFunctions";
 import { Suspense } from "react";
 import { checkCreditLimit, getTotalCreditCount } from "@/lib/credit-check";
 import { Metadata } from "next";
-import SSRGenerateForm from "@/components/ssr-generate-form";
+import SSRGenerateTTVForm from "@/components/ssr-generate-form";
+import SSRGenerateTTIForm from "@/components/ssr-gen-TTI";
 import LoadingGeneratePage from "@/components/loading-generate";
 
 export const metadata: Metadata = {
     title: `Generate AI Videos`
 }
 
-export default async function GeneratePage () {
+export default async function GeneratePage ({
+    params,
+  }: {
+    params: { slug: string };
+  }) {
 
     const session = await getServerSession(authOptions)
 
@@ -27,9 +32,18 @@ export default async function GeneratePage () {
     return (
         <div className="w-full h-full flex flex-col items-center justify-center py-12">
             <WavesIcon className="absolute -z-8 bottom-0 left-0 right-0 top-60 md:top-12 h-120% w-full opacity-40"/>
-            <Suspense fallback={<LoadingGeneratePage />}>
-                <SSRGenerateForm session={session!}/>
-            </Suspense>
+            { params.slug == "text-to-video" && ( 
+                <Suspense fallback={<LoadingGeneratePage />}>
+                    <SSRGenerateTTVForm session={session!} />
+                </Suspense>
+            )}
+
+            { params.slug == "text-to-image" && (
+                <Suspense fallback={<LoadingGeneratePage />}>
+                    <SSRGenerateTTIForm session={session!} />
+                </Suspense>
+            )}
+            
         </div>
     );
 }

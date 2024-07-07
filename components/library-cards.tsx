@@ -8,6 +8,7 @@ import { useInView } from "react-intersection-observer";
 import ImageModal from "./image-modal";
 import { useRouter } from "next/navigation";
 import Link from "next/link";
+import Image from "next/image";
 
 export default function LibraryCards ({email, videoProp, videoLength} : {email: string, videoProp: SavedVideoType[], videoLength: number}) {
 
@@ -42,6 +43,7 @@ export default function LibraryCards ({email, videoProp, videoLength} : {email: 
         }
     }, [inView])
 
+    console.log(videos)
 
     return (
         <>
@@ -63,20 +65,31 @@ export default function LibraryCards ({email, videoProp, videoLength} : {email: 
                             isPressable={true}
                             >
                               <Link href={`/media/${file.key}`} className="h-full w-full">
-                              <video
-                                className="h-full w-full object-cover"
-                                preload="metadata"
-                                autoPlay
-                                playsInline
-                                muted
-                                loop
-                              >
-                                <source src={file.url! + '#t=0.1'} type="video/mp4" />
-                                <track
-                                  src={file.url!}
+                              {file.type === 'SHORTVIDEO' && (
+                                <video
+                                  className="h-full w-full object-cover"
+                                  preload="metadata"
+                                  autoPlay
+                                  playsInline
+                                  muted
+                                  loop
+                                >
+                                  <source src={file.url! + '#t=0.1'} type="video/mp4" />
+                                  <track
+                                    src={file.url!}
+                                  />
+                                  Your browser does not support the video tag.
+                                </video>
+                              )}
+                              {file.type === 'IMAGE' && (
+                                <Image 
+                                  src={file.url!} 
+                                  alt={file.prompt} 
+                                  className="h-full w-full object-cover" 
+                                  width={500} 
+                                  height={500}
                                 />
-                                Your browser does not support the video tag.
-                              </video>
+                              )}
                             <CardFooter className="justify-start before:bg-white/10 border-white/20 border-1 overflow-hidden py-2 absolute before:rounded-xl rounded-large bottom-1 w-[calc(100%_-_8px)] shadow-small ml-1 z-10">
                               <p className="text-tiny text-white/80">{file.prompt.slice(0, 30)}...</p>
                             </CardFooter>
