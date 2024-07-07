@@ -592,7 +592,7 @@ export default function TextToImageForm ({session, checkCreditLimit, getCreditCo
               </Card>
 
         </div>
-        <PricingModal onOpen={isOpen} onOpenChange={onOpenChange} session={session}/>
+        <PricingModal onOpen={isOpen} onOpenChange={onOpenChange} session={session} toolType="TEXT_TO_IMAGE"/>
     </>
     );
 }

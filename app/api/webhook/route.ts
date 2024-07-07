@@ -26,11 +26,11 @@ export async function POST(req: Request) {
     const productType = session?.metadata?.productType;
     const credit = session?.metadata?.credit;
 
-    console.log('Product type')
-    console.log(productType)
-    console.log(credit)
-    console.log(userEmail)
-    console.log(session)
+    // console.log('Product type')
+    // console.log(productType)
+    // console.log(credit)
+    // console.log(userEmail)
+    // console.log(session)
   
     if (event.type === "checkout.session.completed") {
       if (!userEmail || !productType) {

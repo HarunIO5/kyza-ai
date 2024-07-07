@@ -564,7 +564,7 @@ export default function AnimateDiffForm ({session, checkCreditLimit, getCreditCo
               </Card>
 
         </div>
-        <PricingModal onOpen={isOpen} onOpenChange={onOpenChange} session={session}/>
+        <PricingModal onOpen={isOpen} onOpenChange={onOpenChange} session={session} toolType="TEXT_TO_VIDEO"/>
     </>
     );
 }

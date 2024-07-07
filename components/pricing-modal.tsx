@@ -17,7 +17,7 @@ import { Button } from "@nextui-org/button";
 import { Session } from "next-auth";
 import { useRouter } from "next/navigation";
 
-  export default function PricingModal ({onOpen, onOpenChange, session} : {onOpen: boolean, onOpenChange: () => void, session: Session}) {
+  export default function PricingModal ({onOpen, onOpenChange, session, toolType} : {onOpen: boolean, onOpenChange: () => void, session: Session, toolType: string}) {
 
     const [ price, setPrice ] = useState<string>('2.99')
     const [ isLoading, setIsLoading ] = useState<boolean>(false)
@@ -38,13 +38,13 @@ import { useRouter } from "next/navigation";
         // console.log(price)
 
         if (price == "2.99" ) {
-            price_id=process.env.NEXT_PUBLIC_STRIPE_ANIMATEDIFF_10_PRICE_ID
+            price_id = toolType === "TEXT_TO_VIDEO" ? process.env.NEXT_PUBLIC_STRIPE_ANIMATEDIFF_10_PRICE_ID : process.env.NEXT_PUBLIC_STRIPE_TEXTTOIMAGE_10_PRICE_ID
             credit = 10
         } else if (price == "4.99") {
-            price_id=process.env.NEXT_PUBLIC_STRIPE_ANIMATEDIFF_50_PRICE_ID
+            price_id = toolType === "TEXT_TO_VIDEO" ? process.env.NEXT_PUBLIC_STRIPE_ANIMATEDIFF_50_PRICE_ID : process.env.NEXT_PUBLIC_STRIPE_TEXTTOIMAGE_50_PRICE_ID
             credit = 50
         } else if (price == "8.99") {
-            price_id=process.env.NEXT_PUBLIC_STRIPE_ANIMATEDIFF_100_PRICE_ID
+            price_id = toolType === "TEXT_TO_VIDEO" ? process.env.NEXT_PUBLIC_STRIPE_ANIMATEDIFF_100_PRICE_ID : process.env.NEXT_PUBLIC_STRIPE_TEXTTOIMAGE_100_PRICE_ID
             credit = 100
         }
 
@@ -61,7 +61,7 @@ import { useRouter } from "next/navigation";
           email: userEmail,
           price_id: price_id,
           credit: credit, 
-          product: "animateDiff"
+          product: toolType === "TEXT_TO_VIDEO" ? "text_to_video" : "text_to_image"
         }
 
         setIsLoading(true);

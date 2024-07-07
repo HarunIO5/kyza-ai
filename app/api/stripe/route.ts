@@ -16,16 +16,16 @@ export async function POST(req: Request) {
         }
       })
 
-      const orders = await prisma.oneTimePurchases.findFirst({
-        where: {
-          userId: user?.id!,
-          productType: 'animateDiff'
-        }
-      })
+      // const orders = await prisma.oneTimePurchases.findFirst({
+      //   where: {
+      //     userId: user?.id!,
+      //     productType: 'animateDiff'
+      //   }
+      // })
 
-      if (orders) {
-        return new NextResponse("Already purchased", { status: 400 });
-      }
+      // if (orders) {
+      //   return new NextResponse("Already purchased", { status: 400 });
+      // }
 
       // Create Checkout Sessions from body params.
       const session = await stripe.checkout.sessions.create({
@@ -42,7 +42,7 @@ export async function POST(req: Request) {
         customer_email: params.purchaseObj.email,
         // automatic_tax: {enabled: true},
         metadata:{
-          productType: 'animateDiff',
+          productType: params.purchaseObj.product,
           credit: params.purchaseObj.credit
         }
       });
