@@ -51,7 +51,7 @@ async function getLatestToolsPages() {
     return data
 }
 
-const getToolPages = async (slug: string): Promise<{ toolPage: ToolPageType; moreToolPages: ToolPageType[] }> => {
+const getToolPages = cache(async (slug: string): Promise<{ toolPage: ToolPageType; moreToolPages: ToolPageType[] }> => {
 
     const query = `
     {
@@ -65,8 +65,8 @@ const getToolPages = async (slug: string): Promise<{ toolPage: ToolPageType; mor
     }`
 
     // , {}, { next: { revalidate: 0 } }
-    return await client.fetch(query, {}, { next: { revalidate: 0 } })
-}
+    return await client.fetch(query)
+})
 
 export default async function ToolsPages ({
     params

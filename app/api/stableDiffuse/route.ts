@@ -51,7 +51,7 @@ export async function POST(req: Request) {
       return new NextResponse("Failed to generate video", {status: 400})
     }
 
-    const {data, error} = await utapi.uploadFilesFromUrl({url: output.toString(), name: prompt});
+    const {data, error} = await utapi.uploadFilesFromUrl({url: output.toString(), name: prompt, });
     
     if (error) return NextResponse.json({error: `Couldn't uploaded image ${error}`}, {status: 400})
     
