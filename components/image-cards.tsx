@@ -1,9 +1,7 @@
-'use client'
+"use client";
 
-import {Card, CardFooter} from "@nextui-org/react";
-import {
-  useDisclosure
-} from "@nextui-org/react";
+import { Card, CardFooter, Image } from "@nextui-org/react";
+import { useDisclosure } from "@nextui-org/react";
 import { useEffect, useState } from "react";
 import ImageModal from "./image-modal";
 import { useInView } from "react-intersection-observer";
@@ -12,38 +10,44 @@ import { fetchSearchedVideos, fetchVideos } from "@/app/_action";
 import { SearchVideosType } from "@/app/(main)/media/page";
 import Link from "next/link";
 
-export default function VidCard ({vidProp, search, videoLength} : {vidProp : SearchVideosType[], search: string, videoLength: number}) {
+export default function VidCard({
+  vidProp,
+  search,
+  videoLength,
+}: {
+  vidProp: SearchVideosType[];
+  search: string;
+  videoLength: number;
+}) {
+  const [srcName, setSrcName] = useState<string>("");
+  const [srcUrl, setSrcUrl] = useState<string>("");
+  const { isOpen, onOpen, onOpenChange } = useDisclosure();
+  const [videos, setVideos] = useState(vidProp);
+  const [videoSkip, setVideoSkip] = useState(0);
+  const [ref, inView] = useInView();
 
-    const [srcName, setSrcName] = useState<string>('')
-    const [srcUrl, setSrcUrl] = useState<string>('')
-    const {isOpen, onOpen, onOpenChange} = useDisclosure();
-    const [videos, setVideos] = useState(vidProp)
-    const [videoSkip, setVideoSkip] = useState(0)
-    const [ref, inView] = useInView()
+  const router = useRouter();
 
-    const router = useRouter();
-
-    async function loadMoreVideos() {
-
-      const skip = videoSkip + 12
-      const videos = await fetchSearchedVideos({ skip: skip, search: search})
-      if (videos?.length) {
-        setVideoSkip(skip)
-        setVideos((prev: SearchVideosType[] | undefined) => [
-          ...(prev?.length ? prev : []),
-          ...videos
-        ])
-      }
+  async function loadMoreVideos() {
+    const skip = videoSkip + 12;
+    const videos = await fetchSearchedVideos({ skip: skip, search: search });
+    if (videos?.length) {
+      setVideoSkip(skip);
+      setVideos((prev: SearchVideosType[] | undefined) => [
+        ...(prev?.length ? prev : []),
+        ...videos,
+      ]);
     }
+  }
 
-    useEffect(() => {
-      if (inView) {
-        loadMoreVideos()
-      }
-    }, [inView])
+  useEffect(() => {
+    if (inView) {
+      loadMoreVideos();
+    }
+  }, [inView]);
 
-    // console.log(videoSkip)
-    // console.log(videoLength)
+  // console.log(videoSkip)
+  // console.log(videoLength)
 
     return (
         <>

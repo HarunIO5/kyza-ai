@@ -1,14 +1,16 @@
-import {nextui} from '@nextui-org/theme'
+import { nextui } from "@nextui-org/theme";
+import { withUt } from "uploadthing/tw";
 
 /** @type {import('tailwindcss').Config} */
-module.exports = {
+const config = {
   content: [
-    './pages/**/*.{js,ts,jsx,tsx,mdx}',
-    './components/**/*.{js,ts,jsx,tsx,mdx}',
-    './app/**/*.{js,ts,jsx,tsx,mdx}',
-    './node_modules/@nextui-org/theme/dist/**/*.{js,ts,jsx,tsx}'
+    "./pages/**/*.{js,ts,jsx,tsx,mdx}",
+    "./components/**/*.{js,ts,jsx,tsx,mdx}",
+    "./app/**/*.{js,ts,jsx,tsx,mdx}",
+    "./node_modules/@nextui-org/theme/dist/**/*.{js,ts,jsx,tsx}",
   ],
   theme: {
+
   	extend: {
   		'animation': {
   			'border-width': 'border-width 3s infinite alternate',

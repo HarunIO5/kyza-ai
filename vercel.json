@@ -1,8 +1,12 @@
 {
-    "functions": {
-      "app/api/animatediff/route.ts": {
-        "memory": 3008,
-        "maxDuration": 300
-      }
+  "functions": {
+    "app/api/animatediff/route.ts": {
+      "memory": 3008,
+      "maxDuration": 800
+    },
+    "app/api/ai-ghiblify/route.ts": {
+      "memory": 3008,
+      "maxDuration": 800
     }
   }
+}
