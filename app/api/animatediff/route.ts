@@ -1,8 +1,7 @@
 import { NextRequest, NextResponse } from "next/server";
 import { replicate } from "@/lib/replicate";
 import prisma from "@/lib/prisma";
-import { getUser, saveAnimateDiffVideos } from "@/lib/userFunctions";
-import { decrementalCreditLimit } from "@/lib/credit-check";
+import { saveAnimateDiffVideos } from "@/lib/userFunctions";
 import { utapi } from "@/lib/uploadthing";
 
 export type VideoInfo = {
@@ -36,7 +35,7 @@ export async function POST(req: Request) {
   });
 
   console.log("ANIMATE DIFF");
-  console.log(output);
+  console.log(output.toString());
 
   if (!output) {
     return new NextResponse("Failed to generate video", { status: 400 });
@@ -61,10 +60,10 @@ export async function POST(req: Request) {
     negativePrompt: negative as string,
     scale: scale.toString(),
   });
-  await decrementalCreditLimit({
-    email: email as string,
-    productType: "TextToVideo",
-  });
+  // await decrementalCreditLimit({
+  //   email: email as string,
+  //   productType: "TextToVideo",
+  // });
 
   // console.log("ANIMATEDIFF")
   // console.log(returnedInfo)

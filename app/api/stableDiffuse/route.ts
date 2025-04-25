@@ -2,11 +2,10 @@ import { NextRequest, NextResponse } from "next/server";
 import { replicate } from "@/lib/replicate";
 import prisma from "@/lib/prisma";
 import {
-  getUser,
-  saveAnimateDiffVideos,
+  // getUser,
   saveSD3Images,
 } from "@/lib/userFunctions";
-import { decrementalCreditLimit } from "@/lib/credit-check";
+// import { decrementalCreditLimit } from "@/lib/credit-check";
 import { utapi } from "@/lib/uploadthing";
 
 export type ImageInfo = {

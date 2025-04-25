@@ -134,15 +134,7 @@ const styles: Style[] = [
   },
 ];
 
-export default function TextToImageForm({
-  session,
-  checkCreditLimit,
-  getCreditCount,
-}: {
-  session: Session;
-  checkCreditLimit?: boolean;
-  getCreditCount?: number;
-}) {
+export default function TextToImageForm() {
   const [prompt, setPrompt] = useState<string>("");
   const [negative, setNegative] = useState<string>("");
   const [scale, setScale] = useState<SliderValue>(7.5);
@@ -253,11 +245,11 @@ export default function TextToImageForm({
       },
       body: JSON.stringify({
         prompt: values.prompt,
-        negative: values.negative_prompt,
+        // negative: values.negative_prompt,
         // scale: scale,
         // spees: speed,
         aspect_ratio: ratio,
-        email: session?.user?.email!,
+        // email: session?.user?.email!,
       }),
     });
 
@@ -331,12 +323,10 @@ export default function TextToImageForm({
         },
         body: JSON.stringify({
           prompt: prompt,
-          negative:
-            "nsfw, ng_deepnegative_v1_75t, badhandv4, worst quality, low quality, normal quality, lowres, watermark, monochrome",
-          scale: scale,
-          spees: speed,
+          // scale: scale,
+          // spees: speed,
           aspect_ratio: ratio,
-          email: session?.user?.email!,
+          // email: session?.user?.email!,
         }),
       });
 
@@ -361,13 +351,13 @@ export default function TextToImageForm({
       }
     }
 
-    if (loadPrompt && session && !checkCreditLimit) {
+    if (loadPrompt) {
       firstGeneration({ prompt: loadPrompt });
     }
-  }, [loadPrompt && session]);
+  }, [loadPrompt]);
 
-  console.log("GET CREDIT COUNT");
-  console.log(getCreditCount);
+  // console.log("GET CREDIT COUNT");
+  // console.log(getCreditCount);
 
   const copyToClipboard = async (text: string) => {
     try {
@@ -384,21 +374,20 @@ export default function TextToImageForm({
   return (
     <>
       <div className="w-3/4 md:h-full flex flex-col md:flex-row gap-8">
-        {success && (
+        {/* {success && (
           <Confetti width={width! - 50} height={height!} recycle={false} />
-        )}
+        )} */}
         <Card className="w-full h-full md:w-1/3 px-4 py-8 border-1 border-gray-300 dark:border-slate-700 dark:bg-black">
-          {session && (
-            <CardHeader>
-              <span className="relative inline-block mx-auto overflow-hidden rounded-full p-[2px]">
-                <span className="absolute inset-[-1000%] animate-[spin_2s_linear_infinite] bg-[conic-gradient(from_90deg_at_50%_50%,#53d1ff_0%,#ac4cf5_50%,#53d1ff_100%)]" />
-                <div className="inline-flex h-full w-full cursor-pointer items-center justify-center rounded-full bg-white dark:bg-gray-950 px-3 py-1 text-sm font-medium dark:text-gray-50 backdrop-blur-3xl">
-                  <Sparkles className="h-5 w-5 inline fill-yellow-500 text-yellow-500" />{" "}
-                  {getCreditCount} Credits Remaining
-                </div>
-              </span>
-            </CardHeader>
-          )}
+          <CardHeader>
+            <span className="relative inline-block mx-auto overflow-hidden rounded-full p-[2px]">
+              <span className="absolute inset-[-1000%] animate-[spin_2s_linear_infinite] bg-[conic-gradient(from_90deg_at_50%_50%,#53d1ff_0%,#ac4cf5_50%,#53d1ff_100%)]" />
+              <div className="inline-flex h-full w-full cursor-pointer items-center justify-center rounded-full bg-white dark:bg-gray-950 px-3 py-1 text-sm font-medium dark:text-gray-50 backdrop-blur-3xl">
+                <Sparkles className="h-5 w-5 inline fill-yellow-500 text-yellow-500 mr-2" />
+                {"  "}
+                Text To Image
+              </div>
+            </span>
+          </CardHeader>
           <CardBody className="w-full h-full flex flex-col justify-between gap-8">
             {/* <Select
                       items={styles}
@@ -452,7 +441,7 @@ export default function TextToImageForm({
                     label="Describe your video"
                     value={prompt}
                     labelPlacement="outside"
-                    placeholder="masterpiece, best quality, 1girl, solo, cherry blossoms, hanami, pink flower, white flower, spring season, wisteria, petals, flower, plum blossoms, outdoors, falling petals, white hair, black eyes"
+                    placeholder="A tan-skinned Moroccan female in an all-black sleek futuristic outfit, with a huge headpiece as the centerpiece, clean makeup, with depth of field. The outfit is fantastical, edgy, and regal themed, captured in vivid colors, embodying the essence of fantasy with a minimalist approach."
                     className="pb-4"
                     {...register("prompt", {
                       onChange: (e) => {
@@ -528,7 +517,7 @@ export default function TextToImageForm({
                   </RadioGroup>
                 </div>
                 <div className="w-full flex justify-end">
-                  {session && isLoading && (
+                  {isLoading && (
                     <Button className="relative w-full my-4 inline-flex h-12 overflow-hidden rounded-full p-[1px] focus:outline-none focus:ring-2 focus:ring-gray-400 focus:ring-offset-2 focus:ring-offset-gray-50">
                       <span className="absolute inset-[-1000%] animate-[spin_2s_linear_infinite] bg-[conic-gradient(from_90deg_at_50%_50%,#53d1ff_0%,#ac4cf5_50%,#53d1ff_100%)]" />
                       <span className="inline-flex h-full w-full cursor-pointer items-center justify-center rounded-full px-8 py-1 text-md font-medium text-gray-50 backdrop-blur-3xl">
@@ -536,7 +525,7 @@ export default function TextToImageForm({
                       </span>
                     </Button>
                   )}
-                  {session && !isLoading && checkCreditLimit && (
+                  {!isLoading && (
                     <Button
                       className="relative w-full my-4 inline-flex h-12 overflow-hidden rounded-full p-[1px] focus:outline-none focus:ring-2 focus:ring-gray-400 focus:ring-offset-2 focus:ring-offset-gray-50"
                       type="submit"
@@ -547,7 +536,7 @@ export default function TextToImageForm({
                       </span>
                     </Button>
                   )}
-                  {!session && (
+                  {/* {!session && (
                     <Link href={"/login"} className="w-full">
                       <Button className="relative w-full my-4 inline-flex h-12 overflow-hidden rounded-full p-[1px] focus:outline-none focus:ring-2 focus:ring-gray-400 focus:ring-offset-2 focus:ring-offset-gray-50">
                         <span className="absolute inset-[-1000%] animate-[spin_2s_linear_infinite] bg-[conic-gradient(from_90deg_at_50%_50%,#53d1ff_0%,#ac4cf5_50%,#53d1ff_100%)]" />
@@ -556,7 +545,7 @@ export default function TextToImageForm({
                         </span>
                       </Button>
                     </Link>
-                  )}
+                  )} */}
                   {/* {session && checkCreditLimit && (
                     <Button
                       className="relative w-full my-4 inline-flex h-12 overflow-hidden rounded-full p-[1px] focus:outline-none focus:ring-2 focus:ring-gray-400 focus:ring-offset-2 focus:ring-offset-gray-50"
@@ -693,12 +682,12 @@ export default function TextToImageForm({
           )}
         </Card>
       </div>
-      <PricingModal
+      {/* <PricingModal
         onOpen={isOpen}
         onOpenChange={onOpenChange}
         session={session}
         toolType="TEXT_TO_IMAGE"
-      />
+      /> */}
     </>
   );
 }
