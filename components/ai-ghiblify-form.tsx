@@ -448,7 +448,7 @@ export default function AIGhiblifyForm() {
                 Upload an image to generate a Ghiblify image
               </p>
               {uploadedImage && (
-                <div className="relative w-full h-40 mb-2">
+                <div className="relative w-full h-40 mb-6">
                   <div className="w-full">
                     <Image
                       as={NextImage}
