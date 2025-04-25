@@ -7,7 +7,7 @@ import {
   SearchVideosDB,
 } from "@/lib/getVidFiles";
 // import { getUser, getSavedVideos, getNumberOfSavedVideos } from "@/lib/userFunctions"
-import { sendEmail } from "@/lib/email/mailer";
+// import { sendEmail } from "@/lib/email/mailer";
 
 export async function fetchVideos({
   limit,
@@ -39,15 +39,15 @@ export async function fetchSearchedVideos({
 //     return userInfo
 // }
 
-export async function sendTokenEmail(
-  email: string,
-  emailType: string,
-  id: string
-) {
-  const mail = await sendEmail(email, emailType, id);
+// export async function sendTokenEmail(
+//   email: string,
+//   emailType: string,
+//   id: string
+// ) {
+//   const mail = await sendEmail(email, emailType, id);
 
-  return mail;
-}
+//   return mail;
+// }
 
 // export async function getSavedVideosProps ({email, skip}: {email: string, skip: number}) {
 //     const videos = await getSavedVideos({email: email, skip: skip})
