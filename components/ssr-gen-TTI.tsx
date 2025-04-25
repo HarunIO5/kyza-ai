@@ -4,8 +4,8 @@ import AnimateDiffForm from "./animate-diff-form";
 import TextToImageForm from "./text-to-image-form";
 
 export default async function SSRGenerateTTIForm() {
-  let checkCredits;
-  let getCreditCount;
+  //   let checkCredits;
+  //   let getCreditCount;
 
   // if (session) {
   // 	checkCredits = await checkCreditLimit({email: session?.user?.email!, productType: "TextToImage"})
