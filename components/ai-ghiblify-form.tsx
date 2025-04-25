@@ -472,29 +472,31 @@ export default function AIGhiblifyForm() {
                   </div>
                 </div>
               )}
-              <UploadButton
-                endpoint="imageUploader"
-                onClientUploadComplete={(res) => {
-                  // Do something with the response
-                  console.log("Files: ", res);
-                  setUploadedImage(res[0].url);
-                  toast.success("Successfully Uploaded Image!", {
-                    style: {
-                      borderRadius: "10px",
-                    },
-                  });
-                  // alert("Upload Completed");
-                }}
-                onUploadError={(error: Error) => {
-                  // Do something with the error.
-                  // alert(`ERROR! ${error.message}`);
-                  toast.error("Failed to Upload Image: " + error.message, {
-                    style: {
-                      borderRadius: "10px",
-                    },
-                  });
-                }}
-              />
+              {!uploadedImage && (
+                <UploadButton
+                  endpoint="imageUploader"
+                  onClientUploadComplete={(res) => {
+                    // Do something with the response
+                    console.log("Files: ", res);
+                    setUploadedImage(res[0].url);
+                    toast.success("Successfully Uploaded Image!", {
+                      style: {
+                        borderRadius: "10px",
+                      },
+                    });
+                    // alert("Upload Completed");
+                  }}
+                  onUploadError={(error: Error) => {
+                    // Do something with the error.
+                    // alert(`ERROR! ${error.message}`);
+                    toast.error("Failed to Upload Image: " + error.message, {
+                      style: {
+                        borderRadius: "10px",
+                      },
+                    });
+                  }}
+                />
+              )}
             </div>
             <div className="w-full h-full flex flex-col gap-8">
               <form onSubmit={handleSubmit(onSubmit)}>
