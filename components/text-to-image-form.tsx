@@ -254,8 +254,8 @@ export default function TextToImageForm({
       body: JSON.stringify({
         prompt: values.prompt,
         negative: values.negative_prompt,
-        scale: scale,
-        spees: speed,
+        // scale: scale,
+        // spees: speed,
         aspect_ratio: ratio,
         email: session?.user?.email!,
       }),
@@ -421,7 +421,7 @@ export default function TextToImageForm({
                       )}
                     </Select> */}
 
-            <Slider
+            {/* <Slider
               size="sm"
               label="Select guidance scale"
               minValue={0}
@@ -443,7 +443,7 @@ export default function TextToImageForm({
                   <span className="transition-transform bg-gradient-to-br shadow-small from-secondary-100 to-secondary-500 rounded-full w-5 h-5 block group-data-[dragging=true]:scale-80" />
                 </div>
               )}
-            />
+            /> */}
             <div className="w-full h-full flex flex-col gap-8">
               <form onSubmit={handleSubmit(onSubmit)}>
                 <div className="w-full">
@@ -465,7 +465,7 @@ export default function TextToImageForm({
                       {errors.prompt?.message}
                     </span>
                   )}
-                  <Textarea
+                  {/* <Textarea
                     type="text"
                     label="Negative prompt"
                     value={negative}
@@ -481,9 +481,9 @@ export default function TextToImageForm({
                     <span className=" text-red-500">
                       {errors.negative_prompt?.message}
                     </span>
-                  )}
+                  )} */}
                 </div>
-                <div className="w-full flex flex-col gap-8 pt-6 pb-2">
+                {/* <div className="w-full flex flex-col gap-8 pt-6 pb-2">
                   <Switch
                     defaultSelected
                     isSelected={speed}
@@ -505,7 +505,7 @@ export default function TextToImageForm({
                       Select to receive your image quickier
                     </p>
                   </Switch>
-                </div>
+                </div> */}
                 <div className="w-full flex flex-col gap-8 pt-4 pb-4">
                   <RadioGroup
                     label="Select your image dimensions"
@@ -536,7 +536,7 @@ export default function TextToImageForm({
                       </span>
                     </Button>
                   )}
-                  {session && !isLoading && !checkCreditLimit && (
+                  {session && !isLoading && checkCreditLimit && (
                     <Button
                       className="relative w-full my-4 inline-flex h-12 overflow-hidden rounded-full p-[1px] focus:outline-none focus:ring-2 focus:ring-gray-400 focus:ring-offset-2 focus:ring-offset-gray-50"
                       type="submit"
@@ -557,7 +557,7 @@ export default function TextToImageForm({
                       </Button>
                     </Link>
                   )}
-                  {session && checkCreditLimit && (
+                  {/* {session && checkCreditLimit && (
                     <Button
                       className="relative w-full my-4 inline-flex h-12 overflow-hidden rounded-full p-[1px] focus:outline-none focus:ring-2 focus:ring-gray-400 focus:ring-offset-2 focus:ring-offset-gray-50"
                       onClick={() => {
@@ -569,7 +569,7 @@ export default function TextToImageForm({
                         Buy Credits
                       </span>
                     </Button>
-                  )}
+                  )} */}
                 </div>
               </form>
             </div>
@@ -663,8 +663,8 @@ export default function TextToImageForm({
               >
                 <Image
                   as={NextImage}
-                  width={800}
-                  height={800}
+                  width={1000}
+                  height={1000}
                   src={genImage}
                   alt={prompt}
                   className="h-full w-full object-cover"

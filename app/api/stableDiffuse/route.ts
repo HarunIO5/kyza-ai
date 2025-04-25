@@ -17,16 +17,15 @@ export type ImageInfo = {
 export async function POST(req: Request) {
   // console.log("AnimateDIFF Inputs")
 
-  const { prompt, negative, scale, email, speed, aspect_ratio } =
-    await req.json();
+  const { prompt, negative, email, aspect_ratio } = await req.json();
 
   let quality: number;
 
-  if (speed == true) {
-    quality = 80;
-  } else {
-    quality = 20;
-  }
+  // if (speed == true) {
+  //   quality = 20;
+  // } else {
+  //   quality = 80;
+  // }
 
   // console.log(prompt)
   // console.log(negative)
@@ -39,8 +38,8 @@ export async function POST(req: Request) {
       prompt: prompt,
       // n_prompt: negative,
       output_format: "webp",
-      output_quality: quality,
-      cfg: scale,
+      output_quality: 100,
+      // cfg: scale,
       aspect_ratio: aspect_ratio,
       safety_tolerance: 2,
       prompt_upsampling: true,
@@ -70,13 +69,13 @@ export async function POST(req: Request) {
     prompt: prompt as string,
     url: data?.url!,
     negativePrompt: negative as string,
-    scale: scale.toString(),
+    // scale: scale.toString(),
     aspectRatio: aspect_ratio.toString(),
   });
-  await decrementalCreditLimit({
-    email: email as string,
-    productType: "TextToImage",
-  });
+  // await decrementalCreditLimit({
+  //   email: email as string,
+  //   productType: "TextToImage",
+  // });
 
   if (returnedInfo.error || returnedInfo.url == null || !returnedInfo) {
     return NextResponse.json(

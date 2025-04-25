@@ -21,23 +21,22 @@ export async function POST(req: Request) {
   // console.log(style)
   // console.log(email)
 
-  const output = await replicate.run(
-    "lucataco/animate-diff:beecf59c4aee8d81bf04f0381033dfa10dc16e845b4ae00d281e2fa377e48a9f",
-    {
-      input: {
-        path: style,
-        seed: 255224557,
-        steps: 25,
-        prompt: prompt,
-        n_prompt: negative,
-        motion_module: "mm_sd_v14",
-        guidance_scale: scale,
-      },
-    }
-  );
+  const output = await replicate.run("luma/ray-flash-2-720p", {
+    input: {
+      // path: style,
+      // seed: 255224557,
+      // steps: 25,
+      prompt: prompt,
+      // n_prompt: negative,
+      aspect_ratio: "16:9",
+      duration: 5,
+      // motion_module: "mm_sd_v14",
+      // guidance_scale: scale,
+    },
+  });
 
-  // console.log('ANIMATE DIFF')
-  // console.log(output);
+  console.log("ANIMATE DIFF");
+  console.log(output);
 
   if (!output) {
     return new NextResponse("Failed to generate video", { status: 400 });
