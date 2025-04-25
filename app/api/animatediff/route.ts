@@ -58,7 +58,7 @@ export async function POST(req: Request) {
     url: data?.url!,
     style: style as string,
     negativePrompt: negative as string,
-    scale: scale.toString(),
+    // scale: scale.toString(),
   });
   // await decrementalCreditLimit({
   //   email: email as string,
