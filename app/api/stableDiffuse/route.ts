@@ -1,72 +1,94 @@
 import { NextRequest, NextResponse } from "next/server";
 import { replicate } from "@/lib/replicate";
 import prisma from "@/lib/prisma";
-import { getUser, saveAnimateDiffVideos, saveSD3Images } from "@/lib/userFunctions";
+import {
+  getUser,
+  saveAnimateDiffVideos,
+  saveSD3Images,
+} from "@/lib/userFunctions";
 import { decrementalCreditLimit } from "@/lib/credit-check";
 import { utapi } from "@/lib/uploadthing";
 
 export type ImageInfo = {
   image: string;
   key: string;
-}
+};
 
 export async function POST(req: Request) {
+  // console.log("AnimateDIFF Inputs")
 
-    // console.log("AnimateDIFF Inputs")
+  const { prompt, negative, scale, email, speed, aspect_ratio } =
+    await req.json();
 
-    const {prompt, negative, scale, email, speed, aspect_ratio} = await req.json()
+  let quality: number;
 
-    let quality: number
+  if (speed == true) {
+    quality = 80;
+  } else {
+    quality = 20;
+  }
 
-    if (speed == true) {
-      quality = 80
-    } else {
-      quality = 20
-    }
+  // console.log(prompt)
+  // console.log(negative)
+  // console.log(scale)
+  // console.log(style)
+  // console.log(email)
 
-    // console.log(prompt)
-    // console.log(negative)
-    // console.log(scale)
-    // console.log(style)
-    // console.log(email)
+  const output = await replicate.run("black-forest-labs/flux-1.1-pro", {
+    input: {
+      prompt: prompt,
+      // n_prompt: negative,
+      output_format: "webp",
+      output_quality: quality,
+      cfg: scale,
+      aspect_ratio: aspect_ratio,
+      safety_tolerance: 2,
+      prompt_upsampling: true,
+    },
+  });
 
-    const output = await replicate.run(
-        "stability-ai/stable-diffusion-3",
-        {
-          input: {
-            prompt: prompt,
-            n_prompt: negative,
-            output_format: "webp",
-            output_quality: quality,
-            cfg: scale,
-            aspect_ratio: aspect_ratio,
-          }
-        }
-      );
+  console.log("FLUX 1.1 PRO");
+  console.log(output);
 
-      // console.log('ANIMATE DIFF')
-      // console.log(output);
+  if (!output) {
+    return new NextResponse("Failed to generate image", { status: 400 });
+  }
 
-    if (!output) {
-      return new NextResponse("Failed to generate video", {status: 400})
-    }
+  const { data, error } = await utapi.uploadFilesFromUrl({
+    url: output.toString(),
+    name: prompt,
+  });
 
-    const {data, error} = await utapi.uploadFilesFromUrl({url: output.toString(), name: prompt, });
-    
-    if (error) return NextResponse.json({error: `Couldn't uploaded image ${error}`}, {status: 400})
-    
-    const returnedInfo = await saveSD3Images({email: email as string, prompt: prompt as string, url: data?.url!, negativePrompt: negative as string, scale: scale.toString(), aspectRatio: aspect_ratio.toString()})
-    await decrementalCreditLimit({email: email as string, productType: 'TextToImage'})
+  if (error)
+    return NextResponse.json(
+      { error: `Couldn't uploaded image ${error}` },
+      { status: 400 }
+    );
 
-    if (returnedInfo.error || returnedInfo.url == null || !returnedInfo) {
-      return NextResponse.json({error: `Couldn't uploaded image to DB`}, {status: 400})
-    }
+  const returnedInfo = await saveSD3Images({
+    email: email as string,
+    prompt: prompt as string,
+    url: data?.url!,
+    negativePrompt: negative as string,
+    scale: scale.toString(),
+    aspectRatio: aspect_ratio.toString(),
+  });
+  await decrementalCreditLimit({
+    email: email as string,
+    productType: "TextToImage",
+  });
 
-    const dataReturned: ImageInfo = {
-      image: returnedInfo.url,
-      key: returnedInfo.key,
-    }
+  if (returnedInfo.error || returnedInfo.url == null || !returnedInfo) {
+    return NextResponse.json(
+      { error: `Couldn't uploaded image to DB` },
+      { status: 400 }
+    );
+  }
 
-    return new NextResponse(JSON.stringify(dataReturned))
+  const dataReturned: ImageInfo = {
+    image: returnedInfo.url,
+    key: returnedInfo.key,
+  };
 
+  return new NextResponse(JSON.stringify(dataReturned));
 }
