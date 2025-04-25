@@ -16,6 +16,13 @@ export type SearchVideosType = {
   prompt: string;
   url: string;
   fileSizeBytes: number | null;
+  type: string;
+  model: string;
+  style?: string;
+  scale?: number;
+  status?: string;
+  ratio?: string;
+  format?: string;
 };
 
 // export const dynamic = 'force-dynamic'
@@ -25,7 +32,8 @@ export default async function VideosFeed({
 }: {
   searchParams: { [key: string]: string | string[] | undefined };
 }) {
-  const search = typeof searchParams.search === "string" ? searchParams.search : undefined;
+  const search =
+    typeof searchParams.search === "string" ? searchParams.search : undefined;
   // console.log("params")
   // console.log(JSON.stringify(search))
 
@@ -41,11 +49,11 @@ export default async function VideosFeed({
     <div className="w-full flex flex-col items-center justify-center gap-4 py-8 md:py-10">
       <LandingPageHeading />
       <SearchBar />
-        <Suspense
-          key={JSON.stringify(search)}
-          fallback={<LoadingSearchResults/>}
-        >
-        <LibraryLoader search={search!}/>
+      <Suspense
+        key={JSON.stringify(search)}
+        fallback={<LoadingSearchResults />}
+      >
+        <LibraryLoader search={search!} />
       </Suspense>
     </div>
   );
