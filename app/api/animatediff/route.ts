@@ -42,7 +42,7 @@ export async function POST(req: Request) {
   }
 
   const { data, error } = await utapi.uploadFilesFromUrl({
-    url: output.toString(),
+    url: "https://replicate.delivery/xezq/DhiZkcmo51bPJhyb2i0SCgMeUFPmyY6e6pXuYfyn14LYIpMpA/tmp_6yxravz.mp4",
     name: prompt,
   });
 
