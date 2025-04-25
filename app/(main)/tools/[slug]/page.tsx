@@ -66,7 +66,7 @@ const getToolPages = async (
     }`;
 
   // , {}, { next: { revalidate: 0 } }
-  return await client.fetch(query, {}, { next: { revalidate: 0 } });
+  return await client.fetch(query);
 };
 
 export default async function ToolsPages({
