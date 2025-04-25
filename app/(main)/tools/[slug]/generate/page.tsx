@@ -10,6 +10,7 @@ import { Metadata } from "next";
 import SSRGenerateTTVForm from "@/components/ssr-generate-form";
 import SSRGenerateTTIForm from "@/components/ssr-gen-TTI";
 import LoadingGeneratePage from "@/components/loading-generate";
+import AIGhiblifyForm from "@/components/ai-ghiblify-form";
 
 export const metadata: Metadata = {
   title: `Generate AI Videos & Images`,
@@ -38,6 +39,12 @@ export default async function GeneratePage({
       {params.slug == "text-to-image" && (
         <Suspense fallback={<LoadingGeneratePage />}>
           <SSRGenerateTTIForm />
+        </Suspense>
+      )}
+
+      {params.slug == "ai-ghiblify" && (
+        <Suspense fallback={<LoadingGeneratePage />}>
+          <AIGhiblifyForm />
         </Suspense>
       )}
     </div>

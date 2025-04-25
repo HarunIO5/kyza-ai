@@ -111,6 +111,35 @@ export async function saveSD3Images({
   return JSON.parse(JSON.stringify(video));
 }
 
+export async function saveGhiblifyImages({
+  email,
+  prompt,
+  url,
+}: {
+  email?: string;
+  prompt: string;
+  url: string;
+}) {
+  // const user = await getUser(email);
+
+  const video = await prisma.generations.create({
+    data: {
+      prompt: prompt,
+      model: "Ghiblify",
+      url: url,
+      userEmail: email || "", // Store just email if provided
+      negativePrompt: "",
+      scale: "",
+      key: nanoid(),
+      aspectRatio: "",
+      outputFormat: "webp",
+      type: "IMAGE",
+    },
+  });
+
+  return JSON.parse(JSON.stringify(video));
+}
+
 // export async function getSavedVideos({
 //   email,
 //   skip,
