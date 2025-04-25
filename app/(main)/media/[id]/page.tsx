@@ -62,7 +62,7 @@ export default async function StandardMediaView ({
         <div className="w-full flex items-center justify-center py-8 px-4">
             <div className="flex flex-col-reverse md:flex-row items-start justify-between gap-4">
               <div className="flex flex-col gap-4">
-                <p className="font-semibold text-xl">
+                <p className="font-bold text-xl">
                       Prompt:
                 </p>
                 <Card className="dark:bg-slate-900 p-2 rounded-md w-full md:max-w-[300px]">

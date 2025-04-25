@@ -2,26 +2,26 @@ export type SiteConfig = typeof siteConfig;
 
 export const siteConfig = {
 	name: "KYZA",
-	description: "Visualise The Best AI Video & Image Generations",
+	description: "Make beautiful websites regardless of your design experience.",
 	navItems: [
 		{
-			label: "Home",
-			href: "/",
+			label: "Articles",
+			href: "/blog",
 		},
-    	{
-    	  label: "Blogs",
-    	  href: "/blog",
-    	}
+		{
+			label: "📚 GitBook",
+			href: "https://docs.kyza.ai",
+		},
 	],
 	navMenuItems: [
 		{
-			label: "Home",
-			href: "/",
+			label: "Articles",
+			href: "/blog",
 		},
-    	{
-    	  label: "Blogs",
-    	  href: "/blog",
-    	}
+		{
+			label: "📚 GitBook",
+			href: "https://docs.kyza.ai",
+		},
 	],
 	links: {
 		github: "https://github.com/nextui-org/nextui",

@@ -57,34 +57,36 @@ export default function SearchBar () {
     }
 
     return (
-        <div className="w-full flex flex-col gap-3 p-6 justify-center items-center">
-		    <Input
-		    	aria-label="Search"
-                onChange={handleChange}
-		    	classNames={{
-		    	    inputWrapper: [
-                        "bg-default-100",
-                        "border-violet-500",
-                    ],
-		      	    input: "text-sm",
-		      	}}
-                className="md:w-1/2 border-violet-500"
-		      	endContent={
-		      		<Kbd className="hidden lg:inline-block" keys={["command"]}>
-		      			K
-		      		</Kbd>
-		      	}
-		      	labelPlacement="outside"
-		      	placeholder="Search &ldquo;Cars&ldquo;"
-		      	startContent={
-		      		<SearchIcon className="text-base text-default-400 pointer-events-none flex-shrink-0" />
-		      	}
-		      	type="text"
-                variant="bordered"
-                value={query}
-                onKeyDown={onKeyPressHandler}
-		      />
-              <LandingPageVideoFilters/>
-		  </div>
+        <div className="w-full flex flex-col gap-3 justify-center items-center">
+            <div className="w-full px-6 pb-2">
+                <Input
+                    aria-label="Search"
+                    onChange={handleChange}
+                    classNames={{
+                        inputWrapper: [
+                            "bg-default-100",
+                            "border-violet-500",
+                        ],
+                        input: "text-sm",
+                    }}
+                    className="md:w-4/4 border-violet-500"
+                    endContent={
+                        <Kbd className="hidden lg:inline-block" keys={["command"]}>
+                            K
+                        </Kbd>
+                    }
+                    labelPlacement="outside"
+                    placeholder="Search &ldquo;Cars&ldquo;"
+                    startContent={
+                        <SearchIcon className="text-base text-default-400 pointer-events-none flex-shrink-0" />
+                    }
+                    type="text"
+                    variant="bordered"
+                    value={query}
+                    onKeyDown={onKeyPressHandler}
+                />
+            </div>
+            <LandingPageVideoFilters/>
+        </div>
     );
 }

@@ -9,6 +9,7 @@ import SearchFailed from "@/components/search-failed";
 import { Spinner } from "@nextui-org/react";
 import LoadingSearchResults from "@/components/loading-search";
 import LibraryLoader from "@/components/library-loader";
+import { title } from "@/components/primitives";
 
 export type SearchVideosType = {
   id: string;
@@ -38,13 +39,13 @@ export default async function VideosFeed({
 
   // revalidatePath('/videos', 'page')
   return (
-    <div className="w-full flex flex-col items-center justify-center gap-4 py-8 md:py-10">
-      <LandingPageHeading />
+    <div className="w-full flex flex-col items-center justify-center gap-4">
+      <h1 className={`${title()} text-4xl font-bold mb-8`}>Media</h1>
       <SearchBar />
-        <Suspense
-          key={JSON.stringify(search)}
-          fallback={<LoadingSearchResults/>}
-        >
+      <Suspense
+        key={JSON.stringify(search)}
+        fallback={<LoadingSearchResults/>}
+      >
         <LibraryLoader search={search!}/>
       </Suspense>
     </div>

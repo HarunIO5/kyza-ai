@@ -31,7 +31,6 @@ export default async function Layout({
 				<main className="w-full mx-auto flex-grow">
 						{children}
 				</main>
-				<SiteFooter/>
 			</div>
 	);
 }

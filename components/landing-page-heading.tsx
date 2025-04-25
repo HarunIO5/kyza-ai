@@ -1,21 +1,59 @@
-import { title, subtitle } from "@/components/primitives";
-import { WavesIcon } from "./icons";
+"use client";
 
-export default function LandingPageHeading () {
-    return (
-        <>
-			<WavesIcon className="absolute -z-8 bottom-0 left-0 right-0 top-60 md:top-12 h-120% w-full opacity-50"/>
-			<div className="px-4 inline-block max-w-xl text-center justify-center z-10 pt-4">
-				<h1 className={title()}>Search For&nbsp;</h1>
-				<h1 className={`${title()} inline-flex animate-text-gradient bg-gradient-to-r from-[#ac4cf5] via-[#53d1ff] to-[#dd61ff] bg-[200%_auto] bg-clip-text italic text-transparent`}>Beautiful&nbsp;</h1>
-				<br />
-				<h1 className={title()}>
-					AI Videos
-				</h1>
-				<h2 className={subtitle({ class: "mt-4" })}>
-					Search and view the latest videos from the latest models
-				</h2>
-	    	</div>
-        </>     
-    );
+import { title, subtitle } from "@/components/primitives";
+import { motion } from "framer-motion";
+import SearchBar from "./search";
+import { useTheme } from "next-themes";
+import { cn } from "@/lib/utils";
+
+export default function LandingPageHeading() {
+  const { theme } = useTheme();
+
+  return (
+    <motion.div 
+      initial={{ opacity: 0, y: 20 }}
+      animate={{ opacity: 1, y: 0 }}
+      transition={{ duration: 0.5 }}
+      className={cn(
+        "relative w-full py-24",
+        theme === "light" 
+          ? "bg-gradient-to-b from-white to-slate-100" 
+          : "bg-gradient-to-b from-[#020617] to-black"
+      )}
+    >
+      {/* Top Feature Bar */}
+      <div className="absolute top-4 left-0 right-0">
+        <div className={cn(
+          "flex items-center justify-center gap-2 md:gap-6 backdrop-blur-md px-3 py-2 md:p-4 rounded-full w-fit mx-auto border shadow-lg text-sm md:text-base",
+          theme === "light"
+            ? "bg-white/40 border-slate-200/50"
+            : "bg-slate-800/40 border-slate-700/50"
+        )}>
+          <div className="flex items-center gap-2">
+            <span className="relative flex h-2 w-2 md:h-2.5 md:w-2.5">
+              <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-green-400 opacity-75"></span>
+              <span className="relative inline-flex rounded-full h-2 w-2 md:h-2.5 md:w-2.5 bg-green-500"></span>
+            </span>
+            <span className="text-green-400 font-medium hover:text-green-300 transition-colors whitespace-nowrap">Live Generation</span>
+          </div>
+          <span className="text-slate-500 font-light">|</span>
+          <span className="text-purple-400 font-medium hover:text-purple-300 transition-colors whitespace-nowrap">4K Quality</span>
+          <span className="text-slate-500 font-light">|</span>
+          <span className="text-blue-400 font-medium hover:text-blue-300 transition-colors whitespace-nowrap">Real-time Processing</span>
+        </div>
+      </div>
+      
+      {/* Main Content */}
+      <div className="relative px-5 max-w-xl mx-auto text-center z-10 pt-16">
+        <h1 className={title()}>Search For&nbsp;</h1>
+        <h1 className={`${title()} inline-flex animate-text-gradient bg-gradient-to-r from-[#ac4cf5] via-[#53d1ff] to-[#dd61ff] bg-[200%_auto] bg-clip-text italic text-transparent`}>Beautiful&nbsp;</h1>
+        <br />
+        <h1 className={title()}>AI Videos</h1>
+        <h2 className={subtitle({ class: "mt-4 mb-8" })}>
+          Search and view the latest videos from the latest models
+        </h2>
+        <SearchBar />
+      </div>
+    </motion.div>
+  );
 }

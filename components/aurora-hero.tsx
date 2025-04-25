@@ -10,6 +10,8 @@ import {
   motion,
   animate,
 } from "framer-motion";
+import { useTheme } from "next-themes";
+import { cn } from "@/lib/utils";
 
 import AltCoverImage from "./alt-cover-images";
 import Link from "next/link";
@@ -27,6 +29,7 @@ export const AuroraHero = ({
     image: any,
     slug: any
 }) => {
+  const { theme } = useTheme();
   const color = useMotionValue(COLORS_TOP[0]);
 
   useEffect(() => {
@@ -38,7 +41,7 @@ export const AuroraHero = ({
     });
   }, []);
 
-  const backgroundImage = useMotionTemplate`radial-gradient(125% 125% at 50% 0%, #020617 50%, ${color})`;
+  const backgroundImage = useMotionTemplate`radial-gradient(125% 125% at 50% 0%, ${theme === 'light' ? '#ffffff' : '#020617'} 50%, ${color})`;
   const border = useMotionTemplate`1px solid ${color}`;
   const boxShadow = useMotionTemplate`0px 4px 24px ${color}`;
 
@@ -47,7 +50,10 @@ export const AuroraHero = ({
       style={{
         backgroundImage,
       }}
-      className="relative grid min-h-screen place-content-center overflow-hidden bg-gray-950 px-4 py-24 text-gray-200"
+      className={cn(
+        "relative grid min-h-screen place-content-center overflow-hidden px-4 py-24",
+        theme === 'light' ? "text-gray-900 bg-white" : "text-gray-200 bg-gray-950"
+      )}
     >
       <div className="relative z-10 flex flex-col items-center">
         <div className="w-full mx-auto flex flex-col md:flex-row justify-between gap-8 px-12 md:px-24">

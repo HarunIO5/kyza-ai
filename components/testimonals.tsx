@@ -8,16 +8,16 @@ import { title } from "@/components/primitives";
 const ScrollingTestimonials = () => {
   return (
     <div className="py-12">
-      <div className="mb-8 px-4 text-center ">
-        <h3 className={title()}>
+      <div className="mb-8 px-4 text-center">
+        <h3 className={title({ color: "violet" })}>
           Testimonials
         </h3>
-        <p className="text-sm mt-2 max-w-lg mx-auto">
+        <p className="text-sm mt-2 max-w-lg mx-auto text-foreground/60">
           From some of the best in the game.
         </p>
       </div>
       <div className="p-4 overflow-x-hidden relative">
-        <div className="absolute top-0 bottom-0 left-0 w-24 z-10 bg-gradient-to-r from-slate-100 dark:from-slate-900 to-transparent" />
+        <div className="absolute top-0 bottom-0 left-0 w-24 z-10 bg-gradient-to-r from-background to-transparent" />
 
         <div className="flex items-center mb-4">
           <TestimonialList list={testimonials.top} duration={125} />
@@ -29,7 +29,7 @@ const ScrollingTestimonials = () => {
           <TestimonialList list={testimonials.middle} duration={75} reverse />
           <TestimonialList list={testimonials.middle} duration={75} reverse />
         </div>
-        <div className="absolute top-0 bottom-0 right-0 w-24 z-10 bg-gradient-to-l from-slate-100 dark:from-slate-900 to-transparent" />
+        <div className="absolute top-0 bottom-0 right-0 w-24 z-10 bg-gradient-to-l from-background to-transparent" />
       </div>
     </div>
   );
@@ -57,14 +57,18 @@ const TestimonialList = ({
             key={t.id}
             className="shrink-0 w-[500px] grid grid-cols-[7rem,_1fr] rounded-lg overflow-hidden relative"
           >
-            <Image src={t.img} className="w-full h-44 object-cover" alt="Profile Shots" width={200} height={400}/>
-            <div className=" bg-zinc-100 dark:bg-slate-900 dark:text-slate-50 p-4">
+            <Image 
+              src={t.img} 
+              className="w-full h-44 object-cover" 
+              alt={`${t.name}'s profile`} 
+              width={200} 
+              height={400}
+            />
+            <div className="bg-card text-card-foreground p-4">
               <span className="block font-semibold text-lg mb-1">{t.name}</span>
-              <span className="block mb-3 text-sm font-medium">{t.title}</span>
-              <span className="block text-sm text-gray-500 dark:text-slate-300">{t.info}</span>
+              <span className="block mb-3 text-sm font-medium text-foreground/80">{t.title}</span>
+              <span className="block text-sm text-foreground/60">{t.info}</span>
             </div>
-            <span className="text-7xl absolute top-2 right-2 text-slate-700">
-            </span>
           </div>
         );
       })}

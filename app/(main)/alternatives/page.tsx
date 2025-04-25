@@ -24,7 +24,7 @@ export default async function AlternativePage () {
 
     return (
         <div className="w-full flex flex-col items-center justify-center gap-4 p-8  md:p-10">
-            <WavesIcon className="absolute -z-8 bottom-0 left-0 right-0 top-60 md:top-12 h-120% w-full opacity-50"/>
+            <WavesIcon className="absolute -z-8 bottom-0 left-0 right-0 top-60 md:top-12 h-120% w-full opacity-0"/>
 			<div className="px-4 inline-block max-w-xl text-center justify-center z-10 pt-4">
 				<h1 className={title()}>Alternatives&nbsp;</h1>
 				<h2 className={subtitle({ class: "mt-4" })}>

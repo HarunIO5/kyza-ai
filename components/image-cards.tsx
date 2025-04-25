@@ -47,24 +47,17 @@ export default function VidCard ({vidProp, search, videoLength} : {vidProp : Sea
 
     return (
         <>
-            <div className="w-full grid grid-cols-1 md:grid-cols-4 gap-4 p-4" >
+            <div className="w-full grid grid-cols-1 md:grid-cols-3 lg:grid-cols-4 auto-rows-[300px] gap-4 p-4">
                 {videos && (
                     videos.map((file: SearchVideosType) => {
                         return (
-                          <>
-                            <Card
+                          <Card
                             isFooterBlurred
-                            className="rounded-xl"
+                            className="col-span-1 row-span-1 rounded-xl group h-full"
                             key={file.key}
-                            // onPress={() => {
-                            //   // setSrcUrl(file.url)
-                            //   // setSrcName(file.prompt)
-                            //   // onOpen() 
-                            //   // router.push()
-                            // }}
                             isPressable={true}
-                            >
-                              <Link href={`/media/${file.key}`} className="h-full w-full">
+                          >
+                            <Link href={`/media/${file.key}`} className="h-full w-full">
                               <video
                                 className="h-full w-full object-cover"
                                 preload="metadata"
@@ -74,17 +67,16 @@ export default function VidCard ({vidProp, search, videoLength} : {vidProp : Sea
                                 loop
                               >
                                 <source src={file.url + '#t=0.1'} type="video/mp4" />
-                                <track
-                                  src={file.url}
-                                />
+                                <track src={file.url} />
                                 Your browser does not support the video tag.
                               </video>
-                            <CardFooter className="justify-start before:bg-white/10 border-white/20 border-1 overflow-hidden py-2 absolute before:rounded-xl rounded-large bottom-1 w-[calc(100%_-_8px)] shadow-small ml-1 z-10">
-                              <p className="text-tiny text-white/80">{file.prompt.slice(0, 30)}...</p>
-                            </CardFooter>
+                              <CardFooter className="absolute inset-x-0 bottom-0 z-10 opacity-0 group-hover:opacity-100 transition-all duration-300 ease-in-out flex items-center justify-center w-full p-4">
+                                <p className="text-sm font-medium text-white drop-shadow-lg tracking-wide truncate text-center">
+                                  {file.prompt}
+                                </p>
+                              </CardFooter>
                             </Link>
                           </Card>
-                          </>
                         )
                     })
                 )}

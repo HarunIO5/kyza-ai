@@ -6,9 +6,9 @@ export default function MediaLayout({
     modal: React.ReactNode
   }) {
     return (
-      <>
+      <div className="pt-24">
         {children}
         {modal}
-      </>
+      </div>
     )
   }
