@@ -137,7 +137,9 @@ const styles: Style[] = [
 ];
 
 export default function AIGhiblifyForm() {
-  const [prompt, setPrompt] = useState<string>("");
+  const [prompt, setPrompt] = useState<string>(
+    "Ghibli Studio style, Charming hand-drawn anime-style illustration"
+  );
   const [negative, setNegative] = useState<string>("");
   const [scale, setScale] = useState<SliderValue>(7.5);
   const [style, setStyle] = useState<Selection>(
@@ -180,15 +182,12 @@ export default function AIGhiblifyForm() {
 
   const selectedValue = Array.from(info)[0]; // Assuming there's only one value in the set
 
-  const prompts = getPromptsByValue(selectedValue);
+  //   const prompts = getPromptsByValue(selectedValue);
 
-  if (loadPrompt) {
-    defaultPrompt = loadPrompt;
-  } else {
-    defaultPrompt = prompts.defaultPrompt;
-  }
+  //   defaultPrompt =
+  //     "Ghibli Studio style, Charming hand-drawn anime-style illustration";
 
-  defaultNegativePrompt = prompts.negativePrompt;
+  //   defaultNegativePrompt = prompts.negativePrompt;
 
   // console.log("Default Prompt:", defaultPrompt);
   // console.log("Default Negative Prompt:", defaultNegativePrompt);
@@ -305,13 +304,13 @@ export default function AIGhiblifyForm() {
     };
   }
 
-  useEffect(() => {
-    const negative_prompt = defaultNegativePrompt || "";
-    const prompts = defaultPrompt || "";
+  //   useEffect(() => {
+  //     const negative_prompt = defaultNegativePrompt || "";
+  //     const prompts = defaultPrompt || "";
 
-    setPrompt(prompts);
-    setNegative(negative_prompt);
-  }, [style]);
+  //     setPrompt(prompts);
+  //     setNegative(negative_prompt);
+  //   }, [style]);
 
   // useEffect(() => {
   //     setCredits(user?.credits!)
@@ -505,7 +504,7 @@ export default function AIGhiblifyForm() {
                     label="Describe your video"
                     value={prompt}
                     labelPlacement="outside"
-                    placeholder="A tan-skinned Moroccan female in an all-black sleek futuristic outfit, with a huge headpiece as the centerpiece, clean makeup, with depth of field. The outfit is fantastical, edgy, and regal themed, captured in vivid colors, embodying the essence of fantasy with a minimalist approach."
+                    placeholder="A magical forest with Totoro-like creatures, Studio Ghibli style"
                     className="pb-4"
                     {...register("prompt", {
                       onChange: (e) => {
