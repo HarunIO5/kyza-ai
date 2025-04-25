@@ -35,14 +35,14 @@ export async function POST(req: Request) {
   });
 
   console.log("ANIMATE DIFF");
-  console.log(output.toString());
+  console.log(output);
 
   if (!output) {
     return new NextResponse("Failed to generate video", { status: 400 });
   }
 
   const { data, error } = await utapi.uploadFilesFromUrl({
-    url: "https://replicate.delivery/xezq/DhiZkcmo51bPJhyb2i0SCgMeUFPmyY6e6pXuYfyn14LYIpMpA/tmp_6yxravz.mp4",
+    url: output.toString(),
     name: prompt,
   });
 
