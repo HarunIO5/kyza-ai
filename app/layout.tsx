@@ -12,6 +12,7 @@ import { ToasterProvider } from "@/components/toaster-provider";
 import { GoogleAnalytics } from "@next/third-parties/google";
 import { CSPostHogProvider } from "@/components/ph-providers";
 import ProgressBarProviders from "@/components/ProgressBarProvider";
+import { cn } from "@/lib/utils";
 
 export const metadata: Metadata = {
   title: {
@@ -56,9 +57,7 @@ export default async function RootLayout({
           <div className="flex flex-col h-screen">
             <CSPostHogProvider>
               <main className="w-full mx-auto">
-                {/* <AuthProvider> */}
                 <ProgressBarProviders>{children}</ProgressBarProviders>
-                {/* </AuthProvider> */}
               </main>
             </CSPostHogProvider>
           </div>

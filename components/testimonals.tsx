@@ -1,4 +1,4 @@
-"use client"
+"use client";
 
 import { motion } from "framer-motion";
 import { Card } from "@nextui-org/react";
@@ -8,16 +8,14 @@ import { title } from "@/components/primitives";
 const ScrollingTestimonials = () => {
   return (
     <div className="py-12">
-      <div className="mb-8 px-4 text-center ">
-        <h3 className={title()}>
-          Testimonials
-        </h3>
-        <p className="text-sm mt-2 max-w-lg mx-auto">
+      <div className="mb-8 px-4 text-center">
+        <h3 className={title({ color: "violet" })}>Testimonials</h3>
+        <p className="text-sm mt-2 max-w-lg mx-auto text-foreground/60">
           From some of the best in the game.
         </p>
       </div>
       <div className="p-4 overflow-x-hidden relative">
-        <div className="absolute top-0 bottom-0 left-0 w-24 z-10 bg-gradient-to-r from-slate-100 dark:from-slate-900 to-transparent" />
+        <div className="absolute top-0 bottom-0 left-0 w-24 z-10 bg-gradient-to-r from-background to-transparent" />
 
         <div className="flex items-center mb-4">
           <TestimonialList list={testimonials.top} duration={125} />
@@ -29,7 +27,7 @@ const ScrollingTestimonials = () => {
           <TestimonialList list={testimonials.middle} duration={75} reverse />
           <TestimonialList list={testimonials.middle} duration={75} reverse />
         </div>
-        <div className="absolute top-0 bottom-0 right-0 w-24 z-10 bg-gradient-to-l from-slate-100 dark:from-slate-900 to-transparent" />
+        <div className="absolute top-0 bottom-0 right-0 w-24 z-10 bg-gradient-to-l from-background to-transparent" />
       </div>
     </div>
   );
@@ -57,14 +55,20 @@ const TestimonialList = ({
             key={t.id}
             className="shrink-0 w-[500px] grid grid-cols-[7rem,_1fr] rounded-lg overflow-hidden relative"
           >
-            <Image src={t.img} className="w-full h-44 object-cover" alt="Profile Shots" width={200} height={400}/>
-            <div className=" bg-zinc-100 dark:bg-slate-900 dark:text-slate-50 p-4">
+            <Image
+              src={t.img}
+              className="w-full h-44 object-cover"
+              alt={`${t.name}'s profile`}
+              width={200}
+              height={400}
+            />
+            <div className="bg-card text-card-foreground p-4">
               <span className="block font-semibold text-lg mb-1">{t.name}</span>
-              <span className="block mb-3 text-sm font-medium">{t.title}</span>
-              <span className="block text-sm text-gray-500 dark:text-slate-300">{t.info}</span>
+              <span className="block mb-3 text-sm font-medium text-foreground/80">
+                {t.title}
+              </span>
+              <span className="block text-sm text-foreground/60">{t.info}</span>
             </div>
-            <span className="text-7xl absolute top-2 right-2 text-slate-700">
-            </span>
           </div>
         );
       })}
@@ -161,50 +165,6 @@ const testimonials = {
       info: "I've tried numerous text-to-video tools, but none compare to Kyza. Its versatility and precision make it an indispensable asset in my toolkit. Highly recommend it to fellow designers!",
     },
   ],
-//   bottom: [
-//     {
-//       id: 1,
-//       img: "https://images.unsplash.com/photo-1558222218-b7b54eede3f3?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=687&q=80",
-//       name: "Danny G.",
-//       title: "Founder of XYZ",
-//       info: "Lorem ipsum dolor, sit amet consectetur adipisicing elit. Ipsa nostrum labore dolor facilis, nesciunt facere mollitia nam aspernatur!",
-//     },
-//     {
-//       id: 2,
-//       img: "https://images.unsplash.com/photo-1620932934088-fbdb2920e484?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=930&q=80",
-//       name: "Ian D.",
-//       title: "Founder of XYZ",
-//       info: "Lorem ipsum dolor, sit amet consectetur adipisicing elit. Ipsa nostrum labore dolor facilis, nesciunt facere.",
-//     },
-//     {
-//       id: 3,
-//       img: "https://images.unsplash.com/photo-1514222709107-a180c68d72b4?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=898&q=80",
-//       name: "Ben S.",
-//       title: "Founder of XYZ",
-//       info: "Lorem ipsum dolor, sit amet consectetur adipisicing elit.",
-//     },
-//     {
-//       id: 4,
-//       img: "https://images.unsplash.com/photo-1506794778202-cad84cf45f1d?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=687&q=80",
-//       name: "Matthew I.",
-//       title: "Founder of XYZ",
-//       info: "Lorem ipsum dolor, sit amet consectetur adipisicing elit. Ipsa nostrum labore dolor facilis, nesciunt facere mollitia nam aspernatur esse corporis!",
-//     },
-//     {
-//       id: 5,
-//       img: "https://images.unsplash.com/photo-1597346908500-28cda8acfe4e?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=687&q=80",
-//       name: "Garrett P.",
-//       title: "Founder of XYZ",
-//       info: "Lorem ipsum dolor, sit amet consectetur adipisicing elit. Ipsa nostrum labore dolor facilis, nesciunt facere mollitia.",
-//     },
-//     {
-//       id: 6,
-//       img: "https://images.unsplash.com/photo-1642790595397-7047dc98fa72?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=2232&q=80",
-//       name: "Xavier C.",
-//       title: "Founder of XYZ",
-//       info: "Lorem ipsum dolor, sit amet consectetur adipisicing elit. Ipsa nostrum labore dolor facilis, nesciunt facere mollitia nam aspernatur.",
-//     },
-//   ],
 };
 
 export default ScrollingTestimonials;

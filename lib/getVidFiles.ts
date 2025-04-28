@@ -20,58 +20,58 @@ export type MediaType = {
   like?: any;
 };
 
-export async function GetVideoFiles({
-  limit,
-  offset,
-}: {
-  limit: number;
-  offset: number;
-}) {
-  // const fileList = await fetch('https://uploadthing.com/api/listFiles', {
-  //   method: 'POST',
-  //   headers: {
-  //     'Content-Type': 'application/json',
-  //     'X-Uploadthing-Api-Key': process.env.UPLOADTHING_SECRET!,
-  //     'X-Uploadthing-Version': '6.4.0'
-  //   },
-  //   body: JSON.stringify({
-  // 	limit: limit,
-  // 	offset: offset
-  //   })
-  // })
+// export async function GetVideoFiles({
+//   limit,
+//   offset,
+// }: {
+//   limit: number;
+//   offset: number;
+// }) {
+//   // const fileList = await fetch('https://uploadthing.com/api/listFiles', {
+//   //   method: 'POST',
+//   //   headers: {
+//   //     'Content-Type': 'application/json',
+//   //     'X-Uploadthing-Api-Key': process.env.UPLOADTHING_SECRET!,
+//   //     'X-Uploadthing-Version': '6.4.0'
+//   //   },
+//   //   body: JSON.stringify({
+//   // 	limit: limit,
+//   // 	offset: offset
+//   //   })
+//   // })
 
-  // // console.log('LIST FILE')
+//   // // console.log('LIST FILE')
 
-  // const viewFiles = await fileList.json()
-  // console.log("VIEW FILES")
-  // console.log(viewFiles)
+//   // const viewFiles = await fileList.json()
+//   // console.log("VIEW FILES")
+//   // console.log(viewFiles)
 
-  const files = await utapi.listFiles();
+//   const files = await utapi.listFiles();
 
-  let finalFiles = [] as any[];
+//   let finalFiles = [] as any[];
 
-  // Use map to create an array of promises
-  const filePromises = files.map(async (file: any) => {
-    // console.log(file)
-    const oneUrl = await utapi.getFileUrls(file.key as string);
+//   // Use map to create an array of promises
+//   const filePromises = files.map(async (file: any) => {
+//     // console.log(file)
+//     const oneUrl = await utapi.getFileUrls(file.key as string);
 
-    // console.log("URL")
-    // console.log(oneUrl)
+//     // console.log("URL")
+//     // console.log(oneUrl)
 
-    return {
-      url: oneUrl[0].url,
-      ...file,
-    };
-  });
+//     return {
+//       url: oneUrl[0].url,
+//       ...file,
+//     };
+//   });
 
-  // Use Promise.all to wait for all promises to resolve
-  finalFiles = await Promise.all(filePromises);
+//   // Use Promise.all to wait for all promises to resolve
+//   finalFiles = await Promise.all(filePromises);
 
-  //   console.log("FINAL FILES");
-  //   console.log(finalFiles);
+//   //   console.log("FINAL FILES");
+//   //   console.log(finalFiles);
 
-  return JSON.parse(JSON.stringify(finalFiles));
-}
+//   return JSON.parse(JSON.stringify(finalFiles));
+// }
 
 export const GetMediaForModals = async ({ id }: { id: string }) => {
   const media = await prisma.generations.findUnique({

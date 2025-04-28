@@ -40,7 +40,6 @@ import {
 import { z } from "zod";
 import { Session } from "next-auth";
 import Link from "next/link";
-import PricingModal from "@/components/pricing-modal";
 import { useSearchParams } from "next/navigation";
 import toast from "react-hot-toast";
 import useWindowSize from "react-use/lib/useWindowSize";
@@ -170,22 +169,22 @@ export default function TextToImageForm() {
 
   // console.log("STYLE")
 
-  const info = style as Set<any>;
+  // const info = style as Set<any>;
 
-  let defaultPrompt: string;
-  let defaultNegativePrompt: string;
+  // let defaultPrompt: string;
+  // let defaultNegativePrompt: string;
 
-  const selectedValue = Array.from(info)[0]; // Assuming there's only one value in the set
+  // const selectedValue = Array.from(info)[0]; // Assuming there's only one value in the set
 
-  const prompts = getPromptsByValue(selectedValue);
+  // const prompts = getPromptsByValue(selectedValue);
 
-  if (loadPrompt) {
-    defaultPrompt = loadPrompt;
-  } else {
-    defaultPrompt = prompts.defaultPrompt;
-  }
+  // if (loadPrompt) {
+  //   defaultPrompt = loadPrompt;
+  // } else {
+  //   defaultPrompt = prompts.defaultPrompt;
+  // }
 
-  defaultNegativePrompt = prompts.negativePrompt;
+  // defaultNegativePrompt = prompts.negativePrompt;
 
   // console.log("Default Prompt:", defaultPrompt);
   // console.log("Default Negative Prompt:", defaultNegativePrompt);
@@ -275,32 +274,32 @@ export default function TextToImageForm() {
   };
 
   // Function to get the prompts based on the selected value
-  function getPromptsByValue(selectedValue: string): {
-    defaultPrompt: string;
-    negativePrompt: string;
-  } {
-    const style = styles.find((s) => s.value === selectedValue);
+  // function getPromptsByValue(selectedValue: string): {
+  //   defaultPrompt: string;
+  //   negativePrompt: string;
+  // } {
+  //   const style = styles.find((s) => s.value === selectedValue);
 
-    if (style) {
-      return {
-        defaultPrompt: style.defaultPrompt,
-        negativePrompt: style.negativePrompt,
-      };
-    }
+  //   if (style) {
+  //     return {
+  //       defaultPrompt: style.defaultPrompt,
+  //       negativePrompt: style.negativePrompt,
+  //     };
+  //   }
 
-    return {
-      defaultPrompt: "",
-      negativePrompt: "",
-    };
-  }
+  //   return {
+  //     defaultPrompt: "",
+  //     negativePrompt: "",
+  //   };
+  // }
 
-  useEffect(() => {
-    const negative_prompt = defaultNegativePrompt || "";
-    const prompts = defaultPrompt || "";
+  // useEffect(() => {
+  //   const negative_prompt = defaultNegativePrompt || "";
+  //   const prompts = defaultPrompt || "";
 
-    setPrompt(prompts);
-    setNegative(negative_prompt);
-  }, [style]);
+  //   setPrompt(prompts);
+  //   setNegative(negative_prompt);
+  // }, [style]);
 
   // useEffect(() => {
   //     setCredits(user?.credits!)
@@ -377,71 +376,34 @@ export default function TextToImageForm() {
         {/* {success && (
           <Confetti width={width! - 50} height={height!} recycle={false} />
         )} */}
-        <Card className="w-full h-full md:w-1/3 px-4 py-8 border-1 border-gray-300 dark:border-slate-700 dark:bg-black">
+        <Card className="w-full md:h-full md:w-1/3 px-4 py-8 border-1 border-gray-300 dark:border-slate-700 dark:bg-black">
           <CardHeader>
             <span className="relative inline-block mx-auto overflow-hidden rounded-full p-[2px]">
               <span className="absolute inset-[-1000%] animate-[spin_2s_linear_infinite] bg-[conic-gradient(from_90deg_at_50%_50%,#53d1ff_0%,#ac4cf5_50%,#53d1ff_100%)]" />
-              <div className="inline-flex h-full w-full cursor-pointer items-center justify-center rounded-full bg-white dark:bg-gray-950 px-3 py-1 text-sm font-medium dark:text-gray-50 backdrop-blur-3xl">
+              <div className="inline-flex h-full w-full cursor-pointer items-center justify-center rounded-full bg-gray-100 text-black px-3 py-1 text-sm font-medium backdrop-blur-3xl">
                 <Sparkles className="h-5 w-5 inline fill-yellow-500 text-yellow-500 mr-2" />
                 {"  "}
                 Text To Image
               </div>
             </span>
           </CardHeader>
-          <CardBody className="w-full h-full flex flex-col justify-between gap-8">
-            {/* <Select
-                      items={styles}
-                      label="Choose Video Style"
-                      placeholder="Select a style"
-                      labelPlacement="outside"
-                      selectedKeys={style}
-                      className="max-w-lg"
-                      onSelectionChange={setStyle}
-                    >
-                      {(style) => (
-                        <SelectItem key={style.value} textValue={style.name} value={style.value}>
-                          <div className="flex gap-2 items-center">
-                            <Avatar alt={style.name} className="flex-shrink-0" size="sm" src={style.photo} />
-                            <div className="flex flex-col">
-                              <span className="text-small">{style.name}</span>
-                            </div>
-                          </div>
-                        </SelectItem>
-                      )}
-                    </Select> */}
 
-            {/* <Slider
-              size="sm"
-              label="Select guidance scale"
-              minValue={0}
-              maxValue={10}
-              step={0.5}
-              defaultValue={7.5}
-              value={scale}
-              onChange={setScale}
-              classNames={{
-                base: "max-w-md gap-3",
-                track: "border-s-secondary-100",
-                filler: "bg-gradient-to-r from-secondary-100 to-secondary-500",
-              }}
-              renderThumb={(props) => (
-                <div
-                  {...props}
-                  className="group p-1 top-1/2 bg-background border-small border-default-200 dark:border-default-400/50 shadow-medium rounded-full cursor-grab data-[dragging=true]:cursor-grabbing"
-                >
-                  <span className="transition-transform bg-gradient-to-br shadow-small from-secondary-100 to-secondary-500 rounded-full w-5 h-5 block group-data-[dragging=true]:scale-80" />
-                </div>
-              )}
-            /> */}
-            <div className="w-full h-full flex flex-col gap-8">
-              <form onSubmit={handleSubmit(onSubmit)}>
-                <div className="w-full">
+          {/* Make CardBody a flex container with full height and column direction */}
+          <CardBody className="w-full h-full flex flex-col">
+            {/* Form content container that will grow to fill available space */}
+            <div className="flex-grow w-full">
+              <form
+                onSubmit={handleSubmit(onSubmit)}
+                className="h-full flex flex-col"
+              >
+                <div className="w-full mb-4">
                   <Textarea
                     type="text"
-                    label="Describe your video"
+                    label="Describe your image"
                     value={prompt}
                     labelPlacement="outside"
-                    placeholder="A tan-skinned Moroccan female in an all-black sleek futuristic outfit, with a huge headpiece as the centerpiece, clean makeup, with depth of field. The outfit is fantastical, edgy, and regal themed, captured in vivid colors, embodying the essence of fantasy with a minimalist approach."
+                    disabled={isLoading}
+                    placeholder="Magical library inside a hollow baobab tree with spiraling bookshelves, floating light orbs, and a wooden staircase. An old wizard reads a glowing manuscript at the base while luminescent butterflies flutter between ancient tomes. Warm amber and deep blue colors with emerald accents."
                     className="pb-4"
                     {...register("prompt", {
                       onChange: (e) => {
@@ -450,56 +412,18 @@ export default function TextToImageForm() {
                     })}
                   />
                   {errors.prompt && (
-                    <span className=" text-red-500">
+                    <span className="text-red-500">
                       {errors.prompt?.message}
                     </span>
                   )}
-                  {/* <Textarea
-                    type="text"
-                    label="Negative prompt"
-                    value={negative}
-                    labelPlacement="outside"
-                    placeholder="bad-artist, bad_prompt"
-                    {...register("negative_prompt", {
-                      onChange: (e) => {
-                        setNegative(e.target.value);
-                      },
-                    })}
-                  />
-                  {errors.negative_prompt && (
-                    <span className=" text-red-500">
-                      {errors.negative_prompt?.message}
-                    </span>
-                  )} */}
                 </div>
-                {/* <div className="w-full flex flex-col gap-8 pt-6 pb-2">
-                  <Switch
-                    defaultSelected
-                    isSelected={speed}
-                    onChange={(e) => {
-                      setSpeed(e.target.checked);
-                    }}
-                    size="lg"
-                    color="secondary"
-                    thumbIcon={({ isSelected, className }) =>
-                      isSelected ? (
-                        <Rabbit className={"h-5 w-5 text-black"} />
-                      ) : (
-                        <Turtle className={"h-5 w-5 text-black"} />
-                      )
-                    }
-                  >
-                    <p className="text-sm">Slow or Fast</p>
-                    <p className=" text-xs text-foreground-500">
-                      Select to receive your image quickier
-                    </p>
-                  </Switch>
-                </div> */}
-                <div className="w-full flex flex-col gap-8 pt-4 pb-4">
+
+                <div className="w-full mb-4">
                   <RadioGroup
                     label="Select your image dimensions"
                     orientation="horizontal"
-                    color="secondary"
+                    color="warning"
+                    isDisabled={isLoading}
                     defaultValue="3:2"
                     onChange={(e) => {
                       setRatio(e.target.value);
@@ -516,16 +440,23 @@ export default function TextToImageForm() {
                     </Radio>
                   </RadioGroup>
                 </div>
-                <div className="w-full flex justify-end">
-                  {isLoading && (
-                    <Button className="relative w-full my-4 inline-flex h-12 overflow-hidden rounded-full p-[1px] focus:outline-none focus:ring-2 focus:ring-gray-400 focus:ring-offset-2 focus:ring-offset-gray-50">
+
+                {/* This div will push the button to the bottom */}
+                <div className="flex-grow"></div>
+
+                {/* Button container always at the bottom */}
+                <div className="w-full mt-4">
+                  {isLoading ? (
+                    <Button
+                      className="relative w-full my-4 inline-flex h-12 overflow-hidden rounded-full p-[1px] focus:outline-none focus:ring-2 focus:ring-gray-400 focus:ring-offset-2 focus:ring-offset-gray-50"
+                      disabled
+                    >
                       <span className="absolute inset-[-1000%] animate-[spin_2s_linear_infinite] bg-[conic-gradient(from_90deg_at_50%_50%,#53d1ff_0%,#ac4cf5_50%,#53d1ff_100%)]" />
                       <span className="inline-flex h-full w-full cursor-pointer items-center justify-center rounded-full px-8 py-1 text-md font-medium text-gray-50 backdrop-blur-3xl">
                         <Loader2 className="h-7 w-7 animate-spin text-white" />
                       </span>
                     </Button>
-                  )}
-                  {!isLoading && (
+                  ) : (
                     <Button
                       className="relative w-full my-4 inline-flex h-12 overflow-hidden rounded-full p-[1px] focus:outline-none focus:ring-2 focus:ring-gray-400 focus:ring-offset-2 focus:ring-offset-gray-50"
                       type="submit"
@@ -536,29 +467,6 @@ export default function TextToImageForm() {
                       </span>
                     </Button>
                   )}
-                  {/* {!session && (
-                    <Link href={"/login"} className="w-full">
-                      <Button className="relative w-full my-4 inline-flex h-12 overflow-hidden rounded-full p-[1px] focus:outline-none focus:ring-2 focus:ring-gray-400 focus:ring-offset-2 focus:ring-offset-gray-50">
-                        <span className="absolute inset-[-1000%] animate-[spin_2s_linear_infinite] bg-[conic-gradient(from_90deg_at_50%_50%,#53d1ff_0%,#ac4cf5_50%,#53d1ff_100%)]" />
-                        <span className="inline-flex h-full w-full cursor-pointer items-center justify-center rounded-full px-8 py-1 text-lg font-semibold text-gray-50 backdrop-blur-3xl">
-                          Generate
-                        </span>
-                      </Button>
-                    </Link>
-                  )} */}
-                  {/* {session && checkCreditLimit && (
-                    <Button
-                      className="relative w-full my-4 inline-flex h-12 overflow-hidden rounded-full p-[1px] focus:outline-none focus:ring-2 focus:ring-gray-400 focus:ring-offset-2 focus:ring-offset-gray-50"
-                      onClick={() => {
-                        onOpen();
-                      }}
-                    >
-                      <span className="absolute inset-[-1000%] animate-[spin_2s_linear_infinite] bg-[conic-gradient(from_90deg_at_50%_50%,#53d1ff_0%,#ac4cf5_50%,#53d1ff_100%)]" />
-                      <span className="inline-flex h-full w-full cursor-pointer items-center justify-center rounded-full px-8 py-1 text-lg font-semibold text-gray-50 backdrop-blur-3xl">
-                        Buy Credits
-                      </span>
-                    </Button>
-                  )} */}
                 </div>
               </form>
             </div>

@@ -1,7 +1,7 @@
-import Avatar from '@/components/author-ava'
-import CoverImage from '@/components/cover-image'
-import type { Post } from '@/lib/sanity-queries'
-import Link from 'next/link'
+import Avatar from "@/components/author-ava";
+import CoverImage from "@/components/cover-image";
+import type { Post } from "@/lib/sanity-queries";
+import Link from "next/link";
 
 export default function PostPreview({
   title,
@@ -10,7 +10,8 @@ export default function PostPreview({
   excerpt,
   author,
   slug,
-}: Omit<Post, '_id'>) {
+  _createdAt,
+}: Omit<Post, "_id">) {
   return (
     <div>
       <div className="mb-5">
@@ -26,13 +27,10 @@ export default function PostPreview({
           {title}
         </Link>
       </h3>
-      <div className="mb-4 text-lg">
-      {new Date(_updatedAt!).toISOString().split("T")[0]}
-      </div>
       {excerpt && (
         <p className="mb-4 text-lg leading-relaxed text-pretty">{excerpt}</p>
       )}
       {author && <Avatar name={author.name} image={author.image} />}
     </div>
-  )
+  );
 }

@@ -1,14 +1,11 @@
 export default function BlogLayout({
-	children,
+  children,
 }: {
-	children: React.ReactNode;
+  children: React.ReactNode;
 }) {
-	
-	return (
-		<section className="min-h-screen">
-			<div className="container mx-auto p-4">
-				{children}
-			</div>
-		</section>
-	);
+  return (
+    <section className="min-h-screen">
+      <div className="container mx-auto p-4">{children}</div>
+    </section>
+  );
 }

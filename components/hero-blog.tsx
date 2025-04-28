@@ -1,15 +1,15 @@
-import AuthorAvatar from '@/components/author-ava'
-import CoverImage from './cover-image'
-import type { Post } from '@/lib/sanity-queries'
-import Link from 'next/link'
+import AuthorAvatar from "@/components/author-ava";
+import CoverImage from "./cover-image";
+import type { Post } from "@/lib/sanity-queries";
+import Link from "next/link";
 
 export default function HeroPost(
   props: Pick<
     Post,
-    'title' | 'mainImage' | '_updatedAt' | 'excerpt' | 'author' | 'slug'
-  >,
+    "title" | "mainImage" | "_updatedAt" | "excerpt" | "author" | "slug"
+  >
 ) {
-  const { title, mainImage, _updatedAt, excerpt, author, slug } = props
+  const { title, mainImage, _updatedAt, excerpt, author, slug } = props;
   return (
     <section>
       <div className="mb-8 md:mb-16">
@@ -19,12 +19,12 @@ export default function HeroPost(
         <div>
           <h3 className="mb-4 text-4xl leading-tight lg:text-6xl text-balance">
             <Link href={`/blog/${slug}`} className="hover:underline">
-              {title || 'Untitled'}
+              {title || "Untitled"}
             </Link>
           </h3>
-          <div className="mb-4 text-lg md:mb-0">
+          {/* <div className="mb-4 text-lg md:mb-0">
             {new Date(_updatedAt!).toISOString().split("T")[0]}
-          </div>
+          </div> */}
         </div>
         <div>
           {excerpt && (
@@ -32,11 +32,9 @@ export default function HeroPost(
               {excerpt}
             </p>
           )}
-          {author && (
-            <AuthorAvatar name={author.name} image={author.image} />
-          )}
+          {author && <AuthorAvatar name={author.name} image={author.image} />}
         </div>
       </div>
     </section>
-  )
+  );
 }

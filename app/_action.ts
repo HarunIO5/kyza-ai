@@ -3,23 +3,20 @@
 import {
   GetLatestMedia,
   GetMediaForModals,
-  GetVideoFiles,
   SearchVideosDB,
 } from "@/lib/getVidFiles";
-// import { getUser, getSavedVideos, getNumberOfSavedVideos } from "@/lib/userFunctions"
-// import { sendEmail } from "@/lib/email/mailer";
 
-export async function fetchVideos({
-  limit,
-  offset,
-}: {
-  limit: number;
-  offset: number;
-}) {
-  const videos = await GetVideoFiles({ limit: limit, offset: offset });
+// export async function fetchVideos({
+//   limit,
+//   offset,
+// }: {
+//   limit: number;
+//   offset: number;
+// }) {
+//   const videos = await GetVideoFiles({ limit: limit, offset: offset });
 
-  return videos;
-}
+//   return videos;
+// }
 
 export async function fetchSearchedVideos({
   search,
@@ -32,35 +29,6 @@ export async function fetchSearchedVideos({
 
   return searchedVideos;
 }
-
-// export async function getUserInfo(email: string) {
-//     const userInfo = await getUser(email)
-
-//     return userInfo
-// }
-
-// export async function sendTokenEmail(
-//   email: string,
-//   emailType: string,
-//   id: string
-// ) {
-//   const mail = await sendEmail(email, emailType, id);
-
-//   return mail;
-// }
-
-// export async function getSavedVideosProps ({email, skip}: {email: string, skip: number}) {
-//     const videos = await getSavedVideos({email: email, skip: skip})
-
-//     return videos
-
-// }
-
-// export async function getSavedVideosLength ({email}: {email: string}) {
-//     const videoLength = await getNumberOfSavedVideos({email: email})
-
-//     return videoLength
-// }
 
 export async function getMediaModal({ id }: { id: string }) {
   const media = await GetMediaForModals({ id: id });

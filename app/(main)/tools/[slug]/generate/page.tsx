@@ -10,6 +10,12 @@ import { Metadata } from "next";
 import SSRGenerateTTVForm from "@/components/ssr-generate-form";
 import SSRGenerateTTIForm from "@/components/ssr-gen-TTI";
 import LoadingGeneratePage from "@/components/loading-generate";
+import AIGhiblifyForm from "@/components/ai-ghiblify-form";
+import HyperRealisticVideoForm from "@/components/hyper-realistic-form";
+import GenerativeArtForm from "@/components/generative-art-form";
+import AnimeImagesForm from "@/components/anime-images-form";
+import PixelArtForm from "@/components/pixel-art-form";
+import WallpaperEngineForm from "@/components/wallpaper-engine-form";
 
 export const metadata: Metadata = {
   title: `Generate AI Videos & Images`,
@@ -38,6 +44,42 @@ export default async function GeneratePage({
       {params.slug == "text-to-image" && (
         <Suspense fallback={<LoadingGeneratePage />}>
           <SSRGenerateTTIForm />
+        </Suspense>
+      )}
+
+      {params.slug == "ai-ghiblify" && (
+        <Suspense fallback={<LoadingGeneratePage />}>
+          <AIGhiblifyForm />
+        </Suspense>
+      )}
+
+      {params.slug == "hyper-realistic-video" && (
+        <Suspense fallback={<LoadingGeneratePage />}>
+          <HyperRealisticVideoForm />
+        </Suspense>
+      )}
+
+      {params.slug == "generative-art" && (
+        <Suspense fallback={<LoadingGeneratePage />}>
+          <GenerativeArtForm />
+        </Suspense>
+      )}
+
+      {params.slug == "anime-art" && (
+        <Suspense fallback={<LoadingGeneratePage />}>
+          <AnimeImagesForm />
+        </Suspense>
+      )}
+
+      {params.slug == "pixel-art" && (
+        <Suspense fallback={<LoadingGeneratePage />}>
+          <PixelArtForm />
+        </Suspense>
+      )}
+
+      {params.slug == "wallpaper-engine" && (
+        <Suspense fallback={<LoadingGeneratePage />}>
+          <WallpaperEngineForm />
         </Suspense>
       )}
     </div>

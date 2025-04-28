@@ -1,392 +1,254 @@
 "use client";
 
-import {
-  Navbar as NextUINavbar,
-  NavbarContent,
-  NavbarMenu,
-  NavbarMenuToggle,
-  NavbarBrand,
-  NavbarItem,
-  NavbarMenuItem,
-} from "@nextui-org/navbar";
-import { Button } from "@nextui-org/button";
-import { Kbd } from "@nextui-org/kbd";
-import { Link } from "@nextui-org/link";
-import { Input } from "@nextui-org/input";
-
-import { link as linkStyles } from "@nextui-org/theme";
-
-import { siteConfig } from "@/config/site";
-import NextLink from "next/link";
-import clsx from "clsx";
-
-import { ThemeSwitch } from "@/components/theme-switch";
-import { Video, Construction, ChevronDown } from "lucide-react";
-import {
-  DropdownItem,
-  DropdownTrigger,
-  Dropdown,
-  DropdownMenu,
-  DropdownSection,
-} from "@nextui-org/react";
-
-import { Logo } from "@/components/icons";
-import { useEffect, useState } from "react";
+import * as React from "react";
+import Link from "next/link";
 import { usePathname } from "next/navigation";
-import { Session } from "next-auth";
-import UserNav from "@/components/user-nav";
-import { signOut } from "next-auth/react";
-import { useSession } from "next-auth/react";
+import {
+  Menubar,
+  MenubarContent,
+  MenubarItem,
+  MenubarMenu,
+  MenubarSeparator,
+  MenubarSub,
+  MenubarSubContent,
+  MenubarSubTrigger,
+  MenubarTrigger,
+} from "@/components/ui/menubar";
+import { ThemeSwitch } from "@/components/theme-switch";
+import { Logo } from "@/components/icons";
+import { siteConfig } from "@/config/site";
 
 export const Navbar = () => {
-  const [isMenuOpen, setIsMenuOpen] = useState<boolean | undefined>(false);
-  const [isMounted, setIsMounted] = useState(false);
-
+  const [isMounted, setIsMounted] = React.useState(false);
+  const [isMenuOpen, setIsMenuOpen] = React.useState(false);
   const pathname = usePathname();
 
-  // const { data: session, status } = useSession()
+  const handleToggleMenu = () => setIsMenuOpen(!isMenuOpen);
 
-  useEffect(() => {
-    if (isMenuOpen) {
-      setIsMenuOpen(false);
-    }
-  }, [pathname]);
-
-  useEffect(() => {
+  React.useEffect(() => {
     setIsMounted(true);
   }, []);
 
-  if (!isMounted) {
-    return null;
-  }
+  React.useEffect(() => {
+    setIsMenuOpen(false);
+  }, [pathname]);
 
-  const icons = {
-    Video: <Video size={30} />,
-    Construction: <Construction size={30} />,
-    ChevronDown: <ChevronDown size={16} />,
-  };
-
-  let baseUrl = "";
-
-  if (process.env.NODE_ENV === "production") {
-    baseUrl = "https://kyza.ai";
-  } else {
-    baseUrl = "http://localhost:3000";
-  }
+  if (!isMounted) return null;
 
   return (
-    <NextUINavbar
-      maxWidth="xl"
-      position="sticky"
-      className="border-b border-zinc-800"
-      isMenuOpen={isMenuOpen}
-      onMenuOpenChange={setIsMenuOpen}
-    >
-      <NavbarContent className="basis-1/5 sm:basis-full" justify="start">
-        <NavbarBrand as="li" className="gap-3 max-w-fit">
-          <NextLink className="flex justify-start items-center gap-1" href="/">
-            <Logo />
-            <p className="font-bold text-inherit">KYZA</p>
-          </NextLink>
-        </NavbarBrand>
-      </NavbarContent>
+    <header className="sticky top-0 z-50 w-full border-b bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/60">
+      <div className="container flex h-16 items-center justify-between px-4 max-w-7xl mx-auto">
+        <div className="flex items-center gap-2 transition-transform hover:scale-105">
+          <Link href="/" className="flex items-center gap-3">
+            <Logo className="h-8 w-8" />
+            <p className="font-bold text-xl tracking-tight">KYZA</p>
+          </Link>
+        </div>
 
-      <NavbarContent
-        className="hidden sm:flex basis-1/5 sm:basis-full"
-        justify="end"
-      >
-        <ul className="hidden lg:flex gap-4 justify-start ml-2" key={"menu"}>
-          {siteConfig.navItems.map((item) => (
-            <NavbarItem key={item.href}>
-              <NextLink
-                className={clsx(
-                  linkStyles({ color: "foreground" }),
-                  "data-[active=true]:text-primary data-[active=true]:font-medium"
-                )}
-                color="foreground"
-                href={item.href}
-              >
-                {item.label}
-              </NextLink>
-            </NavbarItem>
-          ))}
-        </ul>
-        <Dropdown>
-          <NavbarItem>
-            <DropdownTrigger>
-              <Button
-                disableRipple
-                className="p-0 bg-transparent data-[hover=true]:bg-transparent"
-                endContent={icons.ChevronDown}
-                radius="sm"
-                variant="light"
-              >
-                Tools
-              </Button>
-            </DropdownTrigger>
-          </NavbarItem>
-          <DropdownMenu
-            aria-label="Kyza Generations"
-            className="w-[340px]"
-            itemClasses={{
-              base: "gap-4",
-            }}
+        <button
+          className="lg:hidden p-2 text-foreground"
+          onClick={handleToggleMenu}
+          aria-label="Toggle menu"
+          aria-expanded={isMenuOpen}
+        >
+          <svg
+            className="w-6 h-6"
+            fill="none"
+            strokeLinecap="round"
+            strokeLinejoin="round"
+            strokeWidth="2"
+            viewBox="0 0 24 24"
+            stroke="currentColor"
           >
-            <DropdownSection showDivider>
-              <DropdownItem
-                key="text_to_video"
-                startContent={"📹"}
-                href="/tools/text-to-video"
-              >
-                Text-to-Video
-              </DropdownItem>
-              <DropdownItem
-                key="text_to_image"
-                startContent={"🛠️"}
-                href="/tools/text-to-image"
-              >
-                Text-to-Image
-              </DropdownItem>
-              <DropdownItem
-                key="wallpaper_engine"
-                startContent={"🖼️"}
-                href="/tools/wallpaper-engine"
-              >
-                Wallpaper Engine
-              </DropdownItem>
-              <DropdownItem
-                key="logo_generator"
-                startContent={"💫"}
-                href="/tools/brand-logo-generator"
-              >
-                AI Logo Generator
-              </DropdownItem>
-              <DropdownItem
-                key="prompt_detector"
-                startContent={"🕵️"}
-                href="/tools/prompt-detector-discover-any-prompt"
-              >
-                Prompt Detector
-              </DropdownItem>
-              <DropdownItem
-                key="movie_generator"
-                startContent={"📽️"}
-                href="/tools/a-i-movie-generator"
-              >
-                AI Movie Generator
-              </DropdownItem>
-              <DropdownItem
-                key="auto_caption"
-                startContent={"✍️"}
-                href="/tools/video-caption-online"
-              >
-                Auto Captioning
-              </DropdownItem>
-              <DropdownItem
-                key="generative_art"
-                startContent={"🎨"}
-                href="/tools/generative-art-maker"
-              >
-                Generative Art
-              </DropdownItem>
-              <DropdownItem
-                key="interior_ai"
-                startContent={"🏡"}
-                href="/tools/kyza-interior-ai"
-              >
-                AI Interior Designer
-              </DropdownItem>
-              <DropdownItem
-                key="qr_code_art"
-                startContent={"🖌️"}
-                href="/tools/qr-code-art-generator "
-              >
-                QR Code Art Maker
-              </DropdownItem>
-              <DropdownItem
-                key="ai_image_enhancer"
-                startContent={"📷"}
-                href="/tools/ai-imagine-enhancer"
-              >
-                AI Imagine Enhancer
-              </DropdownItem>
-              <DropdownItem
-                key="ai_cricut_designer"
-                startContent={"🧵"}
-                href="/tools/ai-cricut-designer"
-              >
-                AI Cricut Designer
-              </DropdownItem>
-            </DropdownSection>
-            <DropdownItem key="all_tools" href="/tools">
-              All Tools
-            </DropdownItem>
-          </DropdownMenu>
-        </Dropdown>
-        <NavbarItem className="flex h-full items-center">
-          <ThemeSwitch />
-        </NavbarItem>
-        {/* {session ? (
-          <UserNav session={session} />
-        ) : (
-          <NavbarItem key={"login"}>
-            <NextLink href={"/login"}>
-              <Button color="secondary">Login</Button>
-            </NextLink>
-          </NavbarItem>
-        )} */}
-      </NavbarContent>
+            {isMenuOpen ? (
+              <path d="M6 18L18 6M6 6l12 12" />
+            ) : (
+              <path d="M4 6h16M4 12h16M4 18h16" />
+            )}
+          </svg>
+        </button>
 
-      <NavbarContent className="sm:hidden basis-1 pl-4" justify="end">
-        <ThemeSwitch />
-        <NavbarMenuToggle />
-      </NavbarContent>
-
-      <NavbarMenu>
-        <div className="mx-4 mt-2 flex flex-col gap-2">
-          {siteConfig.navMenuItems.map((item, index) => (
-            <NavbarMenuItem key={`${item}-${index}`}>
-              <Link color={"foreground"} href={item.href} size="lg">
+        {/* Mobile Menu */}
+        <div
+          className={`lg:hidden fixed inset-x-0 top-16 bg-background/95 backdrop-blur border-b ${
+            isMenuOpen ? "block" : "hidden"
+          }`}
+        >
+          <nav className="container px-4 py-4">
+            {siteConfig.navItems.map((item) => (
+              <Link
+                key={item.href}
+                href={item.href}
+                className="block py-2 text-foreground hover:text-primary"
+              >
                 {item.label}
               </Link>
-            </NavbarMenuItem>
-          ))}
-          <NavbarMenuItem key={`text_to_video`}>
-            <Link color={"foreground"} href={"/tools/text-to-video"} size="lg">
-              📹 Text-to-Video
-            </Link>
-          </NavbarMenuItem>
-          <NavbarMenuItem key={`text_to_image`}>
-            <Link color={"foreground"} href={"/tools/text-to-image"} size="lg">
-              🛠️ Text-to-Image
-            </Link>
-          </NavbarMenuItem>
-          <NavbarMenuItem key={`wallpaper_engine`}>
-            <Link color={"foreground"} href="/tools/wallpaper-engine" size="lg">
-              🖼️ Wallpaper Engine
-            </Link>
-          </NavbarMenuItem>
-          <NavbarMenuItem key={`logo_generator`}>
+            ))}
             <Link
-              color={"foreground"}
-              href="/tools/brand-logo-generator"
-              size="lg"
+              href="/media"
+              className="block py-2 text-foreground hover:text-primary"
             >
-              💫 AI Logo Generator
+              Kyza Lab
             </Link>
-          </NavbarMenuItem>
-          <NavbarMenuItem key={`prompt_detector`}>
-            <Link
-              color={"foreground"}
-              href="/tools/prompt-detector-discover-any-prompt"
-              size="lg"
-            >
-              🕵️ Prompt Detector
-            </Link>
-          </NavbarMenuItem>
-          <NavbarMenuItem key={`movie_generator`}>
-            <Link
-              color={"foreground"}
-              href="/tools/a-i-movie-generator"
-              size="lg"
-            >
-              📽️ AI Movie Generator
-            </Link>
-          </NavbarMenuItem>
-          <NavbarMenuItem key={`auto_caption`}>
-            <Link
-              color={"foreground"}
-              href="/tools/video-caption-online"
-              size="lg"
-            >
-              ✍️ Auto Captioning
-            </Link>
-          </NavbarMenuItem>
-          <NavbarMenuItem key={`generative_art`}>
-            <Link
-              color={"foreground"}
-              href="/tools/generative-art-maker"
-              size="lg"
-            >
-              🎨 Generative Art
-            </Link>
-          </NavbarMenuItem>
-          <NavbarMenuItem key={`interior_ai`}>
-            <Link color={"foreground"} href="/tools/kyza-interior-ai" size="lg">
-              🏡 AI Interior Designer
-            </Link>
-          </NavbarMenuItem>
-          <NavbarMenuItem key={`qr_code_art`}>
-            <Link
-              color={"foreground"}
-              href="/tools/qr-code-art-generator"
-              size="lg"
-            >
-              🖌️ QR Code Art Maker
-            </Link>
-          </NavbarMenuItem>
-          <NavbarMenuItem key={`ai_image_enhancer`}>
-            <Link
-              color={"foreground"}
-              href="/tools/ai-imagine-enhancer"
-              size="lg"
-            >
-              📷 AI Imagine Enhancer
-            </Link>
-          </NavbarMenuItem>
-          <NavbarMenuItem key={`ai_cricut_designer`}>
-            <Link
-              color={"foreground"}
-              href="/tools/ai-cricut-designer"
-              size="lg"
-            >
-              🧵 AI Cricut Designer
-            </Link>
-          </NavbarMenuItem>
-          {/* {session ? (
-						<>
-							<NavbarMenuItem key={`library`}>
-								<Link
-									color={"primary"}
-									href={'/library'}
-									size="lg"
-								>
-									Library
-								</Link>
-							</NavbarMenuItem>
-							<NavbarMenuItem key={`settings`}>
-								<Link
-									color={"foreground"}
-									href={'/settings'}
-									size="lg"
-								>
-									Settings
-								</Link>
-							</NavbarMenuItem>
-							<NavbarMenuItem key={`logout`}>
-								<Link
-									color={"danger"}
-									href={''}
-									onClick={() => signOut({callbackUrl: `${baseUrl}`})}
-									size="lg"
-								>
-									Logout
-								</Link>
-							</NavbarMenuItem>
-						</>
-					) : (
-						<NavbarMenuItem key={`logout`}>
-						<Link
-							color={"secondary"}
-							href={'/login'}
-							size="lg"
-						>
-							Login
-						</Link>
-					</NavbarMenuItem>
-					)} */}
+            <div className="py-2">
+              <p className="text-sm font-medium text-foreground/60 pb-2">
+                Tools
+              </p>
+              {[
+                {
+                  href: "/tools/wallpaper-engine",
+                  label: "Wallpaper Engine",
+                  icon: "🖼️",
+                },
+                {
+                  href: "/tools/ai-ghiblify",
+                  label: "AI Ghiblify",
+                  icon: "🎬",
+                },
+                {
+                  href: "",
+                  label: "???????",
+                  icon: "🎨",
+                },
+                {
+                  href: "",
+                  label: "???????",
+                  icon: "📹",
+                },
+                {
+                  href: "",
+                  label: "???????",
+                  icon: "🎥",
+                },
+                {
+                  href: "",
+                  label: "???????",
+                  icon: "🎨",
+                },
+                {
+                  href: "",
+                  label: "???????",
+                  icon: "📚",
+                },
+                {
+                  href: "",
+                  label: "???????",
+                  icon: "👾",
+                },
+              ].map((tool) => (
+                <Link
+                  key={tool.href}
+                  href={tool.href}
+                  className="block py-2 pl-4 text-foreground hover:text-primary"
+                >
+                  <span className="flex items-center gap-2">
+                    <span>{tool.icon}</span>
+                    {tool.label}
+                  </span>
+                </Link>
+              ))}
+            </div>
+          </nav>
         </div>
-      </NavbarMenu>
-    </NextUINavbar>
+
+        <div className="flex-1 flex justify-center">
+          <Menubar className="hidden lg:flex border-none gap-6 bg-transparent">
+            {siteConfig.navItems.map((item) => (
+              <MenubarMenu key={item.href}>
+                <Link href={item.href}>
+                  <MenubarTrigger className="cursor-pointer font-medium transition-colors hover:text-primary">
+                    {item.label}
+                  </MenubarTrigger>
+                </Link>
+              </MenubarMenu>
+            ))}
+            <MenubarMenu>
+              <Link href="/media">
+                <MenubarTrigger className="cursor-pointer font-medium transition-colors hover:text-primary">
+                  Kyza Lab
+                </MenubarTrigger>
+              </Link>
+            </MenubarMenu>
+          </Menubar>
+        </div>
+
+        <div className="flex items-center gap-4">
+          <ThemeSwitch />
+          <Menubar className="hidden lg:flex border-none bg-transparent">
+            <MenubarMenu>
+              <MenubarTrigger className="cursor-pointer font-medium transition-colors hover:text-primary">
+                Tools
+              </MenubarTrigger>
+              <MenubarContent>
+                <MenubarItem>
+                  <Link href="/tools/wallpaper-engine" className="w-full">
+                    <span className="flex items-center gap-2">
+                      <span>🖼️</span>
+                      Wallpaper Engine
+                    </span>
+                  </Link>
+                </MenubarItem>
+                <MenubarItem>
+                  <Link href="/tools/ai-ghiblify" className="w-full">
+                    <span className="flex items-center gap-2">
+                      <span>🎬</span>
+                      AI Ghiblify
+                    </span>
+                  </Link>
+                </MenubarItem>
+                <MenubarItem disabled className="cursor-not-allowed">
+                  <Link href="" className="w-full">
+                    <span className="flex items-center gap-2">
+                      <span>🎨</span>
+                      ???????
+                    </span>
+                  </Link>
+                </MenubarItem>
+                <MenubarItem disabled className="cursor-not-allowed">
+                  <Link href="" className="w-full">
+                    <span className="flex items-center gap-2">
+                      <span>📹</span>
+                      ???????
+                    </span>
+                  </Link>
+                </MenubarItem>
+                <MenubarItem disabled className="cursor-not-allowed">
+                  <Link href="" className="w-full">
+                    <span className="flex items-center gap-2">
+                      <span>🎥</span>
+                      ???????
+                    </span>
+                  </Link>
+                </MenubarItem>
+                <MenubarItem disabled className="cursor-not-allowed">
+                  <Link href="" className="w-full">
+                    <span className="flex items-center gap-2">
+                      <span>🎨</span>
+                      ???????
+                    </span>
+                  </Link>
+                </MenubarItem>
+                <MenubarItem disabled className="cursor-not-allowed">
+                  <Link href="" className="w-full">
+                    <span className="flex items-center gap-2">
+                      <span>📚</span>
+                      ???????
+                    </span>
+                  </Link>
+                </MenubarItem>
+                <MenubarItem disabled>
+                  <Link href="" className="w-full">
+                    <span className="flex items-center gap-2">
+                      <span>👾</span>
+                      ???????
+                    </span>
+                  </Link>
+                </MenubarItem>
+              </MenubarContent>
+            </MenubarMenu>
+          </Menubar>
+        </div>
+      </div>
+    </header>
   );
 };

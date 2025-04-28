@@ -1,79 +1,86 @@
 "use client";
 
-import { FC } from "react";
+import { FC, useEffect, useState } from "react";
+import { useSwitch } from "@nextui-org/switch";
 import { VisuallyHidden } from "@react-aria/visually-hidden";
-import { SwitchProps, useSwitch } from "@nextui-org/switch";
 import { useTheme } from "next-themes";
-import {useIsSSR} from "@react-aria/ssr";
-import clsx from "clsx";
+import { SunFilledIcon, MoonFilledIcon } from "./icons";
+import { cn } from "@/lib/utils";
 
-import { SunFilledIcon, MoonFilledIcon } from "@/components/icons";
-
-export interface ThemeSwitchProps {
-	className?: string;
-	classNames?: SwitchProps["classNames"];
+interface ThemeSwitchProps {
+  className?: string;
+  classNames?: {
+    base?: string;
+    wrapper?: string;
+  };
 }
 
 export const ThemeSwitch: FC<ThemeSwitchProps> = ({
-	className,
-	classNames,
+  className,
+  classNames,
 }) => {
-	const { theme, setTheme } = useTheme();
-  const isSSR = useIsSSR();
+  const [mounted, setMounted] = useState(false);
+  const { theme, setTheme } = useTheme();
 
-	const onChange = () => {
-		theme === "light" ? setTheme("dark") : setTheme("light");
-	};
+  // Always initialize useSwitch hook regardless of mounted state
+  const {
+    Component,
+    slots,
+    isSelected,
+    getBaseProps,
+    getInputProps,
+    getWrapperProps,
+  } = useSwitch({
+    isSelected: theme === "light",
+    "aria-label": `Switch to ${theme === "light" ? "dark" : "light"} mode`,
+    onChange: () => setTheme(theme === "light" ? "dark" : "light"),
+  });
 
-	const {
-		Component,
-		slots,
-		isSelected,
-		getBaseProps,
-		getInputProps,
-		getWrapperProps,
-	} = useSwitch({
-		isSelected: theme === "light" || isSSR,
-    "aria-label": `Switch to ${theme === "light" || isSSR ? "dark" : "light"} mode`,
-		onChange,
-	});
+  useEffect(() => {
+    setMounted(true);
+  }, []);
 
-	const AnyComponent = Component as any;
+  // Render placeholder during SSR
+  if (!mounted) {
+    return <div className="w-10 h-10" />;
+  }
 
-	return (
-		<AnyComponent
-			{...getBaseProps({
-				className: clsx(
-					"px-px transition-opacity hover:opacity-80 cursor-pointer",
-					className,
-					classNames?.base
-				),
-			})}
-		>
-			<VisuallyHidden>
-				<input {...getInputProps()} />
-			</VisuallyHidden>
-			<div
-				{...getWrapperProps()}
-				className={slots.wrapper({
-					class: clsx(
-						[
-							"w-auto h-auto",
-							"bg-transparent",
-							"rounded-lg",
-							"flex items-center justify-center",
-							"group-data-[selected=true]:bg-transparent",
-							"!text-default-500",
-							"pt-px",
-							"px-0",
-							"mx-0",
-						],
-						classNames?.wrapper
-					),
-				})}
-			>
-			 {!isSelected || isSSR ? <SunFilledIcon size={22} /> : <MoonFilledIcon size={22} />}
-			</div>
-		</AnyComponent>
-	);
+  return (
+    <Component
+      {...getBaseProps({
+        className: cn(
+          "px-2 py-1.5 rounded-full bg-slate-800/40 backdrop-blur-md border border-slate-700/50 shadow-lg transition-all duration-300 hover:scale-105",
+          className,
+          classNames?.base
+        ),
+      })}
+    >
+      <VisuallyHidden>
+        <input {...getInputProps()} />
+      </VisuallyHidden>
+      <div
+        {...getWrapperProps()}
+        className={slots.wrapper({
+          class: cn(
+            [
+              "w-auto h-auto",
+              "bg-transparent",
+              "flex items-center justify-center",
+              "group-data-[selected=true]:bg-transparent",
+              "text-slate-100",
+              "transition-colors",
+              "hover:text-slate-300",
+            ],
+            classNames?.wrapper
+          ),
+        })}
+      >
+        {isSelected ? (
+          <MoonFilledIcon size={20} />
+        ) : (
+          <SunFilledIcon size={20} />
+        )}
+      </div>
+    </Component>
+  );
 };
