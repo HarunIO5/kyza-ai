@@ -16,6 +16,10 @@ export const siteConfig = {
       label: "Community (X)",
       href: "https://x.com/kyza_ai",
     },
+    {
+      label: "GitHub",
+      href: "https://github.com/HarunIO5/kyza-ai",
+    },
   ],
   navMenuItems: [
     {
