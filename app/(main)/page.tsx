@@ -21,7 +21,7 @@ export default function Home() {
       <div className="w-full py-12">
         <ScrollingTestimonials />
       </div>
-      <div className="w-full py-12 px-12">
+      {/* <div className="w-full py-12 px-12">
         <FAQSection
           faqTitle1="What makes Kyza.ai different from other text-to-video platforms?"
           faqTitle2="Can Kyza.ai create videos for specific industries or niche topics?"
@@ -34,7 +34,7 @@ export default function Home() {
           faqDescription4="We use state-of-the-art AI models and continuously refine our platform to ensure your videos are clear, grammatically correct, and visually engaging. Plus, our asset library boosts the quality even further."
           faqDescription5="Kyza.ai is completely free to use! If you ever run into any issues or need help, our support team is here for you. Just reach out through our contact page — we're happy to assist and make sure you get the best experience."
         />
-      </div>
+      </div> */}
     </section>
   );
 }
