@@ -74,9 +74,12 @@ export default function LandingPageHeading() {
             theme === "dark" && "bg-slate-800/40 border-slate-700/50"
           )}
         >
-          <Link href="" target="_blank">
+          <Link
+            href="https://dexscreener.com/solana/3pbsdfpwmndgchmap7qlxygg5s7rwyjcckskdjdxvx6h"
+            target="_blank"
+          >
             <span className="text-purple-400 font-medium hover:text-purple-300 transition-colors whitespace-nowrap cursor-default">
-              DEXSCREENER:
+              DEXSCREENER
             </span>
           </Link>
         </div>
