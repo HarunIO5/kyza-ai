@@ -1,40 +1,48 @@
-# Next.js & NextUI Template
+# Kyza AI 
+## 🚀 AI Creativity Agent Powered by MCP
 
-This is a template for creating applications using Next.js 13 (app directory) and NextUI (v2).
+**Kyza AI** is a showcase project demonstrating the capabilities of the **Model Context Protocol (MCP)** developed within the **Kyza ecosystem**.
 
-## Technologies Used
+This agent runs, allowing users to generate cinematic videos, high-fidelity images, and immersive audio based solely on natural language prompts.  
+It highlights the creative flexibility, contextual memory, and autonomous content generation made possible by MCP.
 
-- [Next.js 13](https://nextjs.org/docs/getting-started)
-- [NextUI v2](https://nextui.org/)
-- [Tailwind CSS](https://tailwindcss.com/)
-- [Tailwind Variants](https://tailwind-variants.org)
-- [TypeScript](https://www.typescriptlang.org/)
-- [Framer Motion](https://www.framer.com/motion/)
-- [next-themes](https://github.com/pacocoursey/next-themes)
+---
 
-## How to Use
+## 🌟 Key Highlights
 
+### Model Context Protocol (MCP) Integration
+- Enables local session memory for coherent, evolving creative outputs without requiring a persistent server.
 
-### Use the template with create-next-app
+### Fully Local Execution
+- Generates and renders all content directly on the user's device with no external dependencies.
 
-To create a new project based on this template using `create-next-app`, run the following command:
+### Natural Language Driven
+- Simple English prompts control the creation of videos, images, and audio assets.
 
-```bash
-npx create-next-app -e https://github.com/nextui-org/next-app-template
-```
+### Modular and Extensible
+- Built with a flexible architecture to easily support plugins, customizations, and future expansions.
 
-### Install dependencies
+### Privacy by Design
+- All user prompts and outputs remain private and local unless explicitly shared.
 
-```bash
-npm install
-```
+---
 
-### Run the development server
+## 🛠️ How It Works
 
-```bash
-npm run dev
-```
+### Input
+- Describe your idea in natural language through the CLI or minimal GUI.
 
-## License
+### Parsing
+- The AI Agent interprets the prompt and structures a creative plan.
 
-Licensed under the [MIT license](https://github.com/nextui-org/next-app-template/blob/main/LICENSE).
+### Generation
+- Visual, video, and audio outputs are created locally.
+
+### MCP Session Management
+- Context is maintained across prompts during a session.
+- Style, tone, and narrative continuity are enhanced automatically.
+
+### Output
+- Download your generated assets instantly.
+
+---
