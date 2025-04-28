@@ -12,6 +12,10 @@ export const siteConfig = {
       label: "GitBook",
       href: "https://kyza-ai.gitbook.io/kyza-ai",
     },
+    {
+      label: "Community (X)",
+      href: "https://x.com/kyza_ai",
+    },
   ],
   navMenuItems: [
     {

@@ -76,7 +76,7 @@ export default function LandingPageHeading() {
         >
           <Link href="" target="_blank">
             <span className="text-purple-400 font-medium hover:text-purple-300 transition-colors whitespace-nowrap cursor-default">
-              CA:
+              DEXSCREENER:
             </span>
           </Link>
         </div>
