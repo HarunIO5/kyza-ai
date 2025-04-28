@@ -101,8 +101,13 @@ export const Navbar = () => {
                   icon: "🖼️",
                 },
                 {
-                  href: "/tools/ai-ghiblify",
-                  label: "AI Ghiblify",
+                  href: "/tools/hyper-realistic-video",
+                  label: "Hyper Realistic",
+                  icon: "🎥",
+                },
+                {
+                  href: "",
+                  label: "???????",
                   icon: "🎬",
                 },
                 {
@@ -114,11 +119,6 @@ export const Navbar = () => {
                   href: "",
                   label: "???????",
                   icon: "📹",
-                },
-                {
-                  href: "",
-                  label: "???????",
-                  icon: "🎥",
                 },
                 {
                   href: "",
@@ -189,10 +189,18 @@ export const Navbar = () => {
                   </Link>
                 </MenubarItem>
                 <MenubarItem>
-                  <Link href="/tools/ai-ghiblify" className="w-full">
+                  <Link href="/tools/hyper-realistic-video" className="w-full">
+                    <span className="flex items-center gap-2">
+                      <span>🎥</span>
+                      Hyper Realistic
+                    </span>
+                  </Link>
+                </MenubarItem>
+                <MenubarItem disabled className="cursor-not-allowed">
+                  <Link href="" className="w-full">
                     <span className="flex items-center gap-2">
                       <span>🎬</span>
-                      AI Ghiblify
+                      ???????
                     </span>
                   </Link>
                 </MenubarItem>
@@ -208,14 +216,6 @@ export const Navbar = () => {
                   <Link href="" className="w-full">
                     <span className="flex items-center gap-2">
                       <span>📹</span>
-                      ???????
-                    </span>
-                  </Link>
-                </MenubarItem>
-                <MenubarItem disabled className="cursor-not-allowed">
-                  <Link href="" className="w-full">
-                    <span className="flex items-center gap-2">
-                      <span>🎥</span>
                       ???????
                     </span>
                   </Link>
